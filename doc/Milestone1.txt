@@ -1,0 +1,21 @@
+RENCANA FAKTA DAN RULE
+
+============================
+
+PEMBAGIAN TUGAS
+
+
+
+
+============================
+
+COMPLETED TASKS
+- Pembagian Tugas
+
+ONGOING TASKS
+- Pembuatan Rencana Fakta dan Rule
+
+UNSTARTED TASKS
+- Pembuatan .pl file
+
+============================
