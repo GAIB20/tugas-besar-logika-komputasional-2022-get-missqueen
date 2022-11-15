@@ -1,5 +1,114 @@
 RENCANA FAKTA DAN RULE
 
+4. Chance Card (didi)
+/* RULES */
+/* Memanggil fungsi random untuk menentukan
+   kartu yang ingin diberikan */
+landOnChanceCard(P) :-
+
+/* Memanggil fungsi chance card yang sesuai
+   dengan randomizer: 1 (Tax), 2 (Reward), 3 (Get Out of Jail), 4 (Go To Jail) */
+giveChaceCard(P, 1) :-
+giveChaceCard(P, 2) :-
+giveChaceCard(P, 3) :-
+giveChaceCard(P, 4) :-
+
+/* Memindahkan player ke tempat tax berikutnya */
+goToTax(P) :-
+
+/* Randomize jumlah hadiah dan menambahkan ke 
+   dompet pemain */
+giveReward(P) :-
+
+/* Menambahkan kartu get "Get Out of Jail"
+   ke list kartu pemain */
+giveGetOutOfJailCard(P) :-
+
+/* Memindahkan player ke penjara */
+goToTax(P) :-
+
+
+6. Penjara (didi)
+/* FACTS */
+/* jailTimeLeft(P, TIME)
+
+   Fakta menunjukan sisa waktu seorang
+   pemain perlu menunggu di penjara.
+   Fakta hanya berlaku jika pemain P sedang
+   dipenjara. */
+:- dynamic jailTimeLeft/2
+
+/* RULES */
+/* evaluatePrisonDiceRoll(P, DOUBLE)
+
+   Melakukan evaluasi terhadap hasil
+   lemparan dadu. Jika melempar Double
+   fakta jailTimeLeft pemain P di retract,
+   jika tidak double  */
+evaluatePrisonDiceRoll(P, false) :-
+evaluatePrisonDiceRoll(P, true) :-
+
+/* Mengevaluasi apakah pemain bisa
+   membayar untuk keluar penjara,
+   hasil dikembalikan dalam variabel RETURN */
+canPayBail(P, RETURN) :-
+
+/* Pemain membayar sebanyak XX
+   untuk keluar dari penjara 
+   (fakta jailTimeLeft di-retract).
+   Asumsi dana sudah cukup, evaluasi
+   sebelum pemanggilan fungsi. */
+payBail(P) :-
+
+/* Mengevaluasi apakah pemain memliki,
+   kartu Get Out of Jail hasil
+   dikembalikan dalam variabel RETURN */
+hasGOoJCard(P, RETURN) :-
+
+9. Pemain (didi)
+/* FACTS */
+/* isPlayer(P)
+
+   Fakta menunjukan bahwa P adalah pemain. */
+isPlayer(pemain1).
+isPlayer(pemain2).
+
+/* playerLocation(P, LOC)
+
+   Fakta menunjukan lokasi 
+   pemain P, yaitu LOC. */
+:- playerLocation/2
+
+/* playerCash(P, CASH)
+
+   Fakta menunjukan jumlah 
+   dana tunai pemain P, 
+   yaitu CASH. */
+:- playerCash/2
+
+/* playerPropList(P, PROPLIST)
+
+   Fakta menunjukan list petak 
+   properti yang dimiliki pemain P, 
+   yaitu PROPLIST. (hanya petak, cth. [A1, D2, E4]) */
+:- playerCardList/2
+
+/* playerCardList(P, CARDLIST)
+
+   Fakta menunjukan list kartu 
+   yang dimiliki pemain P, 
+   yaitu CARDLIST. */
+:- playerCardList/2
+
+
+/* RULES */
+/* checkPlayerDetail(P)
+
+   Menampilkan informasi mengenai
+   pemain P sesuai spek */
+checkPlayerDetail(P, false) :-
+
+
 ============================
 
 PEMBAGIAN TUGAS
