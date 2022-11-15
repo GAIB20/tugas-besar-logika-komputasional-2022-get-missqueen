@@ -44,7 +44,75 @@ draw_border(X, Y) :- map_size(W, H),
 					draw_border(NewX, Y).	
 
 ======================================================================
+2. LOKASI (chi & vanes)
+/* FAKTA */
+/* memanfaatkan status properti/nonproperti dari lokasi */
+/* mengecek lokasi nonproperti */
+worldTour(P).
+chanceCard(P).
+penjara(P).
+/* mengecek kevalidan lokasi */
+validLoc(P).
+/* untuk fakta isi P sesuai nanti di mapnya */
 
+/* RULES */
+/* cek lokasi untuk properti */
+checkLocationDetail(P) :-
+validLoc(P),
+property(P),
+propertyName(Name, P),
+propertyDesc(Desc, P),
+rent(RentCost, P),
+cost(BuyCost, P),
+ownProp(Owner, P),
+classOfProperty(P, Class),
+write(“Nama Lokasi : ”),
+write(Name),
+nl,
+write(“Deskripsi Lokasi : ”),
+write(Desc),
+nl,
+write(“Kepemilikan : ”),
+write(Owner),
+nl,
+write("Biaya Sewa Saat Ini : ”),
+write(RentCost),
+nl,
+write("Biaya Akuisisi : ”),
+write(BuyCost),
+nl,
+write("Tingkatan Properti : “),
+write(Class),
+nl.
+
+/* cek lokasi untuk nonproperti : world tour */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+worldTour(P),
+write("Nama Lokasi       :  World Tour”),
+nl,
+write("Deskripsi Lokasi  :  Anda dapat berpindah kemana saja, tentunya dengan membayar uang sebesar X% aset Anda.”),
+nl.
+
+/* cek lokasi untuk nonproperti : penjara */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+penjara(P),
+write(). /*nyusul */
+
+/* cek lokasi untuk nonproperti : chance card */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+chanceCard(P),
+write("Nama Lokasi       :  Chance Card"),
+nl,
+write("Deskripsi Lokasi  :  Apakah Anda sedang merasa beruntung? Disinilah tempatnya! Anda berhak mendapatkan salah satu dari kartu berikut :”),
+nl. /* desc kartu nyusul */
+
+======================================================================
 3. Properti (Fio)
 
 /* FACTS /*
