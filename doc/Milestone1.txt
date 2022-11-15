@@ -184,6 +184,22 @@ isPlayer(pemain2).
 checkPlayerDetail(P, false) :-
 
 ======================================================================
+
+10. Dadu (Fio)
+/* FACTS */
+/* Angka Dadu */
+diceNum(Num)
+:- dynamic(diceNum/1)
+
+/* RULES */
+/* Menghasilkan angka 1-6 */
+generateDiceNum(Num) :-
+
+/* Melakukan pelemparan dadu dua kali */
+throwDice :-
+
+======================================================================
+
 14. End Game (Al)
 /* FACTS */
 /* startGame(false)
@@ -218,6 +234,7 @@ COMPLETED TASKS
    7. Parkir Gratis
    8. World Tour
    9. Pemain
+   10. Dadu
    14. End Game
 
 ONGOING TASKS
