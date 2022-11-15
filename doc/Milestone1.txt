@@ -2,7 +2,7 @@ RENCANA FAKTA DAN RULE
 
 ======================================================================
 
-3. Properti
+3. Properti (Fio)
 
 /* FACTS /*
 
@@ -67,6 +67,16 @@ giveGetOutOfJailCard(P) :-
 
 /* Memindahkan player ke penjara */
 goToTax(P) :-
+
+======================================================================
+
+5. Perpajakan (Fio)
+/* RULES */
+/* Mengembalikan jumlah pajak yang harus dibayar pemain */
+taxOwed(Player, Tax) :-
+
+/* Mengurangi cash pemain setelah terkena pajak */
+taxed(Player) :-
 
 ======================================================================
 
@@ -201,7 +211,9 @@ PEMBAGIAN TUGAS
 COMPLETED TASKS
 - Pembagian Tugas
 - Fakta dan Rule:
+   3. Properti
    4. Chance Card
+   5. Perpajakan
    6. Penjara
    7. Parkir Gratis
    8. World Tour
