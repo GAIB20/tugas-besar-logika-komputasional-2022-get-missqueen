@@ -85,9 +85,11 @@ hasGOoJCard(P, RETURN) :-
 /* FACTS */
 
 /* RULES */
-/* evaluateWorldTour(P, LOC, CASH);
+/* evaluateWorldTour(P, LOC, passGO);
    Menjalankan World Tour pada pemain P.
-   LOC merupakan akhir lokasi player, dan CASH adalah hasil uang yang diperoleh jika melalui GO */
+   LOC merupakan akhir lokasi player, dan passGO jika melewati GO */
+evaluateWorldTour(P, G1, false) :-
+evaluateWorldTour(P, B5, true) :-
 
 ======================================================================
 9. Pemain (didi)
@@ -153,14 +155,19 @@ checkPlayerDetail(P, false) :-
 ============================
 
 PEMBAGIAN TUGAS
-
-
-
+[ included in log.txt]
 
 ============================
 
 COMPLETED TASKS
 - Pembagian Tugas
+- Fakta dan Rule:
+   4. Chance Card
+   6. Penjara
+   7. Parkir Gratis
+   8. World Tour
+   9. Pemain
+   14. End Game
 
 ONGOING TASKS
 - Pembuatan Rencana Fakta dan Rule
