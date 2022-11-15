@@ -2,6 +2,45 @@ RENCANA FAKTA DAN RULE
 
 ======================================================================
 
+3. Properti
+
+/* FACTS /*
+
+/* Identity */
+
+property(Name)             /* Menunjukkan apabila Name adalah property atau non-property /*
+
+/* Classifier /*
+
+levelProp(Level, Prop)     /* Level dari property */
+:- dynamic(levelProp/2)
+
+/* Ownership /*
+
+ownProp(P, Prop)           /* Kepemilikan pemain terhadap property */
+:- dynamic(ownProp/2)
+
+/* Property Information */
+
+propertyName(Name, P)      /* Name adalah nama properti P */
+propertyDesc(Desc, P)      /* Desc adalah deskripsi properti P */
+rent(RentCost, P)          /* RentCost adalah biaya sewa properti P */
+cost(BuyCost, P)           /* BuyCost adalah harga beli properti P */
+
+/* RULES */ 
+
+/* Mengecek rincian dari sebuah properti, 
+meliputi nama, deskripsi, biaya sewa, harga properti */
+checkPropertyDetail(Prop) :-
+
+/* Mengecek klasifikasi dari properti */
+classOfProperty(Prop) :-
+
+/* Mengecek properti yang dimiliki pemain */
+listOwnedProperty(Player) :-
+
+======================================================================
+
 4. Chance Card (didi)
 /* RULES */
 /* Memanggil fungsi random untuk menentukan
@@ -79,7 +118,6 @@ hasGOoJCard(P, RETURN) :-
 
 /* RULES */
 
-
 ======================================================================
 8. World Tour (Al)
 /* FACTS */
@@ -140,6 +178,7 @@ checkPlayerDetail(P, false) :-
 /* FACTS */
 /* startGame(false)
    Ini dapat diimplementasikan di START atau di END */
+
 
 /* RULES */
 /* willBankrupt(P)
