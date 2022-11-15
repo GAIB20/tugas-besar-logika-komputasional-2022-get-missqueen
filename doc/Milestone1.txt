@@ -65,7 +65,7 @@ propertyDesc(Desc, P),
 rent(RentCost, P),
 cost(BuyCost, P),
 ownProp(Owner, P),
-classOfProperty(P, Class),
+levelProp(Level, P),
 write(“Nama Lokasi : ”),
 write(Name),
 nl,
@@ -82,7 +82,7 @@ write("Biaya Akuisisi : ”),
 write(BuyCost),
 nl,
 write("Tingkatan Properti : “),
-write(Class),
+write(Level),
 nl.
 
 /* cek lokasi untuk nonproperti : world tour */
@@ -331,8 +331,35 @@ throwDice :-
 ============================
 
 PEMBAGIAN TUGAS
-[ included in log.txt]
 
+FEATURES:
+1. Papan                        | chi + vanes
+2. Lokasi                       | chi + vanes
+3. Properti                     | fio
+4. Chance Card                  | didi
+5. Perpajakan                   | fio
+6. Penjara                      | didi
+7. Parkir Gratis                | Al
+8. World Tour                   | Al
+9. Pemain (Informasi Player)    | didi
+10. Dadu                        | fio
+11. End Game(Mekanisme Bangkrut)| Al
+
+-----
+12A. Bonus Color Set            |
+12B. World Cup / Festival       |
+12C. Chance Cards++             |
+12D. Buildable Go               |
+12E. Coin Flip                  |
+
+GENERAL DEADLINE
+Rencana Fakta & Rule: 14 Nov 2022
+Milestone 1         : Selasa, 15 November 2022  , 16.00
+Implementasi        : 21 Nov 2022               , 21.00
+Milestone 2         : Selasa, 22 November 2022  , 16.00
+Finishing           : 28 Nov 2022 PAGI GES GAMAU KALO MALEM
+Milestone 3         : Selasa, 28 November 2022
+Demo                : 30 Novermber 2022
 ============================
 
 COMPLETED TASKS
@@ -347,11 +374,12 @@ COMPLETED TASKS
    9. Pemain
    10. Dadu
    14. End Game
-
-ONGOING TASKS
 - Pembuatan Rencana Fakta dan Rule
 
+ONGOING TASKS
+- Implementasi awal
+
 UNSTARTED TASKS
-- Pembuatan .pl file
+- 
 
 ============================
