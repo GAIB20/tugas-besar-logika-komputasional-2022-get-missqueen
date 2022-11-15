@@ -1,6 +1,68 @@
-RENCANA FAKTA DAN RULE
+ANGGOTA KELOMPOK
+1. Enrique Alifio Ditya    | 13521142
+2. Rinaldy Adin            | 13521134
+3. Chiquita Ahsanunnisa    | 13521129
+4. Alisha Listya Wardhani  | 13521171
+5. Vanessa Rebecca Wiyono  | 13521151
 
-=======================================
+PEMBAGIAN TUGAS
+FEATURES:
+1. Papan                        | chi + vanes
+2. Lokasi                       | chi + vanes
+3. Properti                     | fio
+4. Chance Card                  | didi
+5. Perpajakan                   | fio
+6. Penjara                      | didi
+7. Parkir Gratis                | Al
+8. World Tour                   | Al
+9. Pemain (Informasi Player)    | didi
+10. Dadu                        | fio
+11. End Game(Mekanisme Bangkrut)| Al
+
+-----
+12A. Bonus Color Set            |
+12B. World Cup / Festival       |
+12C. Chance Cards++             |
+12D. Buildable Go               |
+12E. Coin Flip                  |
+
+GENERAL DEADLINE
+Rencana Fakta & Rule: 14 Nov 2022
+Milestone 1         : Selasa, 15 November 2022  , 16.00
+Implementasi        : 21 Nov 2022               , 21.00
+Milestone 2         : Selasa, 22 November 2022  , 16.00
+Finishing           : 28 Nov 2022
+Milestone 3         : Selasa, 28 November 2022
+Demo                : 30 November 2022
+
+======================================================================
+
+COMPLETED TASKS
+- Pembagian Tugas
+- Fakta dan Rule:
+   3. Properti
+   4. Chance Card
+   5. Perpajakan
+   6. Penjara
+   7. Parkir Gratis
+   8. World Tour
+   9. Pemain
+   10. Dadu
+   14. End Game
+- Pembuatan Rencana Fakta dan Rule
+
+ONGOING TASKS
+- Implementasi awal
+
+UNSTARTED TASKS
+- 
+
+======================================================================
+
+                     RENCANA FAKTA DAN RULE
+
+======================================================================
+
 1. PAPAN (chi, vanes)
 
 /* FACTS /*
@@ -44,6 +106,7 @@ draw_border(X, Y) :- map_size(W, H),
 					draw_border(NewX, Y).	
 
 ======================================================================
+
 2. LOKASI (chi & vanes)
 /* FAKTA */
 /* memanfaatkan status properti/nonproperti dari lokasi */
@@ -113,6 +176,7 @@ write("Deskripsi Lokasi  :  Apakah Anda sedang merasa beruntung? Disinilah tempa
 nl. /* desc kartu nyusul */
 
 ======================================================================
+
 3. Properti (Fio)
 
 /* FACTS /*
@@ -229,6 +293,7 @@ payBail(P) :-
 hasGOoJCard(P, RETURN) :-
 
 ======================================================================
+
 7. Parkir Gratis (Al)
 /* FACTS */
 
@@ -240,6 +305,7 @@ hasGOoJCard(P, RETURN) :-
 /* RULES */
 
 ======================================================================
+
 8. World Tour (Al)
 /* FACTS */
 
@@ -251,6 +317,7 @@ evaluateWorldTour(P, G1, false) :-
 evaluateWorldTour(P, B5, true) :-
 
 ======================================================================
+
 9. Pemain (didi)
 /* FACTS */
 /* isPlayer(P)
@@ -324,62 +391,4 @@ throwDice :-
 /* mortgage(P, CASH)
    Menjalankan penjualan properti pemain P. */
 
-
-
-
-
-============================
-
-PEMBAGIAN TUGAS
-
-FEATURES:
-1. Papan                        | chi + vanes
-2. Lokasi                       | chi + vanes
-3. Properti                     | fio
-4. Chance Card                  | didi
-5. Perpajakan                   | fio
-6. Penjara                      | didi
-7. Parkir Gratis                | Al
-8. World Tour                   | Al
-9. Pemain (Informasi Player)    | didi
-10. Dadu                        | fio
-11. End Game(Mekanisme Bangkrut)| Al
-
------
-12A. Bonus Color Set            |
-12B. World Cup / Festival       |
-12C. Chance Cards++             |
-12D. Buildable Go               |
-12E. Coin Flip                  |
-
-GENERAL DEADLINE
-Rencana Fakta & Rule: 14 Nov 2022
-Milestone 1         : Selasa, 15 November 2022  , 16.00
-Implementasi        : 21 Nov 2022               , 21.00
-Milestone 2         : Selasa, 22 November 2022  , 16.00
-Finishing           : 28 Nov 2022 PAGI GES GAMAU KALO MALEM
-Milestone 3         : Selasa, 28 November 2022
-Demo                : 30 Novermber 2022
-============================
-
-COMPLETED TASKS
-- Pembagian Tugas
-- Fakta dan Rule:
-   3. Properti
-   4. Chance Card
-   5. Perpajakan
-   6. Penjara
-   7. Parkir Gratis
-   8. World Tour
-   9. Pemain
-   10. Dadu
-   14. End Game
-- Pembuatan Rencana Fakta dan Rule
-
-ONGOING TASKS
-- Implementasi awal
-
-UNSTARTED TASKS
-- 
-
-============================
+======================================================================
