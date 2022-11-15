@@ -1,5 +1,48 @@
 RENCANA FAKTA DAN RULE
 
+=======================================
+1. PAPAN (chi, vanes)
+
+/* FACTS /*
+% MAP SIZE
+mapSize(9,9).
+
+/* RULES /*
+% MAP BORDERS
+% Right
+draw_border(X, Y) :- map_size(W, H),
+					X =:= W + 1,
+					Y =< H + 1,
+					write('| '), nl,
+					NewY is Y+1,
+					draw_border(0, NewY).
+		
+% Left		
+draw_border(X, Y) :- map_size(_, H),
+					X =:= 0,
+					Y =< H+1,
+					write('| '),
+					NewX is X+1,
+					draw_border(NewX, Y).
+				
+% Top				
+draw_border(X, Y) :- map_size(W, _),
+					X < W + 1,
+					X > 0,
+					Y =:= 0,
+					write('_ '),
+					NewX is X+1,
+					draw_border(NewX, Y).
+					
+% Bottom		
+draw_border(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y =:= H + 1,
+					write('_ '),
+					NewX is X+1,
+					draw_border(NewX, Y).	
+
 ======================================================================
 
 3. Properti (Fio)
@@ -244,4 +287,3 @@ UNSTARTED TASKS
 - Pembuatan .pl file
 
 ============================
- 
