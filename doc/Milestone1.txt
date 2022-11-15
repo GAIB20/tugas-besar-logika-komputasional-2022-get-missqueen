@@ -1,5 +1,7 @@
 RENCANA FAKTA DAN RULE
 
+======================================================================
+
 4. Chance Card (didi)
 /* RULES */
 /* Memanggil fungsi random untuk menentukan
@@ -27,6 +29,7 @@ giveGetOutOfJailCard(P) :-
 /* Memindahkan player ke penjara */
 goToTax(P) :-
 
+======================================================================
 
 6. Penjara (didi)
 /* FACTS */
@@ -65,6 +68,28 @@ payBail(P) :-
    dikembalikan dalam variabel RETURN */
 hasGOoJCard(P, RETURN) :-
 
+======================================================================
+7. Parkir Gratis (Al)
+/* FACTS */
+
+/* ParkirGratis(P)
+   Fakta menunjukkan apakah player memiliki
+   kartu parkir Gratis */
+:- dynamic parkirGratis/1
+
+/* RULES */
+
+
+======================================================================
+8. World Tour (Al)
+/* FACTS */
+
+/* RULES */
+/* evaluateWorldTour(P, LOC, CASH);
+   Menjalankan World Tour pada pemain P.
+   LOC merupakan akhir lokasi player, dan CASH adalah hasil uang yang diperoleh jika melalui GO */
+
+======================================================================
 9. Pemain (didi)
 /* FACTS */
 /* isPlayer(P)
@@ -108,6 +133,22 @@ isPlayer(pemain2).
    pemain P sesuai spek */
 checkPlayerDetail(P, false) :-
 
+======================================================================
+14. End Game (Al)
+/* FACTS */
+/* startGame(false)
+   Ini dapat diimplementasikan di START atau di END */
+
+/* RULES */
+/* willBankrupt(P)
+   Mengeluarkan true jika P bound-to-be bangkrut */
+
+/* mortgage(P, CASH)
+   Menjalankan penjualan properti pemain P. */
+
+
+
+
 
 ============================
 
@@ -128,3 +169,4 @@ UNSTARTED TASKS
 - Pembuatan .pl file
 
 ============================
+ 
