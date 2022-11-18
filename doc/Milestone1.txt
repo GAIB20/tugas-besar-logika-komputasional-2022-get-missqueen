@@ -224,10 +224,10 @@ landOnChanceCard(P) :-
 
 /* Memanggil fungsi chance card yang sesuai
    dengan randomizer: 1 (Tax), 2 (Reward), 3 (Get Out of Jail), 4 (Go To Jail) */
-giveChaceCard(P, 1) :-
-giveChaceCard(P, 2) :-
-giveChaceCard(P, 3) :-
-giveChaceCard(P, 4) :-
+giveChanceCard(P, 1) :-
+giveChanceCard(P, 2) :-
+giveChanceCard(P, 3) :-
+giveChanceCard(P, 4) :-
 
 /* Memindahkan player ke tempat tax berikutnya */
 goToTax(P) :-
@@ -330,28 +330,28 @@ isPlayer(pemain2).
 
    Fakta menunjukan lokasi 
    pemain P, yaitu LOC. */
-:- playerLocation/2
+:- dynamic playerLocation/2
 
 /* playerCash(P, CASH)
 
    Fakta menunjukan jumlah 
    dana tunai pemain P, 
    yaitu CASH. */
-:- playerCash/2
+:- dynamic playerCash/2
 
 /* playerPropList(P, PROPLIST)
 
    Fakta menunjukan list petak 
    properti yang dimiliki pemain P, 
    yaitu PROPLIST. (hanya petak, cth. [A1, D2, E4]) */
-:- playerCardList/2
+:- dynamic playerCardList/2
 
 /* playerCardList(P, CARDLIST)
 
    Fakta menunjukan list kartu 
    yang dimiliki pemain P, 
    yaitu CARDLIST. */
-:- playerCardList/2
+:- dynamic playerCardList/2
 
 
 /* RULES */
