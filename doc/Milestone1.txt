@@ -183,17 +183,12 @@ nl. /* desc kartu nyusul */
 
 /* Identity */
 
-property(Name)             /* Menunjukkan apabila Name adalah property atau non-property /*
+property(Name)             /* Menunjukkan apabila Name adalah property atau non-property */
 
-/* Classifier /*
+/* Classifier */
 
 levelProp(Level, Prop)     /* Level dari property */
 :- dynamic(levelProp/2)
-
-/* Ownership /*
-
-ownProp(P, Prop)           /* Kepemilikan pemain terhadap property */
-:- dynamic(ownProp/2)
 
 /* Property Information */
 
