@@ -206,9 +206,6 @@ checkPropertyDetail(Prop) :-
 /* Mengecek klasifikasi dari properti */
 classOfProperty(Prop) :-
 
-/* Mengecek properti yang dimiliki pemain */
-listOwnedProperty(Player) :-
-
 ======================================================================
 
 4. Chance Card (didi)

@@ -361,6 +361,7 @@ costLandmark(40000, H2).
 /* Mengecek rincian dari sebuah properti, 
 meliputi nama, deskripsi, biaya sewa, harga properti */
 checkPropertyDetail(Prop) :-
+    property(Prop),
     propertyName(Name, Prop),
     propertyDesc(Desc, Prop),
     costLand(BuyLand, Prop),
@@ -386,5 +387,13 @@ checkPropertyDetail(Prop) :-
     format('Biaya Sewa Bangunan 1   : ~w ~n', [ClassOneRent]),
     format('Biaya Sewa Bangunan 2   : ~w ~n', [ClassTwoRent]),
     format('Biaya Sewa Bangunan 3   : ~w ~n', [ClassThreeRent]),
-    format('Biaya Sewa Landmark     : ~w ~n', [LandmarkRent]).
+    format('Biaya Sewa Landmark     : ~w ~n', [LandmarkRent]),
+    !.
     
+/* Mengecek klasifikasi dari properti */
+classOfProperty(Prop) :-
+    levelProp(Prop, X),
+    format('Level properti  : ~w', [X]),
+    !,
+    nl.
+
