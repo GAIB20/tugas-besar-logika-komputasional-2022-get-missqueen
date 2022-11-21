@@ -7,7 +7,7 @@
    dipenjara. */
 :- dynamic jailTimeLeft/2.
 
-bailPrice(100).
+bailPrice(1000).
 
 /* RULES */
 /* evaluatePrisonDiceRoll(P, DOUBLE)

@@ -5,7 +5,7 @@ landOnChanceCard(P) :-
                       random(1,4, Chance),
                       giveChanceCard(P, Chance).
 
-chanceCardReward(100).
+chanceCardReward(1000).
 
 /* Memanggil fungsi chance card yang sesuai
    dengan randomizer: 1 (Tax), 2 (Reward), 3 (Get Out of Jail), 4 (Go To Jail) */
