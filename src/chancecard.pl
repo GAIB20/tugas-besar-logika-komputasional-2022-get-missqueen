@@ -23,7 +23,8 @@ goToTax(P) :-
    dompet pemain */
 giveReward(P) :-
                 retract(playerCash(P, OldCash)),
-                NewCash is OldCash
+                chanceCardReward(Reward),
+                NewCash is OldCash + Reward,
                 assertz(playerCash(P, NewCash)).
 
 /* Menambahkan kartu get "Get Out of Jail"

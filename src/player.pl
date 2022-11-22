@@ -115,6 +115,7 @@ displayPlayersCards([Card|B], Index) :-
                                        Index1 is Index + 1,
                                        displayPlayersCards(B, Index1).
 
+
 /* checkPlayerDetail(P)
 
    Menampilkan informasi mengenai
