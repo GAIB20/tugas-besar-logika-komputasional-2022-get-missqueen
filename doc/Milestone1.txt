@@ -1,0 +1,386 @@
+ANGGOTA KELOMPOK
+1. Enrique Alifio Ditya    | 13521142
+2. Rinaldy Adin            | 13521134
+3. Chiquita Ahsanunnisa    | 13521129
+4. Alisha Listya Wardhani  | 13521171
+5. Vanessa Rebecca Wiyono  | 13521151
+
+PEMBAGIAN TUGAS
+FEATURES:
+1. Papan                        | chi + vanes
+2. Lokasi                       | chi + vanes
+3. Properti                     | fio
+4. Chance Card                  | didi
+5. Perpajakan                   | fio
+6. Penjara                      | didi
+7. Parkir Gratis                | Al
+8. World Tour                   | Al
+9. Pemain (Informasi Player)    | didi
+10. Dadu                        | fio
+11. End Game(Mekanisme Bangkrut)| Al
+
+-----
+12A. Bonus Color Set            |
+12B. World Cup / Festival       |
+12C. Chance Cards++             |
+12D. Buildable Go               |
+12E. Coin Flip                  |
+
+GENERAL DEADLINE
+Rencana Fakta & Rule: 14 Nov 2022
+Milestone 1         : Selasa, 15 November 2022  , 16.00
+Implementasi        : 21 Nov 2022               , 21.00
+Milestone 2         : Selasa, 22 November 2022  , 16.00
+Finishing           : 28 Nov 2022
+Milestone 3         : Selasa, 28 November 2022
+Demo                : 30 November 2022
+
+======================================================================
+
+COMPLETED TASKS
+- Pembagian Tugas
+- Fakta dan Rule:
+   3. Properti
+   4. Chance Card
+   5. Perpajakan
+   6. Penjara
+   7. Parkir Gratis
+   8. World Tour
+   9. Pemain
+   10. Dadu
+   14. End Game
+- Pembuatan Rencana Fakta dan Rule
+
+ONGOING TASKS
+- Implementasi awal
+
+UNSTARTED TASKS
+- 
+
+======================================================================
+
+                     RENCANA FAKTA DAN RULE
+
+======================================================================
+
+1. PAPAN (chi, vanes)
+
+/* FACTS /*
+% MAP SIZE
+mapSize(9,9).
+
+/* RULES /*
+% MAP BORDERS
+% Right
+draw_border(X, Y) :- map_size(W, H),
+					X =:= W + 1,
+					Y =< H + 1,
+					write('| '), nl,
+					NewY is Y+1,
+					draw_border(0, NewY).
+		
+% Left		
+draw_border(X, Y) :- map_size(_, H),
+					X =:= 0,
+					Y =< H+1,
+					write('| '),
+					NewX is X+1,
+					draw_border(NewX, Y).
+				
+% Top				
+draw_border(X, Y) :- map_size(W, _),
+					X < W + 1,
+					X > 0,
+					Y =:= 0,
+					write('_ '),
+					NewX is X+1,
+					draw_border(NewX, Y).
+					
+% Bottom		
+draw_border(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y =:= H + 1,
+					write('_ '),
+					NewX is X+1,
+					draw_border(NewX, Y).	
+
+======================================================================
+
+2. LOKASI (chi & vanes)
+/* FAKTA */
+/* memanfaatkan status properti/nonproperti dari lokasi */
+/* mengecek lokasi nonproperti */
+worldTour(P).
+chanceCard(P).
+penjara(P).
+/* mengecek kevalidan lokasi */
+validLoc(P).
+/* untuk fakta isi P sesuai nanti di mapnya */
+
+/* RULES */
+/* cek lokasi untuk properti */
+checkLocationDetail(P) :-
+validLoc(P),
+property(P),
+propertyName(Name, P),
+propertyDesc(Desc, P),
+rent(RentCost, P),
+cost(BuyCost, P),
+ownProp(Owner, P),
+levelProp(Level, P),
+write(“Nama Lokasi : ”),
+write(Name),
+nl,
+write(“Deskripsi Lokasi : ”),
+write(Desc),
+nl,
+write(“Kepemilikan : ”),
+write(Owner),
+nl,
+write("Biaya Sewa Saat Ini : ”),
+write(RentCost),
+nl,
+write("Biaya Akuisisi : ”),
+write(BuyCost),
+nl,
+write("Tingkatan Properti : “),
+write(Level),
+nl.
+
+/* cek lokasi untuk nonproperti : world tour */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+worldTour(P),
+write("Nama Lokasi       :  World Tour”),
+nl,
+write("Deskripsi Lokasi  :  Anda dapat berpindah kemana saja, tentunya dengan membayar uang sebesar X% aset Anda.”),
+nl.
+
+/* cek lokasi untuk nonproperti : penjara */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+penjara(P),
+write(). /*nyusul */
+
+/* cek lokasi untuk nonproperti : chance card */
+checkLocationDetail(P) :-
+validLoc(P),
+\+ property(P),
+chanceCard(P),
+write("Nama Lokasi       :  Chance Card"),
+nl,
+write("Deskripsi Lokasi  :  Apakah Anda sedang merasa beruntung? Disinilah tempatnya! Anda berhak mendapatkan salah satu dari kartu berikut :”),
+nl. /* desc kartu nyusul */
+
+======================================================================
+
+3. Properti (Fio)
+
+/* FACTS /*
+
+/* Identity */
+
+property(Name)             /* Menunjukkan apabila Name adalah property atau non-property */
+
+/* Classifier */
+
+levelProp(Level, Prop)     /* Level dari property */
+:- dynamic(levelProp/2)
+
+/* Property Information */
+
+propertyName(Name, P)      /* Name adalah nama properti P */
+propertyDesc(Desc, P)      /* Desc adalah deskripsi properti P */
+rent(RentCost, P)          /* RentCost adalah biaya sewa properti P */
+cost(BuyCost, P)           /* BuyCost adalah harga beli properti P */
+
+/* RULES */ 
+
+/* Mengecek rincian dari sebuah properti, 
+meliputi nama, deskripsi, biaya sewa, harga properti */
+checkPropertyDetail(Prop) :-
+
+/* Mengecek klasifikasi dari properti */
+classOfProperty(Prop) :-
+
+======================================================================
+
+4. Chance Card (didi)
+/* RULES */
+/* Memanggil fungsi random untuk menentukan
+   kartu yang ingin diberikan */
+landOnChanceCard(P) :-
+
+/* Memanggil fungsi chance card yang sesuai
+   dengan randomizer: 1 (Tax), 2 (Reward), 3 (Get Out of Jail), 4 (Go To Jail) */
+giveChanceCard(P, 1) :-
+giveChanceCard(P, 2) :-
+giveChanceCard(P, 3) :-
+giveChanceCard(P, 4) :-
+
+/* Memindahkan player ke tempat tax berikutnya */
+goToTax(P) :-
+
+/* Randomize jumlah hadiah dan menambahkan ke 
+   dompet pemain */
+giveReward(P) :-
+
+/* Menambahkan kartu get "Get Out of Jail"
+   ke list kartu pemain */
+giveGetOutOfJailCard(P) :-
+
+/* Memindahkan player ke penjara */
+goToTax(P) :-
+
+======================================================================
+
+5. Perpajakan (Fio)
+/* RULES */
+/* Mengembalikan jumlah pajak yang harus dibayar pemain */
+taxOwed(Player, Tax) :-
+
+/* Mengurangi cash pemain setelah terkena pajak */
+taxed(Player) :-
+
+======================================================================
+
+6. Penjara (didi)
+/* FACTS */
+/* jailTimeLeft(P, TIME)
+
+   Fakta menunjukan sisa waktu seorang
+   pemain perlu menunggu di penjara.
+   Fakta hanya berlaku jika pemain P sedang
+   dipenjara. */
+:- dynamic jailTimeLeft/2
+
+/* RULES */
+/* evaluatePrisonDiceRoll(P, DOUBLE)
+
+   Melakukan evaluasi terhadap hasil
+   lemparan dadu. Jika melempar Double
+   fakta jailTimeLeft pemain P di retract,
+   jika tidak double  */
+evaluatePrisonDiceRoll(P, false) :-
+evaluatePrisonDiceRoll(P, true) :-
+
+/* Mengevaluasi apakah pemain bisa
+   membayar untuk keluar penjara,
+   hasil dikembalikan dalam variabel RETURN */
+canPayBail(P, RETURN) :-
+
+/* Pemain membayar sebanyak XX
+   untuk keluar dari penjara 
+   (fakta jailTimeLeft di-retract).
+   Asumsi dana sudah cukup, evaluasi
+   sebelum pemanggilan fungsi. */
+payBail(P) :-
+
+/* Mengevaluasi apakah pemain memliki,
+   kartu Get Out of Jail hasil
+   dikembalikan dalam variabel RETURN */
+hasGOoJCard(P, RETURN) :-
+
+======================================================================
+
+7. Parkir Gratis (Al)
+/* FACTS */
+
+/* ParkirGratis(P)
+   Fakta menunjukkan apakah player memiliki
+   kartu parkir Gratis */
+:- dynamic parkirGratis/1
+
+/* RULES */
+
+======================================================================
+
+8. World Tour (Al)
+/* FACTS */
+
+/* RULES */
+/* evaluateWorldTour(P, LOC, passGO);
+   Menjalankan World Tour pada pemain P.
+   LOC merupakan akhir lokasi player, dan passGO jika melewati GO */
+evaluateWorldTour(P, G1, false) :-
+evaluateWorldTour(P, B5, true) :-
+
+======================================================================
+
+9. Pemain (didi)
+/* FACTS */
+/* isPlayer(P)
+
+   Fakta menunjukan bahwa P adalah pemain. */
+isPlayer(pemain1).
+isPlayer(pemain2).
+
+/* playerLocation(P, LOC)
+
+   Fakta menunjukan lokasi 
+   pemain P, yaitu LOC. */
+:- dynamic playerLocation/2
+
+/* playerCash(P, CASH)
+
+   Fakta menunjukan jumlah 
+   dana tunai pemain P, 
+   yaitu CASH. */
+:- dynamic playerCash/2
+
+/* playerPropList(P, PROPLIST)
+
+   Fakta menunjukan list petak 
+   properti yang dimiliki pemain P, 
+   yaitu PROPLIST. (hanya petak, cth. [A1, D2, E4]) */
+:- dynamic playerCardList/2
+
+/* playerCardList(P, CARDLIST)
+
+   Fakta menunjukan list kartu 
+   yang dimiliki pemain P, 
+   yaitu CARDLIST. */
+:- dynamic playerCardList/2
+
+
+/* RULES */
+/* checkPlayerDetail(P)
+
+   Menampilkan informasi mengenai
+   pemain P sesuai spek */
+checkPlayerDetail(P, false) :-
+
+======================================================================
+
+10. Dadu (Fio)
+/* FACTS */
+/* Angka Dadu */
+diceNum(Num)
+:- dynamic(diceNum/1)
+
+/* RULES */
+/* Menghasilkan angka 1-6 */
+generateDiceNum(Num) :-
+
+/* Melakukan pelemparan dadu dua kali */
+throwDice :-
+
+======================================================================
+
+14. End Game (Al)
+/* FACTS */
+/* startGame(false)
+   Ini dapat diimplementasikan di START atau di END */
+
+
+/* RULES */
+/* willBankrupt(P)
+   Mengeluarkan true jika P bound-to-be bangkrut */
+
+/* mortgage(P, CASH)
+   Menjalankan penjualan properti pemain P. */
+
+======================================================================
