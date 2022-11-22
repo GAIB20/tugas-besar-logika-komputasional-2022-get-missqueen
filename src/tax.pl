@@ -7,6 +7,7 @@ taxOwed(pemain1, [], Tax) :-
 taxOwed(pemain2, [], Tax) :-
     playerCash(Cash),
     Tax is Cash.
+    
 /* Rekurens */
 taxOwed(Player, [Prop|TAIL], Tax) :-
     levelProp(Prop, Level),
