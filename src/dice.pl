@@ -6,8 +6,8 @@ diceNum(dice2, 0).
 
 /* Double Count */
 :- dynamic(doubleCount/2).
-doubleCount(pemain1, 0).
-doubleCount(pemain2, 0).
+doubleCount(player1, 0).
+doubleCount(player2, 0).
 
 /* RULES */
 /* Menghasilkan angka 1-6 */

@@ -1,52 +1,52 @@
 /* FACTS */
 /* isPlayer(P)
 
-   Fakta menunjukan bahwa P adalah pemain. */
-isPlayer(pemain1).
-isPlayer(pemain2).
+   Fakta menunjukan bahwa P adalah player. */
+isPlayer(player1).
+isPlayer(player2).
 
 /* playerName(P)
 
-   Fakta menunjukan bahwa P adalah pemain. */
-:- dynamic playerName/2.
-playerName(pemain1, 'Anton').
-playerName(pemain2, 'Budi').
+   Fakta menunjukan bahwa P adalah player. */
+:- dynamic(playerName/2).
+playerName(player1, 'Anton').
+playerName(player2, 'Budi').
 
 
 /* playerLocation(P, LOC)
 
    Fakta menunjukan lokasi 
-   pemain P, yaitu LOC. */
-:- dynamic playerLocation/2.
-playerLocation(pemain1, loc_GO).
-playerLocation(pemain2, loc_GO).
+   player P, yaitu LOC. */
+:- dynamic(playerLocation/2).
+playerLocation(player1, loc_GO).
+playerLocation(player2, loc_GO).
 
 /* playerCash(P, CASH)
 
    Fakta menunjukan jumlah 
-   dana tunai pemain P, 
+   dana tunai player P, 
    yaitu CASH. */
-:- dynamic playerCash/2.
-playerCash(pemain1, 0).
-playerCash(pemain2, 0).
+:- dynamic(playerCash/2).
+playerCash(player1, 0).
+playerCash(player2, 0).
 
 /* playerPropList(P, PROPLIST)
 
    Fakta menunjukan list petak 
-   properti yang dimiliki pemain P, 
+   properti yang dimiliki player P, 
    yaitu PROPLIST. (hanya petak, cth. [A1, D2, E4]) */
-:- dynamic playerPropList/2.
-playerPropList(pemain1, []).
-playerPropList(pemain2, []).
+:- dynamic(playerPropList/2).
+playerPropList(player1, []).
+playerPropList(player2, []).
 
 /* playerCardList(P, CARDLIST)
 
    Fakta menunjukan list kartu 
-   yang dimiliki pemain P, 
+   yang dimiliki player P, 
    yaitu CARDLIST. */
-:- dynamic playerCardList/2.
-playerCardList(pemain1, []).
-playerCardList(pemain2, []).
+:- dynamic(playerCardList/2).
+playerCardList(player1, []).
+playerCardList(player2, []).
 
 /* translatePropLevel(Level, TRANSLATED)
 
@@ -65,21 +65,6 @@ translatePropLevel(4, 'Landmark').
 translateCardName(getOutOfJailCard, 'Get Out of Jail Card').
 
 /* RULES */
-/* locationCostByLevel(Loc, Level, COST)
-
-   Mengembalikan total nilai properti
-   dari pada Loc dengan level properti Level */
-locationCostByLevel(Loc, 0, COST) :-
-                                    costLand(COST, Loc).
-locationCostByLevel(Loc, 1, COST) :-
-                                    costClassOne(COST, Loc).
-locationCostByLevel(Loc, 2, COST) :-
-                                    costClassTwo(COST, Loc).
-locationCostByLevel(Loc, 3, COST) :-
-                                    costClassThree(COST, Loc).
-locationCostByLevel(Loc, 4, COST) :-
-                                    costLandmark(COST, Loc).
-
 /* totalPropVal(ListProp, TOTAL)
 
    Mengembalikan total nilai properti
@@ -88,7 +73,7 @@ totalPropVal([], 0).
 totalPropVal([Loc|B], TOTAL) :-
                             totalPropVal(B, TOTAL1),
                             levelProp(Loc, Level),
-                            locationCostByLevel(Loc, Level, Cost),
+                            locationCostByLevel(Cost, Loc, Level),
                             TOTAL is Cost + TOTAL1.
 
 /* displayPlayersProps(ListProp, Index)
@@ -119,7 +104,7 @@ displayPlayersCards([Card|B], Index) :-
 /* checkPlayerDetail(P)
 
    Menampilkan informasi mengenai
-   pemain P sesuai spek */
+   player P sesuai spek */
 checkPlayerDetail(P) :-
                        playerName(P, Name),
                        playerLocation(P, Loc),

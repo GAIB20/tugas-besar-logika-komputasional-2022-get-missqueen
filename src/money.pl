@@ -5,8 +5,8 @@
    kartu parkir Gratis 
    parkirGratis(P) */
 :- dynamic parkirGratis/1
-parkirGratis(pemain1).
-parkirGratis(pemain2).
+parkirGratis(player1).
+parkirGratis(player2).
 
 
 /* RULES */

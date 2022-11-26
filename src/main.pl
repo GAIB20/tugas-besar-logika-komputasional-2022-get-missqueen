@@ -1,15 +1,15 @@
-/* # :- include('bankrupt.pl').
-# :- include('chancecard.pl').
-# :- include('dice.pl').
-# :- include('jail.pl').
-# :- include('location.pl').
-# :- include('map.pl').
-# :- include('money.pl').
-# :- include('player.pl').
-# :- include('property.pl').
-# :- include('tax.pl').
-# :- include('utils.pl').
-# :- include('worldtour.pl'). */
+:- consult('bankrupt.pl').
+:- consult('chancecard.pl').
+:- consult('dice.pl').
+:- consult('jail.pl').
+:- consult('location.pl').
+:- consult('map.pl').
+:- consult('money.pl').
+:- consult('player.pl').
+:- consult('property.pl').
+:- consult('tax.pl').
+:- consult('utils.pl').
+:- consult('worldtour.pl').
 
 /* DEKLARASI FAKTA */
 /* Fakta menunjukkan apakah permainan sudah dimulai */
@@ -23,11 +23,11 @@ endingMessage('Bye bye..').
 read_player_name(X,Y):-
     format('Masukkan nama player pertama: '),
     read(X),
-    assertz(playerName(pemain1, X)), nl,
+    assertz(playerName(player1, X)), nl,
     format('Hore. Selamat datang, ~w!', [X]), nl,
     format('Masukkan nama player kedua: '),
     read(Y),
-    assertz(playerName(pemain1, Y)), nl,
+    assertz(playerName(player1, Y)), nl,
     format('Hore. Selamat datang, ~w!', [Y]), nl.
 
 /* DEKLARASI RULE */
