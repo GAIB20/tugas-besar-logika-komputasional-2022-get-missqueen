@@ -1,0 +1,69 @@
+ANGGOTA KELOMPOK
+1. Enrique Alifio Ditya    | 13521142
+2. Rinaldy Adin            | 13521134
+3. Chiquita Ahsanunnisa    | 13521129
+4. Alisha Listya Wardhani  | 13521171
+5. Vanessa Rebecca Wiyono  | 13521151
+
+PEMBAGIAN TUGAS
+FEATURES:
+1. Papan                        | chi + vanes
+2. Lokasi                       | chi + vanes
+3. Properti                     | fio
+4. Chance Card                  | didi
+5. Perpajakan                   | fio
+6. Penjara                      | didi
+7. Parkir Gratis                | Al
+8. World Tour                   | Al
+9. Pemain (Informasi Player)    | didi
+10. Dadu                        | fio
+11. End Game(Mekanisme Bangkrut)| Al
+
+-----
+12A. Bonus Color Set            |
+12B. World Cup / Festival       |
+12C. Chance Cards++             |
+12D. Buildable Go               |
+12E. Coin Flip                  |
+
+GENERAL DEADLINE
+Rencana Fakta & Rule: 14 Nov 2022
+Milestone 1         : Selasa, 15 November 2022  , 16.00
+Implementasi        : 21 Nov 2022               , 21.00
+Milestone 2         : Selasa, 22 November 2022  , 16.00
+Finishing           : 28 Nov 2022
+Milestone 3         : Selasa, 28 November 2022
+Demo                : 30 November 2022
+
+======================================================================
+
+COMPLETED TASKS
+- Pembagian Tugas
+- Fakta dan Rule:
+   3. Properti
+   4. Chance Card
+   5. Perpajakan
+   6. Penjara
+   7. Parkir Gratis
+   8. World Tour
+   9. Pemain
+   10. Dadu
+   11. End Game
+- Pembuatan Rencana Fakta dan Rule
+
+ONGOING TASKS
+- Implementasi:
+   1. Papan
+   2. Lokasi
+   3. Properti
+   4. Chance Card
+   5. Perpajakan
+   6. Penjara
+   7. Parkir Gratis
+   8. World Tour
+   9. Pemain
+   10. Dadu
+   11. End Game
+
+UNSTARTED TASKS
+- Debugging
