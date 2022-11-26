@@ -1,19 +1,11 @@
 /* RULES */
 /* Mengembalikan jumlah pajak yang harus dibayar pemain */
-/* Basis */
-taxOwed(pemain1, [], Tax) :-
-    playerCash(Cash),
-    Tax is Cash.
-taxOwed(pemain2, [], Tax) :-
-    playerCash(Cash),
-    Tax is Cash.
-    
-/* Rekurens */
-taxOwed(Player, [Prop|TAIL], Tax) :-
-    levelProp(Prop, Level),
-    cost(Value, Prop, Level),
-    taxOwed(Player, TAIL, NextTax),
-    Tax is Value+NextTax.
+taxOwed(Player, Tax) :-
+    playerPropList(Player, PropList),
+    totalPropVal(PropList, PropVal),
+    playerCash(Player, Cash),
+    TotalAsset is (PropVal+Cash),
+    Tax is (1/10)*TotalAsset.
 
 /* Mengurangi cash pemain setelah terkena pajak */
 taxed(Player) :-
