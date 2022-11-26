@@ -35,7 +35,8 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             NewCount is OldCount+1,
             assertz(doubleCount(CurrentPlayer, NewCount)),
-            write('Double!'), nl)
+            write('Double!'), nl
+        )
         ; nl
     ),
     doubleCount(CurrentPlayer, Count),
@@ -44,7 +45,8 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             assertz(doubleCount(CurrentPlayer, 0)),
             goToJail(CurrentPlayer),
-            write('Wah! Anda masuk penjara karena mendapatkan double 3 kali berturut-turut :('), nl)
+            write('Wah! Anda masuk penjara karena mendapatkan double 3 kali berturut-turut :('), nl
+        )
         ; format('Anda maju sebanyak ~w langkah.', [Move]), nl
     ),
     !.

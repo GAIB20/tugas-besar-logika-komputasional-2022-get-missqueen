@@ -1,3 +1,5 @@
+:- include('player.pl').
+
 /* FACTS */
 
 /* Identity */
@@ -397,3 +399,38 @@ classOfProperty(Prop) :-
     !,
     nl.
 
+/* Mengecek apabila properti sudah dimiliki */
+/* Basis */
+isPropertyOwned([], _Property, Owned) :- Owned = 0.
+
+/* Rekurens */
+isPropertyOwned([Head|_Tail], Property, Owned) :- 
+    Head == Property,
+    Owned = 1.
+isPropertyOwned([Head|Tail], Property, Owned) :- 
+    Head \= Property, 
+    isPropertyOwned(Tail, Property, Owned).
+
+/* Akuisisi properti */
+buyProperty(Player, Location) :-
+    property(Location) -> (
+        propertyName(PropName, Location),
+        levelProp(Location, Level),
+        cost(Cost, Location, Level),
+        playerCash(Player, Cash),
+        playerPropList(Player, PropList),
+        isPropertyOwned(PropList, Location, Owned),
+        (
+            (Cash >= Cost) -> (
+                (Owned =:= 0) -> (
+                    retract(playerPropList(Player, OldPropList)),
+                    NewPropList = [Location|OldPropList],
+                    assertz(playerPropList(Player, NewPropList)),
+                    retract(playerCash(Player, OldCash)),
+                    NewCash is (OldCash-Cost),
+                    assertz(playerCash(Player, NewCash)),
+                    format('~s berhasil diakusisi. Sisa uang Anda adalah ~w ~n', [PropName, NewCash]), !
+                ) ; write('Anda sudah memiliki properti ini!'), nl, !    
+            ) ; format('Anda miskin! Cari uang sebanyak ~w untuk membeli properti ini. ~n', [Cost]), !
+        )
+    ) ; write('Anda tidak ada pada properti!'), nl, !.
