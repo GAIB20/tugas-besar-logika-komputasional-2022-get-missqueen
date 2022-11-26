@@ -93,7 +93,8 @@ displayPlayersProps([Prop|B], Index) :-
                                        propertyName(PropName, Prop),
                                        levelProp(Prop, Level),
                                        translatePropLevel(Level, LevelTranslated),
-                                       format('~w. ~s - ~s ~n', [Index, PropName, LevelTranslated]),
+                                       cost(Cost, Prop, Level),
+                                       format('~w. ~s - ~s - ~w ~n', [Index, PropName, LevelTranslated, Cost]),
                                        Index1 is Index + 1,
                                        displayPlayersProps(B, Index1).
 
@@ -101,7 +102,7 @@ displayPlayersProps([Prop|B], Index) :-
 
    Menampilkan kartu yang dimiliki dengan
    nomor barisan mulai dari Index */
-displayPlayersCards([], Index) :- nl.
+displayPlayersCards([], _Index).
 displayPlayersCards([Card|B], Index) :-
                                        translateCardName(Card, CardTranslated),
                                        format('~s. ~s ~n', [Index, CardTranslated]),
