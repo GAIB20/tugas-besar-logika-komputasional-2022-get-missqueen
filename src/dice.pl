@@ -16,8 +16,8 @@ generateDiceNum(Num) :-
     Num is DiceFace.
 
 throwDice :-
-    playerName(Player, Name),
-    format('Sekarang adalah giliran ~s ~n.', [Name]),
+    playerName(CurrentPlayer, Name),
+    format('Sekarang adalah giliran ~s. ~n', [Name]),
     nl,
     generateDiceNum(Num),
     retract(diceNum(dice1, OldNum1)),
@@ -29,21 +29,22 @@ throwDice :-
     format('Dadu 2: ~w ~n', [Num]),
     diceNum(dice1, DiceFace1),
     diceNum(dice2, DiceFace2),
+    Move is DiceFace1+DiceFace2,
     (
         DiceFace1 =:= DiceFace2 -> (
-            retract(doubleCount(Player, OldCount)),
+            retract(doubleCount(CurrentPlayer, OldCount)),
             NewCount is OldCount+1,
-            assertz(doubleCount(Player, NewCount)),
-            format('Double! ~n'))
+            assertz(doubleCount(CurrentPlayer, NewCount)),
+            write('Double!'), nl)
         ; nl
     ),
-    doubleCount(Player, Count),
+    doubleCount(CurrentPlayer, Count),
     (
         Count =:= 3 -> (
-            retract(doubleCount(Player, OldCount)),
-            assertz(doubleCount(Player, 0)),
-            goToJail(Player),
-            format('Wah! Anda masuk penjara karena mendapatkan double 3 kali berturut-turut :( ~n'))
-        ; format('Anda maju sebanyak ~w langkah. ~n')
+            retract(doubleCount(CurrentPlayer, OldCount)),
+            assertz(doubleCount(CurrentPlayer, 0)),
+            goToJail(CurrentPlayer),
+            write('Wah! Anda masuk penjara karena mendapatkan double 3 kali berturut-turut :('), nl)
+        ; format('Anda maju sebanyak ~w langkah.', [Move]), nl
     ),
     !.
