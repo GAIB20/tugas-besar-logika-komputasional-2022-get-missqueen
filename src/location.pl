@@ -1,5 +1,6 @@
-:- include('property.pl').
-:- include('player.pl').
+:- consult('property.pl').
+:- consult('player.pl').
+:- consult('utils.pl').
 
 /* what's inside */
 /*  - check location validity
@@ -13,12 +14,11 @@
     - check location detail
         status: yang wt nunggu % nya, untuk go apakah dapat duit kl lewat, belom uppercase2in
     - player location -> ada di bagian file player.pl dengan predikat playerLocation()
-    - nearest tax location (untuk chance card kartu tax, butuh pindah ke tempat tax terdekat berikutnya */
+    - nearest tax location (untuk chance card kartu tax, butuh pindah ke tempat tax terdekat berikutnya 
+    - move player method: move/ teleport 
+    */
 
-/* pertanyaan:
-    1. untuk cc & tx kan ada lbh dari 1. kalo cuman pake 1 istilah jd ambigu,
-       apakah bisa kita sebut ada cc1,cc2,dst?
-*/
+/* Note: untuk player location & cash di sini cuman asserta aja (ga ada retract), retract2 kalo mau sekalian aja di main buat retract semua statenya biar gak backtracking */
 
 /* CHECK LOCATION VALIDITY */
 /* syntax: validLoc(Loc) */
@@ -109,16 +109,7 @@ rollDiceLoc(Roll,PrevLoc,NewLoc) :-
     namaLoc(Y,NewLoc).
 
 /* FIND OWNER OF PROPERTY LOCATION */
-/* Fungsi Antara */
-/* Mengecek apakah properti ada di property list seorang player. Result 1 berarti ada, 0 berarti tidak ada */
-/* syntax: inList(List,SearchedElement,Result)
-/* Basis */
-inList([],_,0).
-inList([H|_],H,1).
-/* Rekurens */
-inList([H|T],SearchedElement,Result)    :-
-    H \== SearchedElement,
-    inList(T,SearchedElement,Result).
+
 
 /* Fungsi Utama */
 /* Mencari pemilik dari property */
@@ -141,7 +132,7 @@ checkLocationDetail(Loc) :-
 checkLocationDetail(go) :-
     write('Nama Lokasi            : Go'),
     nl,
-    write('Deskripsi Lokasi       : Ini adalah tempat start seluruh pemain. Setiap melewatinya setelah 1 putaran, Anda akan mendapatkan tambahan uang sebesar X.'),
+    write('Deskripsi Lokasi       : Ini adalah tempat start seluruh pemain. Setiap melewatinya setelah 1 putaran, Anda akan mendapatkan tambahan uang sebesar 1000.'), /* dummy dulu jumlah duitnya */
     !.
 
 /* Lokasi Nonproperti : Free Parking */
@@ -244,3 +235,40 @@ checkLocationDetail(Loc) :-
 nearestTax(cc1,tx1).
 nearestTax(cc2,tx2).
 nearestTax(cc2,tx2).
+
+/* IS START STEPPED? */
+/* Mengecek apakah start berada di antara (inklusif) PrevLoc dan NewLoc */
+steppedStart(PrevLoc,NewLoc)   :-
+    namaLoc(X,PrevLoc),
+    namaLoc(Y,NewLoc),
+    Y =< X.
+
+/* MOVE PLAYER */
+
+/* Move ke Suatu Tempat: JALAN */
+/* contoh penggunaan: world tour jalan bukan loncat */
+moveTo(Player,NewLoc)          :-
+    playerLocation(Player,PrevLoc),
+    steppedStart(PrevLoc,NewLoc),
+    playerCash(Player, PrevBal),
+    NewBal is PrevBal + 1000, /* dummy dulu kalo lewat start */
+    asserta(playerLocation(Player,NewLoc)),
+    asserta(playerCash(Player,NewBal)).
+
+moveTo(Player,NewLoc)          :-
+    playerLocation(Player,PrevLoc),
+    \+ steppedStart(PrevLoc,NewLoc),
+    playerCash(Player, PrevBal),
+    asserta(playerLocation(Player,NewLoc)),
+    asserta(playerCash(Player,PrevBal)).  
+
+/* Move dari Dice: JALAN */
+moveAfterRoll(Player,Roll)  :-
+    playerLocation(Player,PrevLoc),
+    rollDiceLoc(Roll,PrevLoc,NewLoc),
+    moveTo(Player,NewLoc).
+
+/* Teleport ke Suatu Tempat: TIDAK JALAN (LONCAT) */
+/* contoh penggunaan: saat pengguna mendapat cc masuk penjara, pengguna LONCAT ke penjara (tidak jalan) */
+teleportTo(Player,Loc)     :-
+    asserta(playerLocation(Player,Loc)).
