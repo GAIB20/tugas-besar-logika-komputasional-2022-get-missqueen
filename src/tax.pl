@@ -17,7 +17,8 @@ taxOwed(Player, [Prop|TAIL], Tax) :-
 
 /* Mengurangi cash pemain setelah terkena pajak */
 taxed(Player) :-
-    playerCash(Player, Cash),
     playerPropList(Player, PropList),
     taxOwed(Player, PropList, Tax),
-    assertz(playerCash(Player, (Cash-Tax))).
+    retract(playerCash(Player, (OldCash))),
+    NewCash is (OldCash-Tax),
+    assertz(playerCash(Player, NewCash)).
