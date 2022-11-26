@@ -27,7 +27,7 @@ playerLocation(player2, go).
    dana tunai player P, 
    yaitu CASH. */
 :- dynamic(playerCash/2).
-playerCash(player1, 0).
+playerCash(player1, 100000).
 playerCash(player2, 0).
 
 /* playerPropList(P, PROPLIST)
@@ -76,12 +76,19 @@ totalPropVal([Loc|B], TOTAL) :-
                             cost(Cost, Loc, Level),
                             TOTAL is Cost + TOTAL1.
 
+/* Count List Length */
+/* Basis */
+countLength([], 0).
+/* Rekurens */
+countLength([_|TAIL], C) :-
+    countLength(TAIL, M),
+    C is 1+M.
+
 /* displayPlayersProps(ListProp, Index)
 
    Menampilkan properti yang dimiliki dengan
    nomor barisan mulai dari Index */
-displayPlayersProps([], Index) :-
-                                       format('Tidak ada properti yang dimiliki. ~n', []).
+displayPlayersProps([], _Index).
 displayPlayersProps([Prop|B], Index) :-
                                        propertyName(PropName, Prop),
                                        levelProp(Prop, Level),
@@ -94,8 +101,7 @@ displayPlayersProps([Prop|B], Index) :-
 
    Menampilkan kartu yang dimiliki dengan
    nomor barisan mulai dari Index */
-displayPlayersCards([], Index) :-
-                                       format("Tidak ada kartu yang dimiliki. ~n", []).
+displayPlayersCards([], Index) :- nl.
 displayPlayersCards([Card|B], Index) :-
                                        translateCardName(Card, CardTranslated),
                                        format('~s. ~s ~n', [Index, CardTranslated]),
@@ -122,8 +128,21 @@ checkPlayerDetail(P) :-
                        format('Total Nilai Properti         : ~w ~n', [TotalPropVal]),
                        format('Total Aset                   : ~w ~n', [TotalAsset]),
                        nl,
-                       format('Daftar Kepemilikan Properti  : ~n', []),
-                       displayPlayersProps(Props, 1),
+                       countLength(Props, LengthProp),
+                       countLength(Cards, LengthCards),
+                       write('Daftar Kepemilikan Properti  :'),
                        nl,
-                       format('Daftar Kepemilikan Card      : ~n', []),
-                       displayPlayersCards(Cards, 1).
+                       (
+                           (LengthProp > 0) -> (
+                              displayPlayersProps(Props, 1)
+                           ) ; write('Tidak ada properti yang dimiliki'), nl
+                       ),
+                       nl,
+                       write('Daftar Kepemilikan Card      :'),
+                       nl,
+                       (
+                           (LengthCards > 0) -> (
+                              displayPlayersCards(Cards, 1)
+                           ) ; write('Tidak ada kartu yang dimiliki'), nl
+                       ),
+                       nl, !.
