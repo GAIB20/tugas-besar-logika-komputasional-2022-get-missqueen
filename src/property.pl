@@ -3,6 +3,8 @@
 /* Identity */
 /* property(Name) */
 /* Menunjukkan apabila Name adalah property atau non-property */
+allPropertyList([a1, a2, a3, b1, b2, b3, c1, c2, c3, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2]).
+
 property(a1).
 property(a2).
 property(a3).
@@ -452,7 +454,7 @@ upgradeProp(Player, Location) :-
                     ) ; format('Iya iya.. Saya paham duit kamu banyak. Udah max level propertinya. ~n', [])
                 ) ; format('Miskin.. cari uang sebanyak ~w untuk upgrade properti ini jadi ~s. ~n', [Cost, LevelTranslated])
             )
-        )
+        ) ; (format('Ini bukan properti yah sayang.. ~n'))
     ).
 
 /* Jual Properti */
@@ -468,6 +470,7 @@ sellProperty(Player) :-
                     nl, nl,
                     displayPlayersProps(PropList, 1),
                     nl,
+                    write('| ?- '),
                     read(Input),
                     nl,
                     Index is Input-1,
@@ -527,4 +530,79 @@ rentProperty(Player1, Player2, Location) :-
             NewCash2 is OldCash2+RentCost,
             assertz(playerCash(Player2, NewCash2))
         )
+    ).
+
+/* List properti yang tidak dimiliki pemain */
+getNotOwnedProperty([], _Player, []).
+getNotOwnedProperty([H|T], Player, Result) :-
+    (
+        (\+ ownProp(Player, H)) -> (
+            getNotOwnedProperty(T, Player, NewResult),
+            Result = [H|NewResult]
+        ) ; getNotOwnedProperty(T, Player, Result)
+    ).
+
+getPropertyByLevel([], _Class, []).
+getPropertyByLevel([H|T], Class, Result) :-
+    levelProp(H, Level),
+    (
+        (Level == Class) -> (
+            getPropertyByLevel(T, Class, NewResult),
+            Result = [H|NewResult]
+        ) ; getPropertyByLevel(T, Class, Result)
+    ).
+
+buildableGo(Player, Location) :-
+    Location == go,
+    allPropertyList(AllProperty),
+    format('Lagi di go nih, mau ngapain? ~n', []),
+    nl,
+    getNotOwnedProperty(AllProperty, Player, NotOwned),
+    countLength(NotOwned, LengthNotOwned),
+    write('| ?- '),
+    read(Input),
+    nl,
+    (
+        (Input == 'buy') -> (
+            (
+                (LengthNotOwned > 0) -> (
+                    format('Mau beli yang mana? ~n', []),
+                    nl,
+                    displayPlayersProps(NotOwned, 1),
+                    nl,
+                    write('| ?- '),
+                    read(Select),
+                    nl,
+                    Index is Select-1,
+                    (
+                        (Index >= 0, Index < LengthNotOwned) -> (
+                            getVal(NotOwned, Index, PropBought),
+                            buyProperty(Player, PropBought)
+                        ) ; format('Hah.. yang bener aja dong. Gaada properti ke-~w. ~n', [Select]), nl
+                    )
+                ) ; format('Anjay GG udah punya semua properti. #flex ~n', [])
+            )
+        ) ; (Input == 'upgrade') -> (
+            playerPropList(Player, Owned),
+            getPropertyByLevel(Owned, 3, Upgradable),
+            countLength(Upgradable, LengthUpgradable),
+            (
+                (LengthUpgradable > 0) -> (
+                    format('Mau upgrade yang mana? ~n', []),
+                    nl,
+                    displayPlayersProps(Upgradable, 1),
+                    nl,
+                    write('| ?- '),
+                    read(Select),
+                    nl,
+                    Index is Select-1,
+                    (
+                        (Index >= 0, Index < LengthUpgradable) -> (
+                            getVal(Upgradable, Index, PropUpgraded),
+                            upgradeProp(Player, PropUpgraded)
+                        ) ; write('Hah.. yang bener aja dong. Gaada properti ke-~w. ~n', [Select]), nl
+                    )
+                ) ; format('Gaada properti yang bisa jadi landmark.. ~n', [])
+            )
+        ) ; format('Opsinya cuman bisa beli sama upgrade properti jadi landmark ya... ~n', [])
     ).
