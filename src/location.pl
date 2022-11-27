@@ -144,7 +144,7 @@ checkLocationDetail(jl) :-
     write('Nama Lokasi            : Penjara'),
     nl,
     /* write('Deskripsi Lokasi       : kamu akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. kamu akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, kamu harus: '), */
-    write('Deskripsi Lokasi       : Kalo kamu naughty nanti daddy masukin ke sini. Makanya gausah bertingkah dapet double 3 kali, ntar keluarnya ribet harus judi dulu. Kamu bisa: '),
+    write('Deskripsi Lokasi       : Kalo kamu naughty nanti daddy masukin ke sini, makanya gausah macem-macem dapet double 3 kali. Di sini kamu bisa: '),
     nl,
     write('- Mendapat dadu double sebelum tiga kali giliran,'),
     nl,
