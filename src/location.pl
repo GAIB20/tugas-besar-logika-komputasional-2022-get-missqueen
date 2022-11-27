@@ -1,7 +1,3 @@
-:- consult('property.pl').
-:- consult('player.pl').
-:- consult('utils.pl').
-
 /* what's inside */
 /*  - check location validity
         status: ok

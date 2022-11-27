@@ -47,5 +47,5 @@ validateInput(ListOfValids, Input, ValidInput) :-
       format('Weh, input yang bener dong. Silakan input lagi ~n', []),
       nl,
       read(NewInput),
-      validateInput(ListOfValids, NewInput)
+      validateInput(ListOfValids, NewInput, ValidInput)
    ) ; ValidInput is Input.

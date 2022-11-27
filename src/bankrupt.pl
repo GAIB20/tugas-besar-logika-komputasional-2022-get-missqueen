@@ -1,5 +1,3 @@
-:- include('property.pl').
-
 /* FACTS */
 /* startGame(false)
    Ini dapat diimplementasikan di START atau di END */

@@ -1,4 +1,4 @@
-:- include('location.pl').
+
 
 /* Asumsi: ID pemain hanya ada 1 digit, pemain hanya ada dua, yaitu w dan v */
 writeLocMap(Loc)    :-
@@ -23,8 +23,8 @@ writeLocMap(Loc)    :-
     format(' ~w~w ', [Player,Level]).
 
 map :- 
-    playerLocation(w,LocPlayer1),
-    playerLocation(v,LocPlayer2),
+    playerLocation(player1,LocPlayer1),
+    playerLocation(player2,LocPlayer2),
     write('     '),
     writeLocMap(fp),
     write(' '),
