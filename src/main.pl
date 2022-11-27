@@ -2,8 +2,7 @@
 :- include('bankrupt.pl').
 :- include('chancecard.pl').
 */
-/*
-:- include('dice.pl'). */
+:- include('dice.pl').
 /*
 :- include('jail.pl').
 */
@@ -36,16 +35,18 @@ read_player_name :-
     write('Masukkan nama player pertama: '),
     read(X),
     nonvar(X), !,
-    assertz(playerName(player1, X)), 
-    assertz(playerLocation(player1, go)), nl,
-    format('Hore. Selamat datang, ~w!', [X]), nl,
+    assertz(playerName(w, X)), 
+    assertz(playerLocation(w, go)), nl,
+    format('Horeee, Met datang ~w!', [X]), nl,
+    write('ID Player kamu adalah W!'), nl,
     /* Player Kedua */
     write('Masukkan nama player kedua: '),
     read(Y),
     nonvar(Y), !,
-    assertz(playerName(player2, Y)), 
-    assertz(playerLocation(player2, go)), nl,
-    format('Hore. Selamat datang, ~w!', [Y]), nl.
+    assertz(playerName(v, Y)), 
+    assertz(playerLocation(v, go)), nl,
+    format('Wessss, Haloo ~w!', [Y]), nl,
+    write('ID Player kamu adalah V!').
 
 /* PLAY GAME */
 
@@ -56,28 +57,31 @@ startGame :-
     write(StartMessage), nl,
     /* Game Config */
     read_player_name,
-    loopGame. 
+    stateGame. 
 
-loopGame :-
+stateGame :-
     nl, 
-    write('Berikut merupakan state peta: '), nl,
+    write('Peta nya gini nih: '), nl,
     map, nl,
-    write('Ketik help jika kamu bingung! '), nl,
-    write('Masukkan command: '), nl,
-    read(Command).
+    write('Kalo ngang-ngong ketik help aja! '), nl,
+    write('Mau ngapain? ').
 
-/* Case Switch
+jalan :-
+    throwDice,
+    stateGame.
+
+/* Commands:
 checkLocationDetail(a1).
 checkPropertyDetail(a1).
 checkPlayerDetail(x).
-throwDice
+throwDice atau jalan
 */
 
 help :-
     nl,
-    write('Halo! Kesusahan main monopoli? Kami bantu nih'), nl,
-    write('Berikut command yang bisa kamu lakukan:'), nl,
+    write('Eh jangan nangis dong. Kalo bengong dibantuin nih'), nl,
+    write('Gini katalognya, baik kan admin?'), nl,
     write('1. checkLocationDetail(b)'), tab(6), write('dengan b adalah bangunan'), nl,
     write('2. checkPropertyDetail(p)'), tab(6), write('dengan p adalah properti'), nl,
     write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,
-    write('4. throwDice'), nl.
+    write('4. jalan'), nl.

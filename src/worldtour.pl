@@ -17,7 +17,5 @@ isInWorldTour(P) :-
 evaluateWorldTour(P, NewLoc, OldLoc) :-
                         retract(playerLocation(P, OldLoc)),
                         NewLoc is LOC, !,
-                        assertz(playerLocation(P, NewLoc)),
-                        retract(playerCash(P, OldVal)),
-                        NewVal is OldVal + 100,
-                        assertz(playerCash(P, NewVal)).
+                        LOC \== wt,
+                        moveTo(P, NewLoc).

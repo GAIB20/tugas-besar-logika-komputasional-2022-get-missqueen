@@ -2,24 +2,27 @@
 /* isPlayer(P)
 
    Fakta menunjukan bahwa P adalah player. */
-isPlayer(player1).
-isPlayer(player2).
+isPlayer(w).
+isPlayer(v).
 
 /* playerName(P)
 
    Fakta menunjukan bahwa P adalah player. */
 :- dynamic(playerName/2).
-playerName(player1, "Anton").
-playerName(player2, "Budi").
-
+   /*
+   DUMMY FACT
+   playerName(w, "Anton").
+   playerName(v, "Budi"). */
 
 /* playerLocation(P, LOC)
 
    Fakta menunjukan lokasi 
    player P, yaitu LOC. */
 :- dynamic(playerLocation/2).
-playerLocation(player1, go).
-playerLocation(player2, go).
+   /*
+   DUMMY FACT
+   playerLocation(w, go).
+   playerLocation(v, go). */
 
 /* playerCash(P, CASH)
 
@@ -27,8 +30,8 @@ playerLocation(player2, go).
    dana tunai player P, 
    yaitu CASH. */
 :- dynamic(playerCash/2).
-playerCash(player1, 100000).
-playerCash(player2, 0).
+playerCash(w, 0).
+playerCash(v, 0).
 
 /* playerPrpList(P, PROPLIST)
 
@@ -36,8 +39,8 @@ playerCash(player2, 0).
    properti yang dimiliki player P, 
    yaitu PROPLIST. (hanya petak, cth. [A1, D2, E4]) */
 :- dynamic(playerPropList/2).
-playerPropList(player1, []).
-playerPropList(player2, []).
+playerPropList(w, []).
+playerPropList(v, []).
 
 /* playerCardList(P, CARDLIST)
 
@@ -45,8 +48,8 @@ playerPropList(player2, []).
    yang dimiliki player P, 
    yaitu CARDLIST. */
 :- dynamic(playerCardList/2).
-playerCardList(player1, []).
-playerCardList(player2, []).
+playerCardList(w, []).
+playerCardList(v, []).
 
 /* translatePropLevel(Level, TRANSLATED)
 
@@ -114,7 +117,7 @@ displayPlayersCards([Card|B], Index) :-
 
    Menampilkan informasi mengenai
    player P sesuai spek */
-checkPlayerDetail(P) :-
+checkPlayerDetail(Name) :-
                        playerName(P, Name),
                        playerLocation(P, Loc),
                        playerCash(P, Cash),
@@ -122,7 +125,7 @@ checkPlayerDetail(P) :-
                        playerCardList(P, Cards),
                        totalPropVal(Props, TotalPropVal),
                        TotalAsset is (Cash+TotalPropVal),
-                       format('Informasi Player ~s ~n', [Name]),
+                       format('Informasi Player ~w ~n', [Name]),
                        nl,
                        format('Lokasi                       : ~w ~n', [Loc]),
                        format('Total Uang                   : ~w ~n', [Cash]),

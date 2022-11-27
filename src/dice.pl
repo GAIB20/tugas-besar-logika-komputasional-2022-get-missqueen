@@ -6,8 +6,12 @@ diceNum(dice2, 0).
 
 /* Double Count */
 :- dynamic(doubleCount/2).
-doubleCount(player1, 0).
-doubleCount(player2, 0).
+doubleCount(w, 0).
+doubleCount(v, 0).
+
+/* Player's Turn*/
+:- dynamic(playersTurn/1).
+playersTurn(w).
 
 /* RULES */
 /* Menghasilkan angka 1-6 */
@@ -16,17 +20,18 @@ generateDiceNum(Num) :-
     Num is DiceFace.
 
 throwDice :-
+    playersTurn(CurrentPlayer),
     playerName(CurrentPlayer, Name),
-    format('Sekarang adalah giliran ~s. ~n', [Name]),
+    format('Sekarang gilirannya ~w. ~n', [Name]),
     nl,
-    generateDiceNum(Num),
+    generateDiceNum(Num1),
     retract(diceNum(dice1, OldNum1)),
-    assertz(diceNum(dice1, Num)),
-    format('Dadu 1: ~w ~n', [Num]),
-    generateDiceNum(Num),
+    assertz(diceNum(dice1, Num1)),
+    format('Dadu 1: ~w ~n', [Num1]),
+    generateDiceNum(Num2),
     retract(diceNum(dice2, OldNum2)),
-    assertz(diceNum(dice2, Num)),
-    format('Dadu 2: ~w ~n', [Num]),
+    assertz(diceNum(dice2, Num2)),
+    format('Dadu 2: ~w ~n', [Num2]),
     diceNum(dice1, DiceFace1),
     diceNum(dice2, DiceFace2),
     Move is DiceFace1+DiceFace2,
@@ -35,7 +40,7 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             NewCount is OldCount+1,
             assertz(doubleCount(CurrentPlayer, NewCount)),
-            write('Double!'), nl
+            write('Anjay Double!'), nl
         )
         ; nl
     ),
@@ -45,8 +50,12 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             assertz(doubleCount(CurrentPlayer, 0)),
             goToJail(CurrentPlayer),
-            write('Wah! Anda masuk penjara karena mendapatkan double 3 kali berturut-turut :('), nl
+            write('FBI OPEN UP! Anda masuk penjara karena kebanyakan double lah pokoknya'), nl
         )
-        ; format('Anda maju sebanyak ~w langkah.', [Move]), nl
+        ; format('Anda maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
+    retract(playerName(CurrentPlayer, Name)),
+    retract(playersTurn(_)),
+    assertz(playersTurn(NextPlayer)),
+    assertz(playerName(CurrentPlayer, Name)),
     !.

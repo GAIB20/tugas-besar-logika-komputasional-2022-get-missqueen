@@ -23,7 +23,7 @@ validLoc(fp).
 validLoc(e1).
 validLoc(e2).
 validLoc(e3).
-validLoc(cc1).
+validLoc(cc01).
 validLoc(f1).
 validLoc(f2).
 validLoc(f3).
@@ -31,15 +31,15 @@ validLoc(wt).
 validLoc(g1).
 validLoc(g2).
 validLoc(g3).
-validLoc(tx1).
-validLoc(cc2).
+validLoc(tx01).
+validLoc(cc02).
 validLoc(h1).
 validLoc(h2).
 validLoc(go).
 validLoc(a1).
 validLoc(a2).
 validLoc(a3).
-validLoc(cc3).
+validLoc(cc03).
 validLoc(b1).
 validLoc(b2).
 validLoc(b3).
@@ -47,7 +47,7 @@ validLoc(jl).
 validLoc(c1).
 validLoc(c2).
 validLoc(c3).
-validLoc(tx2).
+validLoc(tx02).
 validLoc(d1).
 validLoc(d2).
 validLoc(d3).
@@ -55,12 +55,12 @@ validLoc(d3).
 /* ADDITIONAL CHECKING */
 /* Untuk lokasi yang namanya tidak unik */
 /* syntax: chanceCard(Loc), tax(Loc) */
-chanceCard(cc1).
-chanceCard(cc2).
-chanceCard(cc3).
+chanceCard(cc01).
+chanceCard(cc02).
+chanceCard(cc03).
 
-tax(tx1).
-tax(tx2).
+tax(tx01).
+tax(tx02).
 
 /* DECODE COORDINATE TO LOCATION NAME */
 /* Lokasi pada map dinyatakan sebagai angka. 0 dimulai dari kiri atas */
@@ -69,7 +69,7 @@ namaLoc(0,fp).
 namaLoc(1,e1).
 namaLoc(2,e2).
 namaLoc(3,e3).
-namaLoc(4,cc1).
+namaLoc(4,cc01).
 namaLoc(5,f1).
 namaLoc(6,f2).
 namaLoc(7,f3).
@@ -77,15 +77,15 @@ namaLoc(8,wt).
 namaLoc(9,g1).
 namaLoc(10,g2).
 namaLoc(11,g3).
-namaLoc(12,tx1).
-namaLoc(13,cc2).
+namaLoc(12,tx01).
+namaLoc(13,cc02).
 namaLoc(14,h1).
 namaLoc(15,h2).
 namaLoc(16,go).
 namaLoc(17,a1).
 namaLoc(18,a2).
 namaLoc(19,a3).
-namaLoc(20,cc3).
+namaLoc(20,cc03).
 namaLoc(21,b1).
 namaLoc(22,b2).
 namaLoc(23,b3).
@@ -93,7 +93,7 @@ namaLoc(24,jl).
 namaLoc(25,c1).
 namaLoc(26,c2).
 namaLoc(27,c3).
-namaLoc(28,tx2).
+namaLoc(28,tx02).
 namaLoc(29,d1).
 namaLoc(30,d2).
 namaLoc(31,d3).
@@ -122,28 +122,29 @@ ownProp(Player,Prop)    :-
 checkLocationDetail(Loc) :-
     \+ validLoc(Loc),
     /* Ini harusnya printnya uppercase LOC */
-    format('~w bukan merupakan lokasi yang valid! Silahkan masukkan lokasi yang tepat~n',[Loc]),
+    format('~w apaan woy, jangan aneh-aneh deh tolong masukin lokasi yang tepat~n',[Loc]),
     !.
 
 /* Lokasi Nonproperti : Go */
 checkLocationDetail(go) :-
     write('Nama Lokasi            : Go'),
     nl,
-    write('Deskripsi Lokasi       : Ini adalah tempat start seluruh pemain. Setiap melewatinya setelah 1 putaran, Anda akan mendapatkan tambahan uang sebesar 1000.'), /* dummy dulu jumlah duitnya */
+    write('Deskripsi Lokasi       : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
     !.
 
 /* Lokasi Nonproperti : Free Parking */
 checkLocationDetail(fp) :-
     write('Nama Lokasi            : Free Parking'),
     nl,
-    write('Deskripsi Lokasi       : Tidak ada efek apa-apa jika menginjak tempat ini.'),
+    write('Deskripsi Lokasi       : Tempat ngechill.'),
     !.
 
 /* Lokasi Nonproperti : Penjara */
 checkLocationDetail(jl) :-
     write('Nama Lokasi            : Penjara'),
     nl,
-    write('Deskripsi Lokasi       : Anda akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Anda akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, Anda harus: '),
+    /* write('Deskripsi Lokasi       : Anda akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Anda akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, Anda harus: '), */
+    write('Deskripsi Lokasi       : Kalo kamu naughty nanti daddy masukin ke sini. Makanya gausah bertingkah dapet double 3 kali, ntar keluarnya ribet harus judi dulu. Kamu bisa: '),
     nl,
     write('- Mendapat dadu double sebelum tiga kali giliran,'),
     nl,
@@ -158,7 +159,7 @@ checkLocationDetail(jl) :-
 checkLocationDetail(wt) :-
     write('Nama Lokasi            : World Tour'),
     nl,
-    write('Deskripsi Lokasi       : Anda dapat berpindah kemana saja, tentunya dengan membayar uang sebesar X% aset Anda.'),
+    write('Deskripsi Lokasi       : Cosplay jadi orkay, banyak duit jadi terserah mau pecicilan ke mana aja. Tentunya dengan membayar uang sebesar 5% aset Anda.'),
     !.
 
 /* Lokasi Nonproperti : Chance Card */
@@ -166,7 +167,7 @@ checkLocationDetail(Loc) :-
     chanceCard(Loc),
     write('Nama Lokasi            : Chance Card'),
     nl,
-    write('Deskripsi Lokasi       : Apakah Anda sedang merasa beruntung? Disinilah tempatnya! Anda berhak mendapatkan salah satu dari kartu berikut :'),
+    write('Deskripsi Lokasi       : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah dah, di sini kamu bisa dapet:'),
     nl,
     write('1. Kartu Tax, Anda akan langsung pindah ke tempat Tax berikutnya (terdekat) dan langsung dikenai pajak.'),
     nl,
@@ -182,7 +183,7 @@ checkLocationDetail(Loc) :-
     tax(Loc),
     write('Nama Lokasi            : Tax'),
     nl,
-    write('Deskripsi Lokasi       : Anda merasa meng-sultan? Injak tempat ini dan sedekahkan 10% total asetmu di sini ^^'),
+    write('Deskripsi Lokasi       : Bayar biaya admin gan, taro 10% total asetmu di sini ^^'),
     !.
 
 /* Lokasi Properti (Belum Ada Pemilik) */
@@ -250,14 +251,18 @@ moveTo(Player,NewLoc)          :-
     playerCash(Player, PrevBal),
     NewBal is PrevBal + 1000, /* dummy dulu kalo lewat start */
     asserta(playerLocation(Player,NewLoc)),
-    asserta(playerCash(Player,NewBal)).
+    asserta(playerCash(Player,NewBal)),
+    retract(playerLocation(Player,PrevLoc)),
+    format('~w', [PrevLoc]).
 
 moveTo(Player,NewLoc)          :-
     playerLocation(Player,PrevLoc),
     \+ steppedStart(PrevLoc,NewLoc),
     playerCash(Player, PrevBal),
     asserta(playerLocation(Player,NewLoc)),
-    asserta(playerCash(Player,PrevBal)).  
+    asserta(playerCash(Player,PrevBal)),
+    retract(playerLocation(Player,PrevLoc)),
+    format('~w', [PrevLoc]).  
 
 /* Move dari Dice: JALAN */
 moveAfterRoll(Player,Roll)  :-
