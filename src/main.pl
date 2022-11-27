@@ -79,8 +79,8 @@ throwDice atau jalan
 
 help :-
     nl,
-    write('Eh jangan nangis dong. Kalo bengong dibantuin nih'), nl,
-    write('Gini katalognya, baik kan admin?'), nl,
+    write('Eh jangan nangis dong. Kalo bengong dibantuin nih,'), nl,
+    write('Gini katalognya:'), nl,
     write('1. checkLocationDetail(b)'), tab(6), write('dengan b adalah bangunan'), nl,
     write('2. checkPropertyDetail(p)'), tab(6), write('dengan p adalah properti'), nl,
     write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,

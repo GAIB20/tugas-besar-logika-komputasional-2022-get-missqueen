@@ -427,11 +427,33 @@ buyProperty(Player, Location) :-
                     retract(playerCash(Player, OldCash)),
                     NewCash is (OldCash-Cost),
                     assertz(playerCash(Player, NewCash)),
-                    format('~s berhasil diakusisi. Sisa uang Anda adalah ~w ~n', [PropName, NewCash]), !
-                ) ; write('Anda sudah memiliki properti ini!'), nl, !    
-            ) ; format('Anda miskin! Cari uang sebanyak ~w untuk membeli properti ini. ~n', [Cost]), !
+                    format('~s berhasil diakusisi. Sisa uang kamu adalah ~w ~n', [PropName, NewCash]), !
+                ) ; write('Gausah maruk deh.. kamu dah punya properti ini'), nl, !    
+            ) ; format('Kamu miskin! Cari uang sebanyak ~w untuk membeli properti ini ~n', [Cost]), !
         )
-    ) ; write('Anda tidak ada pada properti!'), nl, !.
+    ) ; write('Lagi ga di properti gan'), nl, !.
+
+/* Upgrade Properti */
+upgradeProp(Player, Location) :-
+    (
+        property(Location) -> (
+            levelProp(Location, Level),
+            NextLevel is Level+1,
+            cost(Cost, Location, NextLevel),
+            playerCash(Player, Cash),
+            translatePropLevel(NextLevel, LevelTranslated),
+            (
+                (Cash >= Cost) -> (
+                    (NextLevel =< 4) -> (
+                        retract(levelProp(Location, OldLevel)),
+                        NewLevel is OldLevel+1,
+                        assertz(levelProp(Location, NewLevel)),
+                        format('Selesai renov gan. ~n', [])
+                    ) ; format('Iya iya.. Saya paham duit kamu banyak. Udah max level propertinya. ~n', [])
+                ) ; format('Miskin.. cari uang sebanyak ~w untuk upgrade properti ini jadi ~s. ~n', [Cost, LevelTranslated])
+            )
+        )
+    ).
 
 /* Jual Properti */
 /* Player menjual properti Prop */
@@ -442,7 +464,7 @@ sellProperty(Player) :-
         (
             (
                 (Length > 0) -> (
-                    write('Properti mana yang ingin dijual?'),
+                    write('Properti mana yang mau dijual?'),
                     nl, nl,
                     displayPlayersProps(PropList, 1),
                     nl,
@@ -471,7 +493,7 @@ sellProperty(Player) :-
                         )
                     )
                 )
-            ) ; write('Gapunya properti bro'), nl
+            ) ; write('Gapunya properti bro.'), nl
         )
     ).
 
@@ -488,16 +510,16 @@ rentProperty(Player1, Player2, Location) :-
     playerCash(Player1, Cash1),
     (
         (Cash1 >= RentCost) -> (
-            format('Anda harus membayar uang sewa sebanyak ~w ~n', [RentCost]),
+            format('Tok-tok.. Bayar uang sewa sebanyak ~w. ~n', [RentCost]),
             retract(playerCash(Player1, OldCash1)),
             NewCash1 is OldCash1-RentCost,
             assertz(playerCash(Player1, NewCash1)),
             retract(playerCash(Player2, OldCash2)),
             NewCash2 is OldCash2+RentCost,
             assertz(playerCash(Player2, NewCash2)),
-            format('Uang Anda sekarang adalah ~w ~n', [NewCash1])
+            format('Uang kamu sekarang adalah ~w. ~n', [NewCash1])
         ) ; (
-            format('You are a brokie! uang anda tidak cukup untuk menyewa ~s. ~n', [PropName]), 
+            format('You are a brokie! uang kamu tidak cukup untuk menyewa ~s. ~n', [PropName]), 
             nl, 
             /* Mortgage hanya mengurangi uang milik Player 1 namun belum ditransfer ke Player 2  */
             mortgage(Player1, RentCost),

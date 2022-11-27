@@ -36,7 +36,7 @@ mortgage(Player, Pay) :-
                         retract(playerCash(Player, OldCash)),
                         NewNewCash is OldCash-Pay,
                         assertz(playerCash(Player, NewNewCash)),
-                        format('Akhirnya ga bakal dikejar rentenir lagi... Uang anda sekarang adalah ~w ~n', [NewNewCash])
+                        format('Akhirnya ga bakal dikejar rentenir lagi... Uang kamu sekarang adalah ~w. ~n', [NewNewCash])
                      )
                   )
                ) ; (ValidInput == 'n') -> (
@@ -51,6 +51,6 @@ mortgage(Player, Pay) :-
       retract(playerCash(Player, OldCash)),
       NewCash is OldCash-Pay,
       assertz(playerCash(Player, NewCash)),
-      format('Selesai membayar hutang. Uang anda sekarang adalah ~w ~n', [NewCash])
+      format('Selesai membayar hutang. Uang kamu sekarang adalah ~w. ~n', [NewCash])
    ).
 

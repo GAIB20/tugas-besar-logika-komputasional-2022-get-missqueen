@@ -50,9 +50,9 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             assertz(doubleCount(CurrentPlayer, 0)),
             goToJail(CurrentPlayer),
-            write('FBI OPEN UP! Anda masuk penjara karena kebanyakan double lah pokoknya'), nl
+            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl
         )
-        ; format('Anda maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
+        ; format('kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
     retract(playerName(CurrentPlayer, Name)),
     retract(playersTurn(_)),

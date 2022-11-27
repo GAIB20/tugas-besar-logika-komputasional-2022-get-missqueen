@@ -122,7 +122,7 @@ ownProp(Player,Prop)    :-
 checkLocationDetail(Loc) :-
     \+ validLoc(Loc),
     /* Ini harusnya printnya uppercase LOC */
-    format('~w apaan woy, jangan aneh-aneh deh tolong masukin lokasi yang tepat~n',[Loc]),
+    format('~w apaan woi, jangan aneh-aneh deh.. Tolong masukin lokasi yang tepat. ~n',[Loc]),
     !.
 
 /* Lokasi Nonproperti : Go */
@@ -143,7 +143,7 @@ checkLocationDetail(fp) :-
 checkLocationDetail(jl) :-
     write('Nama Lokasi            : Penjara'),
     nl,
-    /* write('Deskripsi Lokasi       : Anda akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. Anda akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, Anda harus: '), */
+    /* write('Deskripsi Lokasi       : kamu akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. kamu akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, kamu harus: '), */
     write('Deskripsi Lokasi       : Kalo kamu naughty nanti daddy masukin ke sini. Makanya gausah bertingkah dapet double 3 kali, ntar keluarnya ribet harus judi dulu. Kamu bisa: '),
     nl,
     write('- Mendapat dadu double sebelum tiga kali giliran,'),
@@ -159,7 +159,7 @@ checkLocationDetail(jl) :-
 checkLocationDetail(wt) :-
     write('Nama Lokasi            : World Tour'),
     nl,
-    write('Deskripsi Lokasi       : Cosplay jadi orkay, banyak duit jadi terserah mau pecicilan ke mana aja. Tentunya dengan membayar uang sebesar 5% aset Anda.'),
+    write('Deskripsi Lokasi       : Cosplay jadi orkay, banyak duit jadi terserah mau pecicilan ke mana aja. Tentunya dengan membayar uang sebesar 5% aset kamu.'),
     !.
 
 /* Lokasi Nonproperti : Chance Card */
@@ -169,13 +169,13 @@ checkLocationDetail(Loc) :-
     nl,
     write('Deskripsi Lokasi       : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah dah, di sini kamu bisa dapet:'),
     nl,
-    write('1. Kartu Tax, Anda akan langsung pindah ke tempat Tax berikutnya (terdekat) dan langsung dikenai pajak.'),
+    write('1. Kartu Tax, kamu langsung dipindahkan ke tempat Tax terdekat dan langsung dikenai pajak.'),
     nl,
-    write('2. Kartu Hadiah, Anda langsung mendapatkan uang berdasarkan nilai yang tertera pada kartu tersebut.'),
+    write('2. Kartu Hadiah, kamu langsung mendapatkan uang (haram) berdasarkan nilai yang tertera pada kartu tersebut.'),
     nl,
-    write('3. Kartu Get Out From Jail, Anda dapat menggunakan kartu ini saat berada di dalam penjara untuk langsung keluar tanpa menunggu tiga kali giliran atau membayar denda.'),
+    write('3. Kartu Get Out From Jail, kamu dapat menggunakan kartu ini saat berada di dalam penjara untuk langsung keluar tanpa menunggu tiga kali giliran atau membayar denda.'),
     nl,
-    write('4. Kartu Go To Jail, Anda langsung ditransportasi ke lokasi Penjara dan dipenjara. Permainan dilanjutkan oleh pemain selanjutnya.'),
+    write('4. Kartu Go To Jail, ya.. kamu masuk penjara.'),
     !.
 
 /* Lokasi Nonproperti : Tax */

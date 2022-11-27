@@ -125,7 +125,7 @@ checkPlayerDetail(Name) :-
                        playerCardList(P, Cards),
                        totalPropVal(Props, TotalPropVal),
                        TotalAsset is (Cash+TotalPropVal),
-                       format('Informasi Player ~w ~n', [Name]),
+                       format('Informasi ~w ~n', [Name]),
                        nl,
                        format('Lokasi                       : ~w ~n', [Loc]),
                        format('Total Uang                   : ~w ~n', [Cash]),
@@ -134,19 +134,19 @@ checkPlayerDetail(Name) :-
                        nl,
                        countLength(Props, LengthProp),
                        countLength(Cards, LengthCards),
-                       write('Daftar Kepemilikan Properti  :'),
+                       write('Punya Properti apa aja       :'),
                        nl,
                        (
                            (LengthProp > 0) -> (
                               displayPlayersProps(Props, 1)
-                           ) ; write('Tidak ada properti yang dimiliki'), nl
+                           ) ; write('Ga punya properti'), nl
                        ),
                        nl,
-                       write('Daftar Kepemilikan Card      :'),
+                       write('Daftar Kepemilikan Kartu     :'),
                        nl,
                        (
                            (LengthCards > 0) -> (
                               displayPlayersCards(Cards, 1)
-                           ) ; write('Tidak ada kartu yang dimiliki'), nl
+                           ) ; write('Ga punya kartu'), nl
                        ),
                        nl, !.
