@@ -21,8 +21,6 @@ generateDiceNum(Num) :-
 
 throwDice :-
     playersTurn(CurrentPlayer),
-    playerName(CurrentPlayer, Name),
-    format('Sekarang gilirannya ~w. ~n', [Name]),
     nl,
     generateDiceNum(Num1),
     retract(diceNum(dice1, _OldNum1)),
@@ -40,19 +38,28 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             NewCount is OldCount+1,
             assertz(doubleCount(CurrentPlayer, NewCount)),
-            write('Anjay Double!'), nl
-        )
-        ; nl
+            write('Anjay Double!'), nl,
+            (
+                Loc == jl -> (
+                    write('yee keluar dr penjara'), nl,
+                    evaluatePrisonDiceRoll(CurrentPlayer, true) 
+                )
+            ); nl
+        ); nl
     ),
     doubleCount(CurrentPlayer, Count),
     (
         Count =:= 3 -> (
             retract(doubleCount(CurrentPlayer, OldCount)),
             assertz(doubleCount(CurrentPlayer, 0)),
-            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl,
-            goToJail(CurrentPlayer)
-        )
-        ; format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
+            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl
+        ); nl
+    ),
+    (
+        Loc == jl -> (
+            write('maaf km msh di penjara...'), nl,
+            evaluatePrisonDiceRoll(CurrentPlayer, false)
+        ); format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
     retract(playerName(CurrentPlayer, Name)),
     retract(playersTurn(_)),

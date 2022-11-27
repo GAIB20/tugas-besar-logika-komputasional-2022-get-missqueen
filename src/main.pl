@@ -57,18 +57,69 @@ startGame :-
     write(StartMessage), nl,
     /* Game Config */
     read_player_name,
-    stateGame.
+    stateGame, nl,
+    write('Kalo ngang-ngong ketik help aja! '), nl,
+    write('Mau ngapain? '),
+    !.
 
 stateGame :-
     nl, 
     write('Peta nya gini nih: '), nl,
-    map, nl,
-    write('Kalo ngang-ngong ketik help aja! '), nl,
-    write('Mau ngapain? ').
+    map,
+    playerName(CurrentPlayer, Name), nl,
+    format('~nSekarang gilirannya ~w. ~n', [Name]).
 
 jalan :-
     throwDice,
+    map,
+    propertyMechanism,
     stateGame.
+
+/* Property */
+propertyMechanism :-
+    playerLocation(CurrentPlayer, Loc),
+    playerPropList(CurrentPlayer, X),
+    property(Loc),
+    isPropertyOwned(X, Loc, Val),
+    (
+        Val =:= 1 -> (
+            format("Apakah kamu ingin mengupgrade ~w? [y/n]~n", [Loc]),
+            read(Command),
+            (
+                Command == y -> (
+                    upgradeProp(CurrentPlayer, Location), !
+                )
+            ) ; write('Oke.')
+        ) ; nl
+    ),
+    (
+        Val =:= 0 -> (
+            format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
+            read(Command),
+            (
+                Command == y -> (
+                    buyProperty(CurrentPlayer, Location), !
+                )
+            ) ; write('Okedeh gpp kalo gamau beli.')
+        )
+    ), !.
+
+/* Jail */
+jailMechanism :-
+    playerLocation(CurrentPlayer, jl),
+    write('Yah masuk penjara AOKWOWKWOK'), nl,
+    assertz(jailTimeLeft(CurrentPlayer, 3)).
+
+/* ChanceCard */
+chanceCard :- 
+    playerLocation(CurrentPlayer, cc),
+    landOnChanceCard(CurrentPlayer).
+
+/* WorldTour */
+
+/* Tax */
+
+/* FreeParking */
 
 /* Commands:
 checkLocationDetail(a1).

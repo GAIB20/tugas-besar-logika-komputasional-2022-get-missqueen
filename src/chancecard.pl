@@ -16,12 +16,14 @@ giveChanceCard(P, 4) :- goToTax(P).
 
 /* Memindahkan player ke tempat tax berikutnya */
 goToTax(P) :-
+
              retract(playerLocation(P, OldLoc)),
              assertz(playerLocation(P, loc_TX)).
 
 /* Randomize jumlah hadiah dan menambahkan ke 
    dompet pemain */
 giveReward(P) :-
+               write("Selamat kamu dapet dorpris dari Chance Card!"), nl,
                 retract(playerCash(P, OldCash)),
                 chanceCardReward(Reward),
                 NewCash is OldCash + Reward,
@@ -30,10 +32,13 @@ giveReward(P) :-
 /* Menambahkan kartu get "Get Out of Jail"
    ke list kartu pemain */
 giveGetOutOfJailCard(P) :-
+                        write("Kamu dapet FreePass penjara sekali nich"), nl,
                           retract(playerCardList(P, OldList)),
                           assertz(playerCardList(P, [getOutOfJailCard|OldList])).
 
 /* Memindahkan player ke penjara */
 goToJail(P) :-
+              write("beuh masuk penjara.."), nl,
               retract(playerLocation(P, OldLoc)),
-              assertz(playerLocation(P, loc_JL)).
+              assertz(playerLocation(P, loc_JL)),
+              assertz(jailTimeLeft(P, 3)).
