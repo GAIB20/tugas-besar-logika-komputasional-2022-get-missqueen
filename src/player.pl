@@ -30,7 +30,7 @@ playerLocation(player2, go).
 playerCash(player1, 100000).
 playerCash(player2, 0).
 
-/* playerPropList(P, PROPLIST)
+/* playerPrpList(P, PROPLIST)
 
    Fakta menunjukan list petak 
    properti yang dimiliki player P, 
