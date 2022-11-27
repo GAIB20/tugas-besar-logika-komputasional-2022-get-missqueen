@@ -7,16 +7,16 @@
 /*
 :- include('jail.pl').
 */
-:- consult('location.pl').
-:- consult('map.pl').
+:- include('location.pl').
+:- include('map.pl').
 /*
 :- include('money.pl'). */
-:- consult('player.pl'). 
-:- consult('property.pl').
+:- include('player.pl'). 
+:- include('property.pl').
 /*
 :- include('tax.pl').
 */
-:- consult('utils.pl').
+:- include('utils.pl').
 /*
 :- include('worldtour.pl').
 */
@@ -43,19 +43,28 @@ read_player_name :-
     write('Masukkan nama player kedua: '),
     read(Y),
     nonvar(Y), !,
-    assertz(playerName(player1, Y)), 
-    assertz(playerLocation(player1, go)), nl,
+    assertz(playerName(player2, Y)), 
+    assertz(playerLocation(player2, go)), nl,
     format('Hore. Selamat datang, ~w!', [Y]), nl.
 
 /* PLAY GAME */
+
 startGame :-
-    retract(state(false)),
+    retract(state(_)),
     assertz(state(true)),
     startingMessage(StartMessage),
     write(StartMessage), nl,
-    /* Game Confiq */
+    /* Game Config */
     read_player_name,
     loopGame. 
+
+loopGame :-
+    nl, 
+    write('Berikut merupakan state peta: '), nl,
+    map, nl,
+    write('Ketik help jika kamu bingung! '), nl,
+    write('Masukkan command: '), nl,
+    read(Command).
 
 /* Case Switch
 checkLocationDetail(a1).
@@ -63,11 +72,6 @@ checkPropertyDetail(a1).
 checkPlayerDetail(x).
 throwDice
 */
-    
-loopGame :-
-    map.
-    /* Rekursif 
-        loopGame. */
 
 help :-
     nl,

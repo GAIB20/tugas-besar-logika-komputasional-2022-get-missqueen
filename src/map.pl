@@ -1,5 +1,3 @@
-
-
 /* Asumsi: ID pemain hanya ada 1 digit, pemain hanya ada dua, yaitu w dan v */
 writeLocMap(Loc)    :-
     \+ property(Loc),
