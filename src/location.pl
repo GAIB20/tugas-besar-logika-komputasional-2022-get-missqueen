@@ -261,8 +261,7 @@ moveTo(Player,NewLoc)          :-
     playerCash(Player, PrevBal),
     asserta(playerLocation(Player,NewLoc)),
     asserta(playerCash(Player,PrevBal)),
-    retract(playerLocation(Player,PrevLoc)),
-    format('~w', [PrevLoc]).  
+    retract(playerLocation(Player,PrevLoc)).  
 
 /* Move dari Dice: JALAN */
 moveAfterRoll(Player,Roll)  :-
