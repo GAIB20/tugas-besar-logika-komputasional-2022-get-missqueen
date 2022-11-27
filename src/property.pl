@@ -542,6 +542,8 @@ getNotOwnedProperty([H|T], Player, Result) :-
         ) ; getNotOwnedProperty(T, Player, Result)
     ).
 
+
+/* Mendapatkan properti berdasarkan levelnya */
 getPropertyByLevel([], _Class, []).
 getPropertyByLevel([H|T], Class, Result) :-
     levelProp(H, Level),
@@ -552,6 +554,7 @@ getPropertyByLevel([H|T], Class, Result) :-
         ) ; getPropertyByLevel(T, Class, Result)
     ).
 
+/* Bonus Buildable Go */
 buildableGo(Player, Location) :-
     Location == go,
     allPropertyList(AllProperty),

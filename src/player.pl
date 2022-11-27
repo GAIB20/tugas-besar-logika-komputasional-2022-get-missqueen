@@ -30,8 +30,8 @@ isPlayer(v).
    dana tunai player P, 
    yaitu CASH. */
 :- dynamic(playerCash/2).
-playerCash(w, 10000).
-playerCash(v, 100000).
+playerCash(w, 0).
+playerCash(v, 0).
 
 /* playerPrpList(P, PROPLIST)
 
