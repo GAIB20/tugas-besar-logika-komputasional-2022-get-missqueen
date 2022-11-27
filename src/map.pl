@@ -36,11 +36,11 @@ writePlayer(Loc)    :-
 
 writePlayer(Loc)    :-
     playerLocation(w,Loc),
-    format('   W  ', [Player]).
+    format('   W  ', [_Player]).
 
 writePlayer(Loc)    :-
     playerLocation(v,Loc),
-    format('   V  ', [Player]).
+    format('   V  ', [_Player]).
 
 map :- 
     playerLocation(w,LocPlayer1),

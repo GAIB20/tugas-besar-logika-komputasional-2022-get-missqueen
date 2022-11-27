@@ -25,11 +25,11 @@ throwDice :-
     format('Sekarang gilirannya ~w. ~n', [Name]),
     nl,
     generateDiceNum(Num1),
-    retract(diceNum(dice1, OldNum1)),
+    retract(diceNum(dice1, _OldNum1)),
     assertz(diceNum(dice1, Num1)),
     format('Dadu 1: ~w ~n', [Num1]),
     generateDiceNum(Num2),
-    retract(diceNum(dice2, OldNum2)),
+    retract(diceNum(dice2, _OldNum2)),
     assertz(diceNum(dice2, Num2)),
     format('Dadu 2: ~w ~n', [Num2]),
     diceNum(dice1, DiceFace1),
@@ -49,13 +49,13 @@ throwDice :-
         Count =:= 3 -> (
             retract(doubleCount(CurrentPlayer, OldCount)),
             assertz(doubleCount(CurrentPlayer, 0)),
-            goToJail(CurrentPlayer),
-            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl
+            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl,
+            goToJail(CurrentPlayer)
         )
-        ; format('kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
+        ; format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
     retract(playerName(CurrentPlayer, Name)),
     retract(playersTurn(_)),
-    assertz(playersTurn(NextPlayer)),
+    assertz(playersTurn(_NextPlayer)),
     assertz(playerName(CurrentPlayer, Name)),
     !.

@@ -51,13 +51,13 @@ read_player_name :-
 /* PLAY GAME */
 
 startGame :-
-    retract(state(_)),
+    retract(state(_S)),
     assertz(state(true)),
     startingMessage(StartMessage),
     write(StartMessage), nl,
     /* Game Config */
     read_player_name,
-    stateGame. 
+    stateGame.
 
 stateGame :-
     nl, 
