@@ -2,7 +2,7 @@
 /* Memanggil fungsi random untuk menentukan
    kartu yang ingin diberikan */
 landOnChanceCard(P) :-
-                      random(1,4, Chance),
+                      random(1,6, Chance),
                       nl,
                       giveChanceCard(P, Chance).
 
