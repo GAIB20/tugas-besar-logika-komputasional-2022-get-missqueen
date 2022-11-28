@@ -3,9 +3,7 @@
 :- include('chancecard.pl').
 */
 :- include('dice.pl').
-/*
 :- include('jail.pl').
-*/
 :- include('location.pl').
 :- include('map.pl').
 /*
@@ -19,6 +17,7 @@
 /*
 :- include('worldtour.pl').
 */
+
 
 /* DEKLARASI FAKTA */
 /* Fakta menunjukkan apakah permainan sudah dimulai */
@@ -71,9 +70,12 @@ stateGame :-
 
 jalan :-
     throwDice,
-    map,
-    propertyMechanism,
-    stateGame.
+    evaluateJalan.
+evaluateJalan :-
+    propertyMechanism, !.
+evaluateJalan :-
+    jailMechanism, !.
+    
 
 /* Property */
 propertyMechanism :-
@@ -87,7 +89,7 @@ propertyMechanism :-
             read(Command),
             (
                 Command == y -> (
-                    upgradeProp(CurrentPlayer, Location), !
+                    upgradeProp(CurrentPlayer, Loc), !
                 )
             ) ; write('Oke.')
         ) ; nl
@@ -98,7 +100,7 @@ propertyMechanism :-
             read(Command),
             (
                 Command == y -> (
-                    buyProperty(CurrentPlayer, Location), !
+                    buyProperty(CurrentPlayer, Loc), !
                 )
             ) ; write('Okedeh gpp kalo gamau beli.')
         )
@@ -106,13 +108,14 @@ propertyMechanism :-
 
 /* Jail */
 jailMechanism :-
-    playerLocation(CurrentPlayer, jl),
-    write('Yah masuk penjara AOKWOWKWOK'), nl,
-    assertz(jailTimeLeft(CurrentPlayer, 3)).
+    Loc == jl,
+    assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
+    write('Yah masuk penjara AOKWOWKWOK'), nl.
 
 /* ChanceCard */
-chanceCard :- 
-    playerLocation(CurrentPlayer, cc),
+chanceCardMechanism :- 
+    playerLocation(CurrentPlayer, Loc),
+    chanceCard(Loc),
     landOnChanceCard(CurrentPlayer).
 
 /* WorldTour */

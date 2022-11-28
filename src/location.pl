@@ -252,8 +252,7 @@ moveTo(Player,NewLoc)          :-
     NewBal is PrevBal + 1000, /* dummy dulu kalo lewat start */
     asserta(playerLocation(Player,NewLoc)),
     asserta(playerCash(Player,NewBal)),
-    retract(playerLocation(Player,PrevLoc)),
-    format('~w', [PrevLoc]).
+    retract(playerLocation(Player,PrevLoc)).
 
 moveTo(Player,NewLoc)          :-
     playerLocation(Player,PrevLoc),
