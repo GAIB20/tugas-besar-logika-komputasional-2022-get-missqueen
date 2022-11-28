@@ -125,6 +125,7 @@ checkPlayerDetail(P) :-
                        playerCardList(P, Cards),
                        totalPropVal(Props, TotalPropVal),
                        TotalAsset is (Cash+TotalPropVal),
+                       nl,
                        format('Informasi ~w ~n', [Name]),
                        nl,
                        format('Lokasi                       : ~w ~n', [Loc]),
@@ -150,3 +151,6 @@ checkPlayerDetail(P) :-
                            ) ; write('Ga punya kartu'), nl
                        ),
                        nl, !.
+checkPlayerDetail(P) :-
+                       \+ isPlayer(P),
+                       nl, format('~w bukan player itu.. inget inputnya pake ID player yaww. ~n', [P]).

@@ -348,6 +348,11 @@ cost(40000, h2, 4).
 
 /* Mengecek rincian dari sebuah properti, 
 meliputi nama, deskripsi, biaya sewa, harga properti */
+checkPropertyDetail(Loc)    :-
+    \+ property(Loc),
+    format('~w apaan woi, yang bener aja dong...~n', [Loc]),
+    !.
+
 checkPropertyDetail(Prop) :-
     property(Prop),
     propertyName(Name, Prop),
@@ -362,6 +367,7 @@ checkPropertyDetail(Prop) :-
     rent(ClassTwoRent, Prop, 2),
     rent(ClassThreeRent, Prop, 3),
     rent(LandmarkRent, Prop, 4),
+    nl,
     format('Nama Properti           : ~w ~n', [Name]),
     format('Deskripsi Properti      : ~w ~n', [Desc]),
     nl,

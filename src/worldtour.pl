@@ -1,9 +1,4 @@
-:- [player].
-
 /* FACTS */
-# playerLocation(p1, wt).
-# playerLocation(p2, notwt).
-
 /* RULES */
 
 /* isInWorldTour(P);
@@ -14,8 +9,5 @@ isInWorldTour(P) :-
 /* evaluateWorldTour(P, LOC, passGO);
    Menjalankan World Tour pada pemain P.
    LOC merupakan akhir lokasi player, dan passGO jika melewati GO */
-evaluateWorldTour(P, NewLoc, OldLoc) :-
-                        retract(playerLocation(P, OldLoc)),
-                        NewLoc is LOC, !,
-                        LOC \== wt,
+evaluateWorldTour(P, NewLoc, _) :-
                         moveTo(P, NewLoc).

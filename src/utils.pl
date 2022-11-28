@@ -41,11 +41,11 @@ inList([H|T],SearchedElement,Result)    :-
     inList(T,SearchedElement,Result).
 
 /* Validasi Input */
-validateInput(ListOfValids, Input, ValidInput) :-
+validateInput(ListOfValids, Input) :-
    inList(ListOfValids, Input, Result),
    (Result == 0) -> (
       format('Weh, input yang bener dong. Silakan input lagi ~n', []),
       nl,
       read(NewInput),
-      validateInput(ListOfValids, NewInput, ValidInput)
-   ) ; ValidInput is Input.
+      validateInput(ListOfValids, NewInput)
+   ) ; nl.

@@ -9,7 +9,7 @@ Masukkan nama player pertama: a.
 Horeee, Met datang a!
 ID Player kamu adalah W!
 
-Masukkan nama player kedua: b.
+doubleCount(v, 0)asukkan nama player kedua: b.
 
 Wessss, Haloo b!
 ID Player kamu adalah V!================= INI STATE GAME ================= 

@@ -11,9 +11,7 @@
 :- include('property.pl').
 :- include('tax.pl').
 :- include('utils.pl').
-/*
 :- include('worldtour.pl').
-*/
 :- include('coinflip.pl').
 
 
@@ -109,6 +107,10 @@ evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, cf),
     coinflipMechanism, !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, fp),
+    freeParkMechanism, !.
 
 /* Property */
 propertyMechanism :-
@@ -164,6 +166,31 @@ chanceCardMechanism :-
     assertz(playerName(CurrentPlayer, Name)), !.
 
 /* WorldTour */
+wtMechanism :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, Loc),
+    write('Selamat! Kamu sekarang bisa World Tour!!'), nl,
+    write('Masukkan tujuan yang kamu mau: '), 
+    read(WTLoc),
+    allLocationList(AllLoc),
+    validateInput(AllLoc, WTLoc),
+    (
+        Loc == WTLoc -> (
+            write('Woi yang bener woi masa mau diem doang di sini'), nl,
+            write('Coba lagi deh, mau kemana?'),
+            read(WTLoc), 
+            validateInput(AllLoc, WTLoc)
+        ) ; nl
+    ),
+    (
+        Loc == wt -> (
+            write('Gaboleh curang ah kok mau World Tour lagi'), nl,
+            write('Coba lagi deh, mau kemana?'),
+            read(WTLoc), 
+            validateInput(AllLoc, WTLoc)
+        ) ; nl
+    ),
+    evaluateWorldTour(CurrentPlayer, WTLoc, Loc).
 
 /* Tax */
 taxMechanism :-
@@ -172,6 +199,9 @@ taxMechanism :-
     taxed(CurrentPlayer), !.
 
 /* FreeParking */
+freeParkMechanism :-
+    write('Aeh aeh parkir gratis terus kayak di kubus'), nl,
+    write('Gaada apa-apa disini, lanjut gih.').
 
 /* Coin Flip */
 coinflipMechanism :-
@@ -188,10 +218,10 @@ throwDice atau jalan
 help :-
     nl,
     write('Eh jangan nangis dong. Kalo bengong dibantuin nih,'), nl,
-    write('Gini katalognya:'), nl,
-    write('1. checkLocationDetail(b)'), tab(6), write('dengan b adalah bangunan'), nl,
-    write('2. checkPropertyDetail(p)'), tab(6), write('dengan p adalah properti'), nl,
-    write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,
-    write('4. jalan'), nl,
-    write('5. stateGame'), nl,
-    write('6. help'), nl.
+    write('Gini katalognya:'), nl, nl,
+    write('1. checkLocationDetail(b)    :   Cek detail lokasi bangunan \'b\'.'), nl,
+    write('2. checkPropertyDetail(p)    :   Cek detail properti \'p\'.'), nl,
+    write('3. checkPlayerDetail(l)      :   Cek detail untuk ID pemain \'l\''), nl,
+    write('4. jalan                     :   Roll dice untuk maju pada peta.'), nl,
+    write('5. stateGame                 :   Melihat state dari permainan.'), nl,
+    write('6. help                      :   The best Indian call center.'), nl.

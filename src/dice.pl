@@ -9,6 +9,11 @@ diceNum(dice2, 0).
 doubleCount(w, 0).
 doubleCount(v, 0).
 
+/* Double Run */
+:- dynamic(doubleRun/1).
+doubleRun(false).
+
+
 /* RULES */
 /* Menghasilkan angka 1-6 */
 generateDiceNum(Num) :-
@@ -37,15 +42,17 @@ throwDice :-
             retract(doubleCount(CurrentPlayer, OldCount)),
             NewCount is OldCount+1,
             assertz(doubleCount(CurrentPlayer, NewCount)),
-            write('Anjay Double!'), nl,
+            write('Anjay Double!'), 
+            retract(doubleRun(_)),
+            assertz(doubleRun(true)), nl,
             (
                 JailTime > 0 -> (
                     write('yee keluar dr penjara'), nl,
                     evaluatePrisonDiceRoll(CurrentPlayer, true),
                     jailTimeLeft(CurrentPlayer, JailTime)
-                )
-            ); (0 == 0)
-        ); (0 == 0)
+                ) ; (0 == 0)
+            )
+        ) ; (0 == 0)
     ),
     doubleCount(CurrentPlayer, Count), !,
     (
