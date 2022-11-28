@@ -71,6 +71,7 @@ startGame :-
     !.
 
 stateGame :-
+    write(' '), nl,
     write('================= INI STATE GAME ================= '), nl,
     playersTurn(CurrentPlayer),
     nl, 
@@ -186,4 +187,4 @@ help :-
     write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,
     write('4. jalan'), nl,
     write('5. checkState'), nl,
-        write('6. help'), nl.
+    write('6. help'), nl.
