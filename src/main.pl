@@ -1,5 +1,4 @@
-/* 
-:- include('bankrupt.pl'). */
+:- include('bankrupt.pl').
 :- include('chancecard.pl').
 :- include('dice.pl').
 :- include('jail.pl').
@@ -64,8 +63,9 @@ startGame :-
         state(false) ->(
             retract(state(_S)),
             assertz(state(true)),
+            printASCII, nl, nl,
             startingMessage(StartMessage),
-            write(StartMessage), nl,
+            write(StartMessage), nl, nl,
             /* Game Config */
             read_player_name,
             stateGame, nl,
@@ -209,7 +209,6 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    jailTimeLeft(CurrentPlayer, JailTime),
     nl, write('Ga betah ya di penjara? Coba keluar dengan cara lain [useJailCard/bailOut/roll]'), nl,
     write('| ?- '),
     read(Command), nl,

@@ -11,7 +11,7 @@ jailTimeLeft(v,0).
 
 :- dynamic(justGotOutOfJail/1).
 
-bailPrice(1000).
+bailPrice(5000).
 
 /* RULES */
 /* evaluatePrisonDiceRoll(P, DOUBLE)
