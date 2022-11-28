@@ -6,6 +6,10 @@
   Get MissQueen<br/>
 </h2>
 
+<p align="center">
+![getmissqueen](https://user-images.githubusercontent.com/73476678/204267705-97b65ea9-89dd-40db-be68-257bbba8700f.png)
+</p>
+
 <p> Program berbasis Command-Line Interface (CLI) yang dibuat dalam bahasa Prolog. Program ini memproyeksikan sebuah gim mini menyerupai Monopoli atau Get Rich. Program ini merupakan 2 based-player game Monopoli, dengan urutan bermain berselingan. Kami </p>
 <hr>
 
