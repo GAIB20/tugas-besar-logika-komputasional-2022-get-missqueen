@@ -1,0 +1,109 @@
++++++++++++++++ DESC +++++++++++++++
+double dice ga jalan. harusnya setelah 1x draw ngedraw lg
+
++++++++++++++++ QUERY +++++++++++++++
+| ?- startGame.
+Selamat datang ke GetMissQueen!
+Masukkan nama player pertama: a.
+
+Horeee, Met datang a!
+ID Player kamu adalah W!
+
+Masukkan nama player kedua: b.
+
+Wessss, Haloo b!
+ID Player kamu adalah V!================= INI STATE GAME ================= 
+
+Peta nya gini nih: 
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  CF  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                                           
+                                                                      W  V 
+
+Posisi pemain:
+W = go 
+V = go 
+
+
+Sekarang gilirannya a. 
+
+Kalo ngang-ngong ketik help aja! 
+Mau ngapain? 
+
+(1 ms) yes
+| ?- jalan. 
+
+Dadu 1: 1 
+Dadu 2: 1 
+Anjay Double!
+
+
+
+Kamu maju sebanyak 2 langkah.
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  CF  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                                           
+                                                          W             V  
+
+Posisi pemain:
+W = a2 
+V = go 
+
+Apakah kamu ingin membeli a2? [y/n]
+y.
+Labtek VIII berhasil diakusisi. Sisa uang kamu adalah 997000 
+================= INI STATE GAME ================= 
+
+Peta nya gini nih: 
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  CF  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                         w0                
+                                                          W             V  
+
+Posisi pemain:
+W = a2 
+V = go 
+
+
+Sekarang gilirannya b. ------> HARUSNYA MASIH A
+
+(1 ms) yes
+
++++++++++++++++ STATUS +++++++++++++++
+UNSOLVED
