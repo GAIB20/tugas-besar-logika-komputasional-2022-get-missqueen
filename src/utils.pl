@@ -49,3 +49,19 @@ validateInput(ListOfValids, Input) :-
       read(NewInput),
       validateInput(ListOfValids, NewInput)
    ) ; nl.
+
+/* Dekorasi */
+printASCII :-
+    write('                   /(###  .###   ##'), nl,
+    write('                  ((((%### #####  ##'), nl,
+    write('         _       /((((((%###(#########('), nl,
+    write(' ___ ___| |_    ( /((((((%##   ####   ##'), nl,
+    write('| . | -_|  _|  ( .(  ( .(%(%######%###%#'), nl,
+    write('|_  |___|_|     ((((((((##(((((((((  (/'), nl,
+    write('|___|            ((((((#((((((* ((((/'), nl,
+    write('                  (((####((##((* *('), nl,
+    write(' _____ _         _____/#########(#/,'), nl,
+    write('|     |_|___ ___|     |_ _ ___ ___ ___ '), nl,
+    write('| | | | |_ -|_ -|  |  | | | -_| -_|   |'), nl,
+    write('|_|_|_|_|___|___|__  _|___|___|___|_|_|'), nl,
+    write('                   |__|').
