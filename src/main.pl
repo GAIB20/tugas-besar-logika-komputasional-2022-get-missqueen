@@ -61,6 +61,8 @@ switchPlayer :-
 startGame :-
     (
         state(false) ->(
+            cpu_time(Seed),
+            set_seed(Seed),
             retract(state(_S)),
             assertz(state(true)),
             printASCII, nl, nl,
