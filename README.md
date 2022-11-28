@@ -2,11 +2,11 @@
 # Tugas-Besar-Logika-Komputasional-2022
 
  Project ini merupakan salah satu pemenuhan Tugas besar I IF2121 Logika Komputasional:
-<h2 align="center">
+<h2 align='center'>
   Get MissQueen<br/>
 </h2>
 
-<p align="center">
+<p align='center'>
 <img src = https://user-images.githubusercontent.com/73476678/204267705-97b65ea9-89dd-40db-be68-257bbba8700f.png>
 </p>
 
@@ -21,7 +21,7 @@
 5. [Struktur](#struktur)
 6. [Author](#author)
 
-<a name="getting started"></a>
+<a name='getting started'></a>
 
 ## Getting Started!
 
@@ -53,15 +53,15 @@ startGame.
 ```
 4. Selamat bermain!
 
-<a name="pembagian-tugas"></a>
+<a name='pembagian-tugas'></a>
 
 ## Pembagian Tugas
 
 | Nama / NIM                            | Pembagian Tugas                                                                                                                                            |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Chiquita Ahsanunnisa / 13521129 | <li>Map</li> <li>Location</li>   |
+| Chiquita Ahsanunnisa / 13521129 | <li>Map</li> <li>Location</li> <li>Bonus Chance Card</li>  |
 | Rinaldy Adin / 13521134  | <li>Chance Card</li> <li>Jail</li> <li>Player</li>  |
-| Enrique Alifio Ditya / 13521142     |<li>Properti</li> <li>Tax</li> <li>Dice</li>   |
+| Enrique Alifio Ditya / 13521142     |<li>Properti</li> <li>Tax</li> <li>Dice</li> <li>Bankrupt</li> <li>Bonus Buildable Go</li> <li>Bonus Coin Flip</li> |
 | Vanessa Rebecca Wiyono / 13521151     | <li>Map</li> <li>Location</li>  |
 | Alisha Listya Wardhani / 13521171 | <li>Free Parking</li> <li>World Tour</li> <li>End Game</li> 
 
@@ -80,8 +80,9 @@ startGame.
 | `TAX`                          | &#10004;          |
 | `COINFLIP`                     | &#10004;          |
 | `BUILDABLE GO`                 | &#10004;          |
+| `BONUS CHANCE CARD`            | &#10004;          |
 
-<a name="struktur"></a>
+<a name='struktur'></a>
 
 ## Struktur
 ```bash
@@ -106,10 +107,10 @@ tugas-besar-logika-komputasional-2022-get-missqueen
 
 ```
 
-<a name="author"></a>
+<a name='author'></a>
 
 ## Author
-<h4 align="center">
+<h4 align='center'>
     Created by Kelompok /+ GetMissQueen<br/>
     2022
 </h4>

@@ -138,7 +138,7 @@ true ? ;
 
 
 +++++++++++++++++++ STATUS +++++++++++++++++++
-SOLVED, pake ! di "jalan"
+SOLVED, pake ! di 'jalan'
 
 Problem 2
 blm ad nonprop mech fp -> evlauate jalan fail -> switchPlayer fail -> stuck

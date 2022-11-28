@@ -10,4 +10,5 @@ isInWorldTour(P) :-
    Menjalankan World Tour pada pemain P.
    LOC merupakan akhir lokasi player, dan passGO jika melewati GO */
 evaluateWorldTour(P, NewLoc, _) :-
-                        moveTo(P, NewLoc).
+                        moveTo(P, NewLoc),
+                        stateGame.
