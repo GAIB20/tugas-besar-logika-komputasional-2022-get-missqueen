@@ -108,22 +108,22 @@ stateGame :-
     format('~nSekarang gilirannya ~w. ~n', [Name]), !.
 
 jalan :-
+    playersTurn(CurrentPlayer),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime =:= 0,
     throwDice,
     evaluateJalan,
     switchPlayer,
     stateGame, !.
 
-
-jalan(X) :-
-    throwDice(X, X),
-    evaluateJalan,
+jalan :-
+    playersTurn(CurrentPlayer),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime > 0,
+    jailMechanism,
     switchPlayer,
-    stateGame, !.
-
-jalan(X, Y) :-
-    throwDice(X, Y),
-    evaluateJalan,
-    switchPlayer,
+    nl, write('Peta nya gini nih: '), nl,
+    map,
     stateGame, !.
 
 evaluateJalan :-
@@ -136,13 +136,8 @@ evaluateJalan :-
     playerLocation(CurrentPlayer, jl),
     jailTimeLeft(CurrentPlayer, JailTime),
     JailTime =:= 3,
+    write('Yah masuk penjara AOKWOWKWOK'),
     jailMechanism, !.
-evaluateJalan :-
-    playersTurn(CurrentPlayer),
-    playerLocation(CurrentPlayer, jl),
-    jailTimeLeft(CurrentPlayer, JailTime),
-    JailTime =:= 3,
-    write('Yah masuk penjara AOKWOWKWOK'), !.
 evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, jl),
@@ -208,8 +203,35 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    jailTimeLeft(CurrentPlayer, JailTime), JailTime > 0, nl,
-    write('Yah masuk penjara AOKWOWKWOK'), nl.
+    jailTimeLeft(CurrentPlayer, JailTime),
+    nl, write('Ga betah ya di penjara? Coba keluar dengan cara lain [useJailCard/bailOut/roll]'), nl,
+    write('| ?- '),
+    read(Command), nl,
+    validateInput([useJailCard, bailOut, roll], Command),
+    (
+        Command == useJailCard -> (
+            hasGOoJCard(CurrentPlayer) -> (
+                useGOoJCard(CurrentPlayer),
+                assertz(justGotOutOfJail(CurrentPlayer)),
+                write('Yeey keluar penjaraa')
+            ); (\+ hasGOoJCard(CurrentPlayer)) -> (
+                write('Kamu ga punya kartunya :('),
+                validateInput([useJailCard, bailOut, roll], Command)
+            )
+        );
+        Command == bailOut -> (
+            canPayBail(CurrentPlayer) -> (
+                payBail(CurrentPlayer),
+                assertz(justGotOutOfJail(CurrentPlayer)),
+                write('Yeey keluar penjaraa')
+            ); (\+ canPayBail(CurrentPlayer)) -> (
+                write('Kamu ga cukup uangnya :('),
+                validateInput([useJailCard, bailOut, roll], Command)
+            )
+        ); (Command == roll) -> (
+            throwDice
+        )
+    ).
 
 /* ChanceCard */
 chanceCardMechanism :- 
