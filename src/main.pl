@@ -179,7 +179,7 @@ propertyMechanism :-
     isPropertyOwned(Y, Loc, ValOther),
     (
         Val =:= 1 -> (
-            format("Apakah kamu ingin upgrade ~w? [y/n]~n", [Loc]),
+            format('Apakah kamu ingin upgrade ~w? [y/n]~n', [Loc]),
             write('| ?- '),
             read(Command),
             nl,
@@ -192,11 +192,11 @@ propertyMechanism :-
             /* Kalau propertinya dimiliki orang */  
             (
                 ValOther =:= 1 -> (
-                    format("Yah! Ini punya orang. Bayar sewa!!"),
+                    format('Yah! Ini punya orang. Bayar sewa!! ~n', []),
                     rentProperty(CurrentPlayer, NextPlayer, Loc)
                 ) ; (
                     /* Kalau propertinya ga dimilikin siapa siapa */
-                    format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
+                    format('Apakah kamu ingin membeli ~w? [y/n]~n', [Loc]),
                     write('| ?- '),
                     read(Command),
                     nl,

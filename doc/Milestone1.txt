@@ -138,13 +138,13 @@ nl,
 write(“Kepemilikan : ”),
 write(Owner),
 nl,
-write("Biaya Sewa Saat Ini : ”),
+write('Biaya Sewa Saat Ini : ”),
 write(RentCost),
 nl,
-write("Biaya Akuisisi : ”),
+write('Biaya Akuisisi : ”),
 write(BuyCost),
 nl,
-write("Tingkatan Properti : “),
+write('Tingkatan Properti : “),
 write(Level),
 nl.
 
@@ -153,9 +153,9 @@ checkLocationDetail(P) :-
 validLoc(P),
 \+ property(P),
 worldTour(P),
-write("Nama Lokasi       :  World Tour”),
+write('Nama Lokasi       :  World Tour”),
 nl,
-write("Deskripsi Lokasi  :  Anda dapat berpindah kemana saja, tentunya dengan membayar uang sebesar X% aset Anda.”),
+write('Deskripsi Lokasi  :  Anda dapat berpindah kemana saja, tentunya dengan membayar uang sebesar X% aset Anda.”),
 nl.
 
 /* cek lokasi untuk nonproperti : penjara */
@@ -170,9 +170,9 @@ checkLocationDetail(P) :-
 validLoc(P),
 \+ property(P),
 chanceCard(P),
-write("Nama Lokasi       :  Chance Card"),
+write('Nama Lokasi       :  Chance Card'),
 nl,
-write("Deskripsi Lokasi  :  Apakah Anda sedang merasa beruntung? Disinilah tempatnya! Anda berhak mendapatkan salah satu dari kartu berikut :”),
+write('Deskripsi Lokasi  :  Apakah Anda sedang merasa beruntung? Disinilah tempatnya! Anda berhak mendapatkan salah satu dari kartu berikut :”),
 nl. /* desc kartu nyusul */
 
 ======================================================================
@@ -228,7 +228,7 @@ goToTax(P) :-
    dompet pemain */
 giveReward(P) :-
 
-/* Menambahkan kartu get "Get Out of Jail"
+/* Menambahkan kartu get 'Get Out of Jail'
    ke list kartu pemain */
 giveGetOutOfJailCard(P) :-
 

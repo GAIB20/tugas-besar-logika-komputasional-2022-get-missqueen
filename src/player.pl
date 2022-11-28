@@ -11,8 +11,8 @@ isPlayer(v).
 :- dynamic(playerName/2).
    /*
    DUMMY FACT
-   playerName(w, "Anton").
-   playerName(v, "Budi"). */
+   playerName(w, 'Anton').
+   playerName(v, 'Budi'). */
 
 /* playerLocation(P, LOC)
 
@@ -142,7 +142,7 @@ checkPlayerDetail(P) :-
                        nl,
                        countLength(Props, LengthProp),
                        countLength(Cards, LengthCards),
-                       write('Punya Properti apa aja       :'),
+                       write('Daftar Kepemilikan Properti  :'),
                        nl,
                        (
                            (LengthProp > 0) -> (

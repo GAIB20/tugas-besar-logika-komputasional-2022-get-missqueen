@@ -22,7 +22,7 @@ generateDiceNum(Num) :-
 
 throwDice :-
     playersTurn(CurrentPlayer),
-    playerLocation(CurrentPlayer, Loc),
+    playerLocation(CurrentPlayer, _Loc),
     jailTimeLeft(CurrentPlayer, JailTime),
     nl,
     generateDiceNum(Num1),
@@ -37,7 +37,7 @@ throwDice :-
     diceNum(dice1, DiceFace1),
     diceNum(dice2, DiceFace2),
     Move is DiceFace1+DiceFace2,
-    doubleCount(CurrentPlayer, Count), !,
+    !,
     (
         JailTime > 0 -> (
             (
@@ -93,7 +93,7 @@ throwDice :-
 
 throwDice(Num1, Num2) :-
     playersTurn(CurrentPlayer),
-    playerLocation(CurrentPlayer, Loc),
+    playerLocation(CurrentPlayer, _Loc),
     jailTimeLeft(CurrentPlayer, JailTime),
     nl,
     retract(diceNum(dice1, _OldNum1)),
@@ -106,7 +106,7 @@ throwDice(Num1, Num2) :-
     diceNum(dice1, DiceFace1),
     diceNum(dice2, DiceFace2),
     Move is DiceFace1+DiceFace2,
-    doubleCount(CurrentPlayer, Count), !,
+    !,
     (
         JailTime > 0 -> (
             (

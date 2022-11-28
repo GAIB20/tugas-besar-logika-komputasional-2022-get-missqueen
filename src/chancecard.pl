@@ -35,7 +35,7 @@ giveReward(P) :-
                 format('Kamu dapetnya: ~w perak', [Reward]),
                 assertz(playerCash(P, NewCash)).
 
-/* Menambahkan kartu get "Get Out of Jail"
+/* Menambahkan kartu get 'Get Out of Jail'
    ke list kartu pemain */
 giveGetOutOfJailCard(P) :-
                         write('Kamu dapet FreePass penjara sekali nich'), nl,

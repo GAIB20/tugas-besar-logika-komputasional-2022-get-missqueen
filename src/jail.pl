@@ -64,5 +64,5 @@ useGOoJCard(P) :-
                  retract(playerCardList(P, OldList)),
                  deleteVal(OldList, getOutOfJailCard, NewList),
                  assertz(playerCash(P, NewList)),
-                 retract(jailTimeLeft(P, OldTime)).
+                 retract(jailTimeLeft(P, _OldTime)),
                  assertz(jailTimeLeft(P, 0)).

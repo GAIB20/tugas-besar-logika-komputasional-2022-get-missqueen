@@ -2,11 +2,11 @@
 # Tugas-Besar-Logika-Komputasional-2022
 
  Project ini merupakan salah satu pemenuhan Tugas besar I IF2121 Logika Komputasional:
-<h2 align="center">
+<h2 align='center'>
   Get MissQueen<br/>
 </h2>
 
-<p align="center">
+<p align='center'>
 <img src = https://user-images.githubusercontent.com/73476678/204267705-97b65ea9-89dd-40db-be68-257bbba8700f.png>
 </p>
 
@@ -21,7 +21,7 @@
 5. [Struktur](#struktur)
 6. [Author](#author)
 
-<a name="getting started"></a>
+<a name='getting started'></a>
 
 ## Getting Started!
 
@@ -53,7 +53,7 @@ startGame.
 ```
 4. Selamat bermain!
 
-<a name="pembagian-tugas"></a>
+<a name='pembagian-tugas'></a>
 
 ## Pembagian Tugas
 
@@ -82,7 +82,7 @@ startGame.
 | `BUILDABLE GO`                 | &#10004;          |
 | `BONUS CHANCE CARD`            | &#10004;          |
 
-<a name="struktur"></a>
+<a name='struktur'></a>
 
 ## Struktur
 ```bash
@@ -107,10 +107,10 @@ tugas-besar-logika-komputasional-2022-get-missqueen
 
 ```
 
-<a name="author"></a>
+<a name='author'></a>
 
 ## Author
-<h4 align="center">
+<h4 align='center'>
     Created by Kelompok /+ GetMissQueen<br/>
     2022
 </h4>
