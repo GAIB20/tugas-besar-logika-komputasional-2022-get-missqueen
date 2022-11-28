@@ -196,6 +196,10 @@ checkLocationDetail(Loc) :-
     write('3. Kartu Get Out From Jail, kamu dapat menggunakan kartu ini saat berada di dalam penjara untuk langsung keluar tanpa menunggu tiga kali giliran atau membayar denda.'),
     nl,
     write('4. Kartu Go To Jail, ya.. kamu masuk penjara.'),
+    nl,
+    write('5. Kartu Go To Coin Flip, hoki sih, kamu langsung teleport ke Coin Flip.'),
+    nl,
+    write('6. Kartu Angel, hoki sih(2), dapet kartu terkeren buat cover biaya rent sama cancel bankrupt.'),
     !.
 
 /* Lokasi Nonproperti : Tax */

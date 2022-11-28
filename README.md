@@ -59,9 +59,9 @@ startGame.
 
 | Nama / NIM                            | Pembagian Tugas                                                                                                                                            |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Chiquita Ahsanunnisa / 13521129 | <li>Map</li> <li>Location</li>   |
+| Chiquita Ahsanunnisa / 13521129 | <li>Map</li> <li>Location</li> <li>Bonus Chance Card</li>  |
 | Rinaldy Adin / 13521134  | <li>Chance Card</li> <li>Jail</li> <li>Player</li>  |
-| Enrique Alifio Ditya / 13521142     |<li>Properti</li> <li>Tax</li> <li>Dice</li>   |
+| Enrique Alifio Ditya / 13521142     |<li>Properti</li> <li>Tax</li> <li>Dice</li> <li>Bankrupt</li> <li>Bonus Buildable Go</li> <li>Bonus Coin Flip</li> |
 | Vanessa Rebecca Wiyono / 13521151     | <li>Map</li> <li>Location</li>  |
 | Alisha Listya Wardhani / 13521171 | <li>Free Parking</li> <li>World Tour</li> <li>End Game</li> 
 
@@ -80,6 +80,7 @@ startGame.
 | `TAX`                          | &#10004;          |
 | `COINFLIP`                     | &#10004;          |
 | `BUILDABLE GO`                 | &#10004;          |
+| `BONUS CHANCE CARD`            | &#10004;          |
 
 <a name="struktur"></a>
 

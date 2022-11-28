@@ -504,6 +504,61 @@ rentProperty(Player1, Player2, Location) :-
     Owned == 1,
     playerCash(Player1, Cash1),
     (
+        /* Kalau punya angel card berarti ga bayar */
+        haveAngelCard(Player1) -> (
+            write('Hoki dah kamu, punya Angel Card. Mau dipake ga? [y/n]'), nl,
+            write('| ?- '),
+            read(Command),
+            nl,
+            ( /* Kalau gamau pake angel card */
+                Command == n -> (
+                     /* Kalau duitnya mencukupi */
+                    (Cash1 >= RentCost) -> (
+                        format('Tok-tok.. Bayar uang sewa sebanyak ~w. ~n', [RentCost]),
+                        retract(playerCash(Player1, OldCash1)),
+                        NewCash1 is OldCash1-RentCost,
+                        assertz(playerCash(Player1, NewCash1)),
+                        retract(playerCash(Player2, OldCash2)),
+                        NewCash2 is OldCash2+RentCost,
+                        assertz(playerCash(Player2, NewCash2)),
+                        format('Uang kamu sekarang adalah ~w. ~n', [NewCash1])
+                    ) ; ( /* Kalau duitnya ga mencukupi */
+                        format('You are a brokie! uang kamu tidak cukup untuk menyewa ~w. ~n', [PropName]), 
+                        nl, 
+                        /* Mortgage hanya mengurangi uang milik Player 1 namun belum ditransfer ke Player 2  */
+                        mortgage(Player1, RentCost),
+                        retract(playerCash(Player2, OldCash2)),
+                        NewCash2 is OldCash2+RentCost,
+                        assertz(playerCash(Player2, NewCash2))
+                    )
+                ) ; write('Yeee yaudah selamat dah kamu, thanks to Angel Card'), nl
+            )
+        ) ; (
+            /* Kalau gapunya angel card */
+            /* Kalau duitnya mencukupi */
+            (Cash1 >= RentCost) -> (
+                format('Tok-tok.. Bayar uang sewa sebanyak ~w. ~n', [RentCost]),
+                retract(playerCash(Player1, OldCash1)),
+                NewCash1 is OldCash1-RentCost,
+                assertz(playerCash(Player1, NewCash1)),
+                retract(playerCash(Player2, OldCash2)),
+                NewCash2 is OldCash2+RentCost,
+                assertz(playerCash(Player2, NewCash2)),
+                format('Uang kamu sekarang adalah ~w. ~n', [NewCash1])
+            ) ; ( /* Kalau duitnya ga mencukupi */
+                format('You are a brokie! uang kamu tidak cukup untuk menyewa ~w. ~n', [PropName]), 
+                nl, 
+                /* Mortgage hanya mengurangi uang milik Player 1 namun belum ditransfer ke Player 2  */
+                mortgage(Player1, RentCost),
+                retract(playerCash(Player2, OldCash2)),
+                NewCash2 is OldCash2+RentCost,
+                assertz(playerCash(Player2, NewCash2))
+            )
+        )
+    ).
+
+/*                                              
+    (
         (Cash1 >= RentCost) -> (
             format('Tok-tok.. Bayar uang sewa sebanyak ~w. ~n', [RentCost]),
             retract(playerCash(Player1, OldCash1)),
@@ -516,13 +571,13 @@ rentProperty(Player1, Player2, Location) :-
         ) ; (
             format('You are a brokie! uang kamu tidak cukup untuk menyewa ~w. ~n', [PropName]), 
             nl, 
-            /* Mortgage hanya mengurangi uang milik Player 1 namun belum ditransfer ke Player 2  */
             mortgage(Player1, RentCost),
             retract(playerCash(Player2, OldCash2)),
             NewCash2 is OldCash2+RentCost,
             assertz(playerCash(Player2, NewCash2))
         )
-    ).
+    ). 
+*/
 
 /* List properti yang tidak dimiliki pemain */
 getNotOwnedProperty([], _Player, []).
@@ -547,10 +602,9 @@ getPropertyByLevel([H|T], Class, Result) :-
     ).
 
 /* Bonus Buildable Go */
-buildableGo(Player, Location) :-
-    Location == go,
+buildableGo(Player) :-
     allPropertyList(AllProperty),
-    format('Lagi di go nih, mau ngapain? ~n', []),
+    format('Lagi di go nih, mau ngapain? [buy/upgrade/pass]~n', []),
     nl,
     getNotOwnedProperty(AllProperty, Player, NotOwned),
     countLength(NotOwned, LengthNotOwned),
@@ -599,5 +653,7 @@ buildableGo(Player, Location) :-
                     )
                 ) ; format('Gaada properti yang bisa jadi landmark.. ~n', [])
             )
-        ) ; format('Opsinya cuman bisa beli sama upgrade properti jadi landmark ya... ~n', [])
+        ) ; (Input == 'pass') -> (
+            format('Okelah sakarepmu.. ~n', [])
+        ) ; format('Opsinya cuman bisa beli sama upgrade properti jadi landmark ya... ~n', []), buildableGo(Player)
     ).

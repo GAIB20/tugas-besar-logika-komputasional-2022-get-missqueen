@@ -60,16 +60,20 @@ switchPlayer :-
 
 /* PLAY GAME */
 startGame :-
-    retract(state(_S)),
-    assertz(state(true)),
-    startingMessage(StartMessage),
-    write(StartMessage), nl,
-    /* Game Config */
-    read_player_name,
-    stateGame, nl,
-    write('Kalo ngang-ngong ketik help aja! '), nl,
-    write('Mau ngapain? '),
-    !.
+    (
+        state(false) ->(
+            retract(state(_S)),
+            assertz(state(true)),
+            startingMessage(StartMessage),
+            write(StartMessage), nl,
+            /* Game Config */
+            read_player_name,
+            stateGame, nl,
+            write('Kalo ngang-ngong ketik help aja! '), nl,
+            write('Mau ngapain? '),
+            !    
+        ) ; write('maaf permainan sudah dimulai')
+    ), !.
 
 stateGame :-
     write(' '), nl,
@@ -113,13 +117,20 @@ evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, fp),
     freeParkMechanism, !.
-
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, go),
+    gogoMechanism, !.
+    
 /* Property */
 propertyMechanism :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, Loc),
     playerPropList(CurrentPlayer, X),
     isPropertyOwned(X, Loc, Val),
+    otherPlayer(NextPlayer),
+    playerPropList(NextPlayer, Y),
+    isPropertyOwned(Y, Loc, ValOther),
     (
         Val =:= 1 -> (
             format("Apakah kamu ingin upgrade ~w? [y/n]~n", [Loc]),
@@ -131,26 +142,27 @@ propertyMechanism :-
                     upgradeProp(CurrentPlayer, Loc), !
                 )
             ) ; write('Oke.'), nl
+        ) ; Val =:= 0 -> (
+            /* Kalau propertinya dimiliki orang */  
+            (
+                ValOther =:= 1 -> (
+                    format("Yah! Ini punya orang. Bayar sewa!!"),
+                    rentProperty(CurrentPlayer, NextPlayer, Loc)
+                ) ; (
+                    /* Kalau propertinya ga dimilikin siapa siapa */
+                    format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
+                    write('| ?- '),
+                    read(Command),
+                    nl,
+                    (
+                        Command == y -> (
+                            buyProperty(CurrentPlayer, Loc), !
+                        ) ; write('Okedeh gpp kalo gamau beli.'), nl
+                    )
+                ) ; nl
+            )
         ) ; nl
     ),
-    (
-        Val =:= 0 -> (
-            /* Kalau propertinya dimiliki orang */
-            
-            /* Kalau propertinya ga dimilikin siapa siapa */
-            format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
-            write('| ?- '),
-            read(Command),
-            nl,
-            (
-                Command == y -> (
-                    buyProperty(CurrentPlayer, Loc), !
-                )
-            ) ; write('Okedeh gpp kalo gamau beli.'), nl
-        )
-    ), 
-    retract(playerName(CurrentPlayer, Name)),
-    assertz(playerName(CurrentPlayer, Name)),
     !.
 
 /* Jail */
@@ -213,6 +225,10 @@ freeParkMechanism :-
 coinflipMechanism :-
     playersTurn(CurrentPlayer),
     coinFlip(CurrentPlayer), !.
+
+gogoMechanism :-
+    playersTurn(CurrentPlayer),
+    buildableGo(CurrentPlayer), !.
 
 /* Commands:
 checkLocationDetail(a1).

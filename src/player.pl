@@ -113,6 +113,12 @@ displayPlayersCards([Card|B], Index) :-
                                        Index1 is Index + 1,
                                        displayPlayersCards(B, Index1).
 
+/* Mendapatkan variabel other player 
+   Mendapatkan other Player */
+otherPlayer(P) :-
+   playersTurn(CurrentPlayer),
+   isPlayer(P),
+   P \== CurrentPlayer.
 
 /* checkPlayerDetail(P)
 
