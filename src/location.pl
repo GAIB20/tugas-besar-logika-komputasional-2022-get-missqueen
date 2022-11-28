@@ -46,7 +46,7 @@ validLoc(b3).
 validLoc(jl).
 validLoc(c1).
 validLoc(c2).
-validLoc(cf).
+validLoc(c3).
 validLoc(tx02).
 validLoc(d1).
 validLoc(d2).
@@ -92,7 +92,7 @@ namaLoc(23,b3).
 namaLoc(24,jl).
 namaLoc(25,c1).
 namaLoc(26,c2).
-namaLoc(27,cf).
+namaLoc(27,c3).
 namaLoc(28,tx02).
 namaLoc(29,d1).
 namaLoc(30,d2).
@@ -129,18 +129,7 @@ checkLocationDetail(Loc) :-
 checkLocationDetail(go) :-
     write('Nama Lokasi            : Go'),
     nl,
-    write('Deskripsi Lokasi       : Tempat kamu mulai. Di sini kamu bisa:'), /* dummy dulu jumlah duitnya */
-    nl,
-    write('1. Beli properti.'),
-    nl,
-    write('2. Upgrade properti yang dimiliki jadi landmark.'),
-    !.
-
-/* Lokasi Nonproperti : Coin Flip */
-checkLocationDetail(cf) :-
-    write('Nama Lokasi            : Coin Flip'),
-    nl,
-    write('Deskripsi Lokasi       : Kuy tebak, head apa tail nih? Kalo bener dapet duit lochhh.'),
+    write('Deskripsi Lokasi       : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
     !.
 
 /* Lokasi Nonproperti : Free Parking */
@@ -208,8 +197,8 @@ checkLocationDetail(Loc) :-
     cost(BuyCost, Loc, Level),
     \+ ownProp(_, Loc),
     
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi           : ~w ~n',[Name]),
+    format('Deskripsi Lokasi      : ~w ~n',[Desc]),
     nl,
     write('Kepemilikan           : -'),
     nl,
@@ -229,8 +218,8 @@ checkLocationDetail(Loc) :-
     cost(BuyCost, Loc, Level),
     ownProp(Owner, Loc),
     
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi           : ~w ~n',[Name]),
+    format('Deskripsi Lokasi      : ~w ~n',[Desc]),
     nl,
     format('Kepemilikan           : ~w ~n',[Owner]),
     format('Biaya Sewa Saat Ini   : ~w ~n',[RentCost]),
