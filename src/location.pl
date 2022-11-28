@@ -17,6 +17,9 @@
 
 /* Note: untuk player location & cash di sini cuman asserta aja (ga ada retract), retract2 kalo mau sekalian aja di main buat retract semua statenya biar gak backtracking */
 
+/* Location List */
+allLocationList([a1, a2, a3, b1, b2, b3, c1, c2, c3, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2, cc01, cc02, cc03, tx01, tx02, jl, go]).
+
 /* CHECK LOCATION VALIDITY */
 /* syntax: validLoc(Loc) */
 validLoc(fp).
@@ -122,52 +125,69 @@ ownProp(Player,Prop)    :-
 checkLocationDetail(Loc) :-
     \+ validLoc(Loc),
     /* Ini harusnya printnya uppercase LOC */
+    nl,
     format('~w apaan woi, jangan aneh-aneh deh.. Tolong masukin lokasi yang tepat. ~n',[Loc]),
     !.
 
 /* Lokasi Nonproperti : Go */
 checkLocationDetail(go) :-
-    write('Nama Lokasi            : Go'),
     nl,
-    write('Deskripsi Lokasi       : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
+    write('Nama Lokasi              : Go'),
+    nl,
+    write('Deskripsi Lokasi         : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
+    nl, nl,
+    write('Aksi yang bisa dilakukan :'),
+    nl,
+    write('1. Beli bangunan baru.'),
+    nl,
+    write('2. Upgrade bangunan yang dimiliki menjadi landmark.'),
+    nl,
     !.
 
 /* Lokasi Nonproperti : Free Parking */
 checkLocationDetail(fp) :-
-    write('Nama Lokasi            : Free Parking'),
     nl,
-    write('Deskripsi Lokasi       : Tempat ngechill.'),
+    write('Nama Lokasi              : Free Parking'),
+    nl,
+    write('Deskripsi Lokasi         : Tempat ngechill.'),
     !.
 
 /* Lokasi Nonproperti : Penjara */
 checkLocationDetail(jl) :-
-    write('Nama Lokasi            : Penjara'),
+    nl,
+    write('Nama Lokasi              : Penjara'),
     nl,
     /* write('Deskripsi Lokasi       : kamu akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. kamu akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, kamu harus: '), */
-    write('Deskripsi Lokasi       : Kalo kamu naughty nanti daddy masukin ke sini, makanya gausah macem-macem dapet double 3 kali. Di sini kamu bisa: '),
+    write('Deskripsi Lokasi         : Kalo kamu naughty, daddy masukin ke sini. Gausah macem-macem dapet double 3 kali.'),
+    nl, nl,
+    write('Opsi keluar jail         :'),
     nl,
-    write('- Mendapat dadu double sebelum tiga kali giliran,'),
+    write('1. Mendapat dadu double sebelum tiga kali giliran,'),
     nl,
-    write('- Sudah melempar dadu tiga kali,'),
+    write('2. Sudah melempar dadu tiga kali,'),
     nl,
-    write('- Mempunyai kartu lolos dari penjara, atau'),
+    write('3. Mempunyai kartu lolos dari penjara, atau'),
     nl,
-    write('- Membayar denda pada giliran berikutnya,'),
+    write('4. Membayar denda pada giliran berikutnya,'),
     !.
 
 /* Lokasi Nonproperti : World Tour */
 checkLocationDetail(wt) :-
-    write('Nama Lokasi            : World Tour'),
     nl,
-    write('Deskripsi Lokasi       : Cosplay jadi orkay, banyak duit jadi terserah mau pecicilan ke mana aja. Tentunya dengan membayar uang sebesar 5% aset kamu.'),
+    write('Nama Lokasi              : World Tour'),
+    nl,
+    write('Deskripsi Lokasi         : Cosplay jadi orkay, banyak duit jadi terserah mau pecicilan ke mana aja. Tentunya dengan membayar uang sebesar 5% aset kamu.'),
     !.
 
 /* Lokasi Nonproperti : Chance Card */
 checkLocationDetail(Loc) :-
-    chanceCard(Loc),
-    write('Nama Lokasi            : Chance Card'),
     nl,
-    write('Deskripsi Lokasi       : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah dah, di sini kamu bisa dapet:'),
+    chanceCard(Loc),
+    write('Nama Lokasi              : Chance Card'),
+    nl,
+    write('Deskripsi Lokasi         : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah lu dah..'),
+    nl, nl,
+    write('Kartu yang bisa didapat  :'),
     nl,
     write('1. Kartu Tax, kamu langsung dipindahkan ke tempat Tax terdekat dan langsung dikenai pajak.'),
     nl,
@@ -180,10 +200,11 @@ checkLocationDetail(Loc) :-
 
 /* Lokasi Nonproperti : Tax */
 checkLocationDetail(Loc) :-
-    tax(Loc),
-    write('Nama Lokasi            : Tax'),
     nl,
-    write('Deskripsi Lokasi       : Bayar biaya admin gan, taro 10% total asetmu di sini ^^'),
+    tax(Loc),
+    write('Nama Lokasi              : Tax'),
+    nl,
+    write('Deskripsi Lokasi         : Bayar biaya admin gan, taro 10% total asetmu di sini ^^'),
     !.
 
 /* Lokasi Properti (Belum Ada Pemilik) */
@@ -196,15 +217,13 @@ checkLocationDetail(Loc) :-
     rent(RentCost, Loc, Level),
     cost(BuyCost, Loc, Level),
     \+ ownProp(_, Loc),
-    
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi             : ~w ~n',[Name]),
+    format('Deskripsi Lokasi        : ~w ~n',[Desc]),
     nl,
-    write('Kepemilikan           : -'),
-    nl,
-    format('Biaya Sewa Saat Ini   : ~w ~n',[RentCost]),
-    format('Biaya Akuisisi        : ~w ~n',[BuyCost]),
-    format('Tingkatan Properti    : ~w ~n',[Level]),
+    format('Kepemilikan             : - ~n', []),
+    format('Biaya Sewa Saat Ini     : ~w ~n',[RentCost]),
+    format('Biaya Akuisisi          : ~w ~n',[BuyCost]),
+    format('Tingkatan Properti      : ~w ~n',[Level]),
     !.
 
 /* Lokasi Properti (Ada Pemilik) */
@@ -217,14 +236,13 @@ checkLocationDetail(Loc) :-
     rent(RentCost, Loc, Level),
     cost(BuyCost, Loc, Level),
     ownProp(Owner, Loc),
-    
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi             : ~w ~n',[Name]),
+    format('Deskripsi Lokasi        : ~w ~n',[Desc]),
     nl,
-    format('Kepemilikan           : ~w ~n',[Owner]),
-    format('Biaya Sewa Saat Ini   : ~w ~n',[RentCost]),
-    format('Biaya Akuisisi        : ~w ~n',[BuyCost]),
-    format('Tingkatan Properti    : ~w ~n',[Level]),
+    format('Kepemilikan             : ~w ~n',[Owner]),
+    format('Biaya Sewa Saat Ini     : ~w ~n',[RentCost]),
+    format('Biaya Akuisisi          : ~w ~n',[BuyCost]),
+    format('Tingkatan Properti      : ~w ~n',[Level]),
     !.
 
 /* NEAREST TAX LOCATION */
@@ -250,6 +268,8 @@ moveTo(Player,NewLoc)          :-
     steppedStart(PrevLoc,NewLoc),
     playerCash(Player, PrevBal),
     NewBal is PrevBal + 1000, /* dummy dulu kalo lewat start */
+    write('Yeey gajian dapet 1000 abis lewatin Go.'),
+    nl,
     asserta(playerLocation(Player,NewLoc)),
     asserta(playerCash(Player,NewBal)),
     retract(playerLocation(Player,PrevLoc)).

@@ -3,7 +3,7 @@
 /* Identity */
 /* property(Name) */
 /* Menunjukkan apabila Name adalah property atau non-property */
-allPropertyList([a1, a2, a3, b1, b2, b3, c1, c2, c3, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2]).
+allPropertyList([a1, a2, a3, b1, b2, b3, c1, c2, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2]).
 
 property(a1).
 property(a2).
@@ -13,7 +13,6 @@ property(b2).
 property(b3).
 property(c1).
 property(c2).
-property(c3).
 property(d1).
 property(d2).
 property(d3).
@@ -41,7 +40,6 @@ levelProp(b2, 0).
 levelProp(b3, 0).
 levelProp(c1, 0).
 levelProp(c2, 0).
-levelProp(c3, 0).
 levelProp(d1, 0).
 levelProp(d2, 0).
 levelProp(d3, 0).
@@ -70,7 +68,6 @@ propertyName('Gedung TVST', b2).
 propertyName('Gedung COMLABS', b3).
 propertyName('CC Timur', c1).
 propertyName('CC Barat', c2).
-propertyName('Lapangan', c3).
 propertyName('Lab Fisika', d1).
 propertyName('Lab Kimia', d2).
 propertyName('Lab Informatika', d3).
@@ -96,7 +93,6 @@ propertyDesc('Gedung kuliah serbaguna TVST', b2).
 propertyDesc('ComLabs USDI ITB', b3).
 propertyDesc('Campus Center Timur', c1).
 propertyDesc('Campus Center Barat', c2).
-propertyDesc('Area lapangan Basket dan Segitiga', c3).
 propertyDesc('Tempat praktikum Fisika Dasar', d1).
 propertyDesc('Tempat praktikum Kimia Dasar', d2).
 propertyDesc('Tempat praktikum rumpun Informatika', d3).
@@ -123,7 +119,6 @@ rent(1100, b2, 0).
 rent(1000, b3, 0).
 rent(1750, c1, 0).
 rent(1750, c2, 0).
-rent(500, c3, 0).
 rent(1000, d1, 0).
 rent(1000, d2, 0).
 rent(1250, d3, 0).
@@ -147,7 +142,6 @@ rent(2200, b2, 1).
 rent(2000, b3, 1).
 rent(3500, c1, 1).
 rent(3500, c2, 1).
-rent(1000, c3, 1).
 rent(2000, d1, 1).
 rent(2000, d2, 1).
 rent(2500, d3, 1).
@@ -171,7 +165,6 @@ rent(3300, b2, 2).
 rent(3000, b3, 2).
 rent(5250, c1, 2).
 rent(5250, c2, 2).
-rent(1500, c3, 2).
 rent(3000, d1, 2).
 rent(3000, d2, 2).
 rent(3750, d3, 2).
@@ -195,7 +188,6 @@ rent(4400, b2, 3).
 rent(4000, b3, 3).
 rent(7000, c1, 3).
 rent(7000, c2, 3).
-rent(2000, c3, 3).
 rent(4000, d1, 3).
 rent(4000, d2, 3).
 rent(5000, d3, 3).
@@ -219,7 +211,6 @@ rent(5500, b2, 4).
 rent(5000, b3, 4).
 rent(8750, c1, 4).
 rent(8750, c2, 4).
-rent(2500, c3, 4).
 rent(5000, d1, 4).
 rent(5000, d2, 4).
 rent(6250, d3, 4).
@@ -246,7 +237,6 @@ cost(4400, b2, 0).
 cost(4000, b3, 0).
 cost(7000, c1, 0).
 cost(7000, c2, 0).
-cost(2000, c3, 0).
 cost(4000, d1, 0).
 cost(4000, d2, 0).
 cost(5000, d3, 0).
@@ -270,7 +260,6 @@ cost(8800, b2, 1).
 cost(8000, b3, 1).
 cost(14000, c1, 1).
 cost(14000, c2, 1).
-cost(4000, c3, 1).
 cost(8000, d1, 1).
 cost(8000, d2, 1).
 cost(10000, d3, 1).
@@ -294,7 +283,6 @@ cost(13200, b2, 2).
 cost(12000, b3, 2).
 cost(21000, c1, 2).
 cost(21000, c2, 2).
-cost(6000, c3, 2).
 cost(12000, d1, 2).
 cost(12000, d2, 2).
 cost(15000, d3, 2).
@@ -318,7 +306,6 @@ cost(17600, b2, 3).
 cost(16000, b3, 3).
 cost(28000, c1, 3).
 cost(28000, c2, 3).
-cost(8000, c3, 3).
 cost(16000, d1, 3).
 cost(16000, d2, 3).
 cost(20000, d3, 3).
@@ -342,7 +329,6 @@ cost(22000, b2, 4).
 cost(20000, b3, 4).
 cost(35000, c1, 4).
 cost(35000, c2, 4).
-cost(10000, c3, 4).
 cost(20000, d1, 4).
 cost(20000, d2, 4).
 cost(25000, d3, 4).
@@ -362,6 +348,11 @@ cost(40000, h2, 4).
 
 /* Mengecek rincian dari sebuah properti, 
 meliputi nama, deskripsi, biaya sewa, harga properti */
+checkPropertyDetail(Loc)    :-
+    \+ property(Loc),
+    format('~w apaan woi, yang bener aja dong...~n', [Loc]),
+    !.
+
 checkPropertyDetail(Prop) :-
     property(Prop),
     propertyName(Name, Prop),
@@ -376,6 +367,7 @@ checkPropertyDetail(Prop) :-
     rent(ClassTwoRent, Prop, 2),
     rent(ClassThreeRent, Prop, 3),
     rent(LandmarkRent, Prop, 4),
+    nl,
     format('Nama Properti           : ~w ~n', [Name]),
     format('Deskripsi Properti      : ~w ~n', [Desc]),
     nl,

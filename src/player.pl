@@ -30,8 +30,8 @@ isPlayer(v).
    dana tunai player P, 
    yaitu CASH. */
 :- dynamic(playerCash/2).
-playerCash(w, 1000000).
-playerCash(v, 1000000).
+/* playerCash(w, 1000000).
+playerCash(v, 1000000). */
 
 /* playerPrpList(P, PROPLIST)
 
@@ -66,6 +66,7 @@ translatePropLevel(4, 'Landmark').
    Fakta menunjukan translasi
    dari Card menjadi sebuah string, */
 translateCardName(getOutOfJailCard, 'Get Out of Jail Card').
+translateCardName(angelCard, 'Angel Card').
 
 /* RULES */
 /* totalPropVal(ListProp, TOTAL)
@@ -125,6 +126,7 @@ checkPlayerDetail(P) :-
                        playerCardList(P, Cards),
                        totalPropVal(Props, TotalPropVal),
                        TotalAsset is (Cash+TotalPropVal),
+                       nl,
                        format('Informasi ~w ~n', [Name]),
                        nl,
                        format('Lokasi                       : ~w ~n', [Loc]),
@@ -150,3 +152,6 @@ checkPlayerDetail(P) :-
                            ) ; write('Ga punya kartu'), nl
                        ),
                        nl, !.
+checkPlayerDetail(P) :-
+                       \+ isPlayer(P),
+                       nl, format('~w bukan player itu.. inget inputnya pake ID player yaww. ~n', [P]).

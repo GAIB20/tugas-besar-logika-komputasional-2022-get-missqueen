@@ -43,7 +43,6 @@ writePlayer(Loc)    :-
     format('   V  ', [_Player]).
 
 map :-
-    write('=================  INI MAP  ================= '), nl,
     playerLocation(w,LocPlayer1),
     playerLocation(v,LocPlayer2),
     write('             '),
@@ -112,9 +111,9 @@ map :-
     writeLocMap(tx01),
     writePlayer(tx01),
     nl,
-    writePlayer(c3),
-    writeLocMap(c3),
-    write('|  C3  |                                                | CC02 |'),
+    writePlayer(cf),
+    writeLocMap(cf),
+    write('|  CF  |                                                | CC02 |'),
     writeLocMap(cc02),
     writePlayer(cc02),
     nl,

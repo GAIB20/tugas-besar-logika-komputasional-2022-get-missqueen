@@ -9,6 +9,11 @@ diceNum(dice2, 0).
 doubleCount(w, 2).
 doubleCount(v, 0).
 
+/* Double Run */
+:- dynamic(doubleRun/1).
+doubleRun(false).
+
+
 /* RULES */
 /* Menghasilkan angka 1-6 */
 generateDiceNum(Num) :-
@@ -17,7 +22,6 @@ generateDiceNum(Num) :-
 
 throwDice :-
     playersTurn(CurrentPlayer),
-    playerName(CurrentPlayer, Nama),
     playerLocation(CurrentPlayer, Loc),
     jailTimeLeft(CurrentPlayer, JailTime),
     nl,
@@ -25,6 +29,7 @@ throwDice :-
     retract(diceNum(dice1, _OldNum1)),
     assertz(diceNum(dice1, Num1)),
     format('Dadu 1: ~w ~n', [Num1]),
+    nl,
     generateDiceNum(Num2),
     retract(diceNum(dice2, _OldNum2)),
     assertz(diceNum(dice2, Num2)),
