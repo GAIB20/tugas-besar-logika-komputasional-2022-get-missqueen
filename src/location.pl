@@ -18,7 +18,7 @@
 /* Note: untuk player location & cash di sini cuman asserta aja (ga ada retract), retract2 kalo mau sekalian aja di main buat retract semua statenya biar gak backtracking */
 
 /* Location List */
-allLocationList([a1, a2, a3, b1, b2, b3, c1, c2, c3, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2, cc01, cc02, cc03, tx01, tx02, jl, go]).
+allLocationList([a1, a2, a3, b1, b2, b3, c1, c2, cf, d1, d2, d3, e1, e2, e3, f1, f2, f3, g1, g2, g3, h1, h2, cc01, cc02, cc03, tx01, tx02, jl, go]).
 
 /* CHECK LOCATION VALIDITY */
 /* syntax: validLoc(Loc) */
@@ -49,7 +49,7 @@ validLoc(b3).
 validLoc(jl).
 validLoc(c1).
 validLoc(c2).
-validLoc(c3).
+validLoc(cf).
 validLoc(tx02).
 validLoc(d1).
 validLoc(d2).
@@ -95,7 +95,7 @@ namaLoc(23,b3).
 namaLoc(24,jl).
 namaLoc(25,c1).
 namaLoc(26,c2).
-namaLoc(27,c3).
+namaLoc(27,cf).
 namaLoc(28,tx02).
 namaLoc(29,d1).
 namaLoc(30,d2).
