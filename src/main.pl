@@ -3,9 +3,7 @@
 :- include('chancecard.pl').
 */
 :- include('dice.pl').
-/*
 :- include('jail.pl').
-*/
 :- include('location.pl').
 :- include('map.pl').
 /*
@@ -19,6 +17,7 @@
 /*
 :- include('worldtour.pl').
 */
+
 
 /* DEKLARASI FAKTA */
 /* Fakta menunjukkan apakah permainan sudah dimulai */
@@ -36,7 +35,7 @@ read_player_name :-
     read(X),
     nonvar(X), !,
     assertz(playerName(w, X)), 
-    assertz(playerLocation(w, go)), nl,
+    assertz(playerLocation(w, jl)), nl,
     format('Horeee, Met datang ~w!', [X]), nl,
     write('ID Player kamu adalah W!'), nl,
     /* Player Kedua */
@@ -44,7 +43,7 @@ read_player_name :-
     read(Y),
     nonvar(Y), !,
     assertz(playerName(v, Y)), 
-    assertz(playerLocation(v, go)), nl,
+    assertz(playerLocation(v, jl)), nl,
     format('Wessss, Haloo ~w!', [Y]), nl,
     write('ID Player kamu adalah V!').
 
@@ -71,9 +70,12 @@ stateGame :-
 
 jalan :-
     throwDice,
-    map,
-    propertyMechanism,
-    stateGame.
+    evaluateJalan.
+evaluateJalan :-
+    propertyMechanism, !.
+evaluateJalan :-
+    jailMechanism, !.
+    
 
 /* Property */
 propertyMechanism :-
@@ -106,13 +108,14 @@ propertyMechanism :-
 
 /* Jail */
 jailMechanism :-
-    playerLocation(CurrentPlayer, jl),
-    write('Yah masuk penjara AOKWOWKWOK'), nl,
-    assertz(jailTimeLeft(CurrentPlayer, 3)).
+    Loc == jl,
+    assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
+    write('Yah masuk penjara AOKWOWKWOK'), nl.
 
 /* ChanceCard */
-chanceCard :- 
-    playerLocation(CurrentPlayer, cc),
+chanceCardMechanism :- 
+    playerLocation(CurrentPlayer, Loc),
+    chanceCard(Loc),
     landOnChanceCard(CurrentPlayer).
 
 /* WorldTour */
