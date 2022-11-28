@@ -349,6 +349,7 @@ cost(40000, h2, 4).
 /* Mengecek rincian dari sebuah properti, 
 meliputi nama, deskripsi, biaya sewa, harga properti */
 checkPropertyDetail(Loc)    :-
+    state(true),
     \+ property(Loc),
     format('~w apaan woi, yang bener aja dong...~n', [Loc]),
     !.

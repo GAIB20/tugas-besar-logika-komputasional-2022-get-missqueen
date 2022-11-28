@@ -123,6 +123,7 @@ ownProp(Player,Prop)    :-
 /* syntax: checkLocationDetail(Loc) */
 /* Lokasi Tidak Valid */
 checkLocationDetail(Loc) :-
+    state(true),
     \+ validLoc(Loc),
     /* Ini harusnya printnya uppercase LOC */
     nl,
@@ -268,7 +269,7 @@ steppedStart(PrevLoc,NewLoc)   :-
 steppedStart(PrevLoc,NewLoc)   :-
     namaLoc(X,PrevLoc),
     namaLoc(Y,NewLoc),
-    X >= Y,
+    X > Y,
     X > 16,
     Y >= 16.
 

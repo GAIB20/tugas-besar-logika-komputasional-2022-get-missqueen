@@ -36,7 +36,10 @@ mortgage(Player, Pay) :-
                         )
                      )
                   ) ; (ValidInput == 'n') -> (
-                     write('HAHAHAHAH BROKIE, BYE!!!'), nl
+                     write('HAHAHAHAH BROKIE, BYE!!!'), nl,
+                     retract(state(_)),
+                     assertz(state(false)), 
+                     format('Selamat! Player ~w menang!', [NextPlayer]), !
                   ) ; (
                      write('Mulaii dah mulaiii... bayar dulu woiii'), nl, mortgage(Player, Pay)
                   )
@@ -44,6 +47,7 @@ mortgage(Player, Pay) :-
             ) ; (
                write('Waduh gapunya properti trus gaada duit wkkwkw BROKIEE, BYE!!!'), nl,
                retract(state(_)),
+               assertz(state(false)),
                format('Selamat! Player ~w menang!', [NextPlayer]), !
             )
          )

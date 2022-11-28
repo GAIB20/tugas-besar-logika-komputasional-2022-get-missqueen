@@ -78,6 +78,7 @@ startGame :-
     ), !.
 
 stateGame :-
+    state(true),
     isPlayer(PrevPlayer),
     \+ playersTurn(PrevPlayer),
     jailTimeLeft(PrevPlayer, 0),
@@ -90,6 +91,7 @@ stateGame :-
     format('Sekarang gilirannya ~w. ~n', [Name]), !.
 
 stateGame :-
+    state(true),
     isPlayer(PrevPlayer),
     \+ playersTurn(PrevPlayer),
     jailTimeLeft(PrevPlayer, JailTime),
@@ -99,6 +101,7 @@ stateGame :-
     format('~nSekarang gilirannya ~w. ~n', [Name]), !.
 
 stateGame :-
+    state(true),
     isPlayer(PrevPlayer),
     \+ playersTurn(PrevPlayer),
     justGotOutOfJail(PrevPlayer),
@@ -108,6 +111,7 @@ stateGame :-
     format('~nSekarang gilirannya ~w. ~n', [Name]), !.
 
 jalan :-
+    state(true),
     playersTurn(CurrentPlayer),
     jailTimeLeft(CurrentPlayer, JailTime),
     JailTime =:= 0,
@@ -117,6 +121,7 @@ jalan :-
     stateGame, !.
 
 jalan :-
+    state(true),
     playersTurn(CurrentPlayer),
     jailTimeLeft(CurrentPlayer, JailTime),
     JailTime > 0,
