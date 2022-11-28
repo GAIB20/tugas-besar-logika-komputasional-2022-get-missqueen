@@ -14,6 +14,7 @@
 /*
 :- include('worldtour.pl').
 */
+:- include('coinflip.pl').
 
 
 /* DEKLARASI FAKTA */
@@ -104,6 +105,10 @@ evaluateJalan :-
     playerLocation(CurrentPlayer, Loc),
     property(Loc),
     propertyMechanism, !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, cf),
+    coinflipMechanism, !.
 
 /* Property */
 propertyMechanism :-
@@ -148,9 +153,7 @@ propertyMechanism :-
 jailMechanism :-
     playersTurn(CurrentPlayer),
     assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
-    write('Yah masuk penjara AOKWOWKWOK'), nl,
-    retract(playerName(CurrentPlayer, Name)),
-    assertz(playerName(CurrentPlayer, Name)), !.
+    write('Yah masuk penjara AOKWOWKWOK'), nl, !.
 
 /* ChanceCard */
 chanceCardMechanism :- 
@@ -166,11 +169,14 @@ chanceCardMechanism :-
 taxMechanism :-
     playersTurn(CurrentPlayer),
     write('Waduh! Kamu kena pajak nih.'), nl,
-    taxed(CurrentPlayer),
-    retract(playerName(CurrentPlayer, Name)),
-    assertz(playerName(CurrentPlayer, Name)), !.
+    taxed(CurrentPlayer), !.
 
 /* FreeParking */
+
+/* Coin Flip */
+coinflipMechanism :-
+    playersTurn(CurrentPlayer),
+    coinFlip(CurrentPlayer), !.
 
 /* Commands:
 checkLocationDetail(a1).
