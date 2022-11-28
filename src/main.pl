@@ -209,7 +209,6 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    jailTimeLeft(CurrentPlayer, JailTime),
     nl, write('Ga betah ya di penjara? Coba keluar dengan cara lain [useJailCard/bailOut/roll]'), nl,
     write('| ?- '),
     read(Command), nl,
