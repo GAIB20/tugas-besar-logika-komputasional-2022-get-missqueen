@@ -230,9 +230,9 @@ checkLocationDetail(Loc) :-
 /* NEAREST TAX LOCATION */
 /* Mencari lokasi tax terdekat berikutnya */
 /* syntax: nearestTax(CCnum,TaxLoc) */
-nearestTax(cc1,tx1).
-nearestTax(cc2,tx2).
-nearestTax(cc2,tx2).
+nearestTax(cc01,tx01).
+nearestTax(cc02,tx02).
+nearestTax(cc02,tx02).
 
 /* IS START STEPPED? */
 /* Mengecek apakah start berada di antara (inklusif) PrevLoc dan NewLoc */
@@ -271,4 +271,6 @@ moveAfterRoll(Player,Roll)  :-
 /* Teleport ke Suatu Tempat: TIDAK JALAN (LONCAT) */
 /* contoh penggunaan: saat pengguna mendapat cc masuk penjara, pengguna LONCAT ke penjara (tidak jalan) */
 teleportTo(Player,Loc)     :-
+    playerLocation(Player,PrevLoc),
+    retract(playerLocation(Player,PrevLoc)),
     asserta(playerLocation(Player,Loc)).

@@ -30,8 +30,8 @@ isPlayer(v).
    dana tunai player P, 
    yaitu CASH. */
 :- dynamic(playerCash/2).
-playerCash(w, 0).
-playerCash(v, 0).
+playerCash(w, 1000000).
+playerCash(v, 1000000).
 
 /* playerPrpList(P, PROPLIST)
 
@@ -55,17 +55,17 @@ playerCardList(v, []).
 
    Fakta menunjukan translasi
    dari Level menjadi sebuah string, */
-translatePropLevel(0, "Tanah").
-translatePropLevel(1, "Bangunan 1").
-translatePropLevel(2, "Bangunan 2").
-translatePropLevel(3, "Bangunan 3").
-translatePropLevel(4, "Landmark").
+translatePropLevel(0, 'Tanah').
+translatePropLevel(1, 'Bangunan 1').
+translatePropLevel(2, 'Bangunan 2').
+translatePropLevel(3, 'Bangunan 3').
+translatePropLevel(4, 'Landmark').
 
 /* translateCardName(Level, TRANSLATED)
 
    Fakta menunjukan translasi
    dari Card menjadi sebuah string, */
-translateCardName(getOutOfJailCard, "Get Out of Jail Card").
+translateCardName(getOutOfJailCard, 'Get Out of Jail Card').
 
 /* RULES */
 /* totalPropVal(ListProp, TOTAL)
@@ -97,7 +97,7 @@ displayPlayersProps([Prop|B], Index) :-
                                        levelProp(Prop, Level),
                                        translatePropLevel(Level, LevelTranslated),
                                        cost(Cost, Prop, Level),
-                                       format('~w. ~s - ~s - ~w ~n', [Index, PropName, LevelTranslated, Cost]),
+                                       format('~w. ~w - ~w - ~w ~n', [Index, PropName, LevelTranslated, Cost]),
                                        Index1 is Index + 1,
                                        displayPlayersProps(B, Index1).
 
@@ -108,7 +108,7 @@ displayPlayersProps([Prop|B], Index) :-
 displayPlayersCards([], _Index).
 displayPlayersCards([Card|B], Index) :-
                                        translateCardName(Card, CardTranslated),
-                                       format('~s. ~s ~n', [Index, CardTranslated]),
+                                       format('~w. ~w ~n', [Index, CardTranslated]),
                                        Index1 is Index + 1,
                                        displayPlayersCards(B, Index1).
 
@@ -117,7 +117,7 @@ displayPlayersCards([Card|B], Index) :-
 
    Menampilkan informasi mengenai
    player P sesuai spek */
-checkPlayerDetail(Name) :-
+checkPlayerDetail(P) :-
                        playerName(P, Name),
                        playerLocation(P, Loc),
                        playerCash(P, Cash),

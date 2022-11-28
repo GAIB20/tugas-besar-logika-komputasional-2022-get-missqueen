@@ -6,8 +6,8 @@
    Fakta hanya berlaku jika pemain P sedang
    dipenjara. */
 :- dynamic(jailTimeLeft/2).
-jailTimeLeft(w,1).
-jailTimeLeft(v,1).
+jailTimeLeft(w,0).
+jailTimeLeft(v,0).
 
 bailPrice(1000).
 
@@ -25,7 +25,6 @@ evaluatePrisonDiceRoll(P, false) :-
                                    assertz(jailTimeLeft(P, NewVal)).
 evaluatePrisonDiceRoll(P, true) :-
                                   retract(jailTimeLeft(P, OldVal)),
-                                  NewVal is OldVal - OldVal, !,
                                   assertz(jailTimeLeft(P, OldVal)).
 
 /* Mengevaluasi apakah pemain bisa
@@ -45,7 +44,7 @@ payBail(P) :-
              retract(playerCash(P, OldCash)),
              NewCash is OldCash - Price,
              assertz(playerCash(P, NewCash)),
-             retract(jailTimeLeft(P, OldTime)).
+             retract(jailTimeLeft(P, _OldTime)).
 
 /* Mengevaluasi apakah pemain memliki,
    kartu Get Out of Jail */

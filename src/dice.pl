@@ -9,9 +9,6 @@ diceNum(dice2, 0).
 doubleCount(w, 0).
 doubleCount(v, 0).
 
-/* Player's Turn*/
-:- dynamic(playersTurn/1).
-
 /* RULES */
 /* Menghasilkan angka 1-6 */
 generateDiceNum(Num) :-
@@ -69,6 +66,4 @@ throwDice :-
         ); format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
     map,
-    retract(playerName(CurrentPlayer, Name)),
-    assertz(playerName(CurrentPlayer, Name)),
     !.

@@ -175,5 +175,5 @@ map :-
     write('Posisi pemain:'),
     nl,
     format('W = ~w ~n',[LocPlayer1]),
-    format('V = ~w',[LocPlayer2]),
+    format('V = ~w ~n',[LocPlayer2]),
     !.

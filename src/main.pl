@@ -1,7 +1,6 @@
 /* 
-:- include('bankrupt.pl').
+:- include('bankrupt.pl'). */
 :- include('chancecard.pl').
-*/
 :- include('dice.pl').
 :- include('jail.pl').
 :- include('location.pl').
@@ -10,9 +9,7 @@
 :- include('money.pl'). */
 :- include('player.pl'). 
 :- include('property.pl').
-/*
 :- include('tax.pl').
-*/
 :- include('utils.pl').
 /*
 :- include('worldtour.pl').
@@ -24,9 +21,12 @@
 :- dynamic(state/1).
 state(false).
 
+/* Players Turn */
+:- playersTurn(player/1).
+playersTurn(w).
+
 startingMessage('Selamat datang ke GetMissQueen!').
 endingMessage('Bye bye..').
-
 
 /* CONFIGURATION */
 read_player_name :-
@@ -35,15 +35,15 @@ read_player_name :-
     read(X),
     nonvar(X), !,
     assertz(playerName(w, X)), 
-    assertz(playerLocation(w, go)), nl,
+    assertz(playerLocation(w, cc01)), nl,
     format('Horeee, Met datang ~w!', [X]), nl,
-    write('ID Player kamu adalah W!'), nl,
+    write('ID Player kamu adalah W!'), nl, nl,
     /* Player Kedua */
     write('Masukkan nama player kedua: '),
     read(Y),
     nonvar(Y), !,
     assertz(playerName(v, Y)), 
-    assertz(playerLocation(v, go)), nl,
+    assertz(playerLocation(v, cc02)), nl,
     format('Wessss, Haloo ~w!', [Y]), nl,
     write('ID Player kamu adalah V!').
 
@@ -70,18 +70,29 @@ stateGame :-
 
 jalan :-
     throwDice,
-    evaluateJalan.
+    evaluateJalan,
+    stateGame.
+
 evaluateJalan :-
-    propertyMechanism, !.
+    playerLocation(CurrentPlayer, Loc),
+    tax(Loc),
+    taxMechanism, !.
 evaluateJalan :-
+    playerLocation(CurrentPlayer, jl),
     jailMechanism, !.
-    
+evaluateJalan :-
+    playerLocation(CurrentPlayer, Loc),
+    chanceCard(Loc),
+    chanceCardMechanism, !.
+evaluateJalan :-
+    playerLocation(CurrentPlayer, Loc),
+    property(Loc),
+    propertyMechanism, !.
 
 /* Property */
 propertyMechanism :-
     playerLocation(CurrentPlayer, Loc),
     playerPropList(CurrentPlayer, X),
-    property(Loc),
     isPropertyOwned(X, Loc, Val),
     (
         Val =:= 1 -> (
@@ -96,6 +107,9 @@ propertyMechanism :-
     ),
     (
         Val =:= 0 -> (
+            /* Kalau propertinya dimiliki orang */
+
+            /* Kalau propertinya ga dimilikin siapa siapa */
             format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
             read(Command),
             (
@@ -104,23 +118,35 @@ propertyMechanism :-
                 )
             ) ; write('Okedeh gpp kalo gamau beli.')
         )
-    ), !.
+    ), 
+    retract(playerName(CurrentPlayer, Name)),
+    assertz(playerName(CurrentPlayer, Name)),
+    !.
 
 /* Jail */
 jailMechanism :-
     Loc == jl,
     assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
-    write('Yah masuk penjara AOKWOWKWOK'), nl.
+    write('Yah masuk penjara AOKWOWKWOK'), nl,
+    retract(playerName(CurrentPlayer, Name)),
+    assertz(playerName(CurrentPlayer, Name)).
 
 /* ChanceCard */
 chanceCardMechanism :- 
+    write('Widi! Kamu dapet hadiah nih.'), nl,
     playerLocation(CurrentPlayer, Loc),
-    chanceCard(Loc),
-    landOnChanceCard(CurrentPlayer).
+    landOnChanceCard(CurrentPlayer),
+    retract(playerName(CurrentPlayer, Name)),
+    assertz(playerName(CurrentPlayer, Name)).
 
 /* WorldTour */
 
 /* Tax */
+taxMechanism :-
+    write('Waduh! Kamu kena pajak nih.'), nl,
+    taxed(CurrentPlayer),
+    retract(playerName(CurrentPlayer, Name)),
+    assertz(playerName(CurrentPlayer, Name)).
 
 /* FreeParking */
 

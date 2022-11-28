@@ -62,55 +62,55 @@ levelProp(h2, 0).
 /* propertyName(Name, P) */
 /* Name adalah nama properti P */
 
-propertyName("Labtek V", a1).
-propertyName("Labtek VIII", a2).
-propertyName("Labtek Biru", a3).
-propertyName("Gedung PLN", b1).
-propertyName("Gedung TVST", b2).
-propertyName("Gedung COMLABS", b3).
-propertyName("CC Timur", c1).
-propertyName("CC Barat", c2).
-propertyName("Lapangan", c3).
-propertyName("Lab Fisika", d1).
-propertyName("Lab Kimia", d2).
-propertyName("Lab Informatika", d3).
-propertyName("GKU Timur", e1).
-propertyName("GKU Barat", e2).
-propertyName("Oktagon", e3).
-propertyName("CRCS", f1).
-propertyName("CIBE", f2).
-propertyName("CADL", f3).
-propertyName("Perpustakaan Pusat", g1).
-propertyName("Perpustakaan STEI", g2).
-propertyName("Perpustakaan Sipil", g3).
-propertyName("Aula Timur", h1).
-propertyName("Aula Barat", h2).
+propertyName('Labtek V', a1).
+propertyName('Labtek VIII', a2).
+propertyName('Labtek Biru', a3).
+propertyName('Gedung PLN', b1).
+propertyName('Gedung TVST', b2).
+propertyName('Gedung COMLABS', b3).
+propertyName('CC Timur', c1).
+propertyName('CC Barat', c2).
+propertyName('Lapangan', c3).
+propertyName('Lab Fisika', d1).
+propertyName('Lab Kimia', d2).
+propertyName('Lab Informatika', d3).
+propertyName('GKU Timur', e1).
+propertyName('GKU Barat', e2).
+propertyName('Oktagon', e3).
+propertyName('CRCS', f1).
+propertyName('CIBE', f2).
+propertyName('CADL', f3).
+propertyName('Perpustakaan Pusat', g1).
+propertyName('Perpustakaan STEI', g2).
+propertyName('Perpustakaan Sipil', g3).
+propertyName('Aula Timur', h1).
+propertyName('Aula Barat', h2).
 
 /* propertyDesc(Desc, P) */
 /* Desc adalah deskripsi properti P */
-propertyDesc("Tempat perkuliahan Prodi IF, STI", a1).
-propertyDesc("Tempat akomodasi Tata Usaha STEI dan FMIPA", a2).
-propertyDesc("Tempat perkuliahan SITH-S", a3).
-propertyDesc("Gedung kerjasama PLN-ITB", b1).
-propertyDesc("Gedung kuliah serbaguna TVST", b2).
-propertyDesc("ComLabs USDI ITB", b3).
-propertyDesc("Campus Center Timur", c1).
-propertyDesc("Campus Center Barat", c2).
-propertyDesc("Area lapangan Basket dan Segitiga", c3).
-propertyDesc("Tempat praktikum Fisika Dasar", d1).
-propertyDesc("Tempat praktikum Kimia Dasar", d2).
-propertyDesc("Tempat praktikum rumpun Informatika", d3).
-propertyDesc("Gedung Kuliah Umum Timur", e1).
-propertyDesc("Gedung Kuliah Umum Barat", e2).
-propertyDesc("Gedung kuliah serbaguna Oktagon", e3).
-propertyDesc("Center of Research and Community Services", f1).
-propertyDesc("Center of Infrastructure and Build Environment", f2).
-propertyDesc("Center of Arts, Design, and Language", f3).
-propertyDesc("Gedung perpustakaan utama", g1).
-propertyDesc("Perpustakaan di Labtek V", g2).
-propertyDesc("Perpustakaan di CIBE", g3).
-propertyDesc("Aula serbaguna timur", h1).
-propertyDesc("Aula serbaguna barat", h2).
+propertyDesc('Tempat perkuliahan Prodi IF, STI', a1).
+propertyDesc('Tempat akomodasi Tata Usaha STEI dan FMIPA', a2).
+propertyDesc('Tempat perkuliahan SITH-S', a3).
+propertyDesc('Gedung kerjasama PLN-ITB', b1).
+propertyDesc('Gedung kuliah serbaguna TVST', b2).
+propertyDesc('ComLabs USDI ITB', b3).
+propertyDesc('Campus Center Timur', c1).
+propertyDesc('Campus Center Barat', c2).
+propertyDesc('Area lapangan Basket dan Segitiga', c3).
+propertyDesc('Tempat praktikum Fisika Dasar', d1).
+propertyDesc('Tempat praktikum Kimia Dasar', d2).
+propertyDesc('Tempat praktikum rumpun Informatika', d3).
+propertyDesc('Gedung Kuliah Umum Timur', e1).
+propertyDesc('Gedung Kuliah Umum Barat', e2).
+propertyDesc('Gedung kuliah serbaguna Oktagon', e3).
+propertyDesc('Center of Research and Community Services', f1).
+propertyDesc('Center of Infrastructure and Build Environment', f2).
+propertyDesc('Center of Arts, Design, and Language', f3).
+propertyDesc('Gedung perpustakaan utama', g1).
+propertyDesc('Perpustakaan di Labtek V', g2).
+propertyDesc('Perpustakaan di CIBE', g3).
+propertyDesc('Aula serbaguna timur', h1).
+propertyDesc('Aula serbaguna barat', h2).
 
 /* rent(RentCost, P, L) */
 /* RentCost adalah biaya sewa properti P dengan level L */
