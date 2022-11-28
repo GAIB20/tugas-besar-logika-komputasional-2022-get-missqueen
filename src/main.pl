@@ -77,15 +77,11 @@ startGame :-
 
 
 stateGame :-
-<<<<<<< HEAD
     isPlayer(PrevPlayer),
     \+ playersTurn(PrevPlayer),
     jailTimeLeft(PrevPlayer, 0),
     \+ justGotOutOfJail(PrevPlayer),
     write('================= INI STATE GAME ================= '), nl,
-=======
-    write(' '), nl,
->>>>>>> 820dadf20484dc913fa279a8013008e7c28ef763
     playersTurn(CurrentPlayer),
     nl, 
     write('Peta nya gini nih: '), nl,
@@ -113,6 +109,19 @@ stateGame :-
 
 jalan :-
     throwDice,
+    evaluateJalan,
+    switchPlayer,
+    stateGame, !.
+
+
+jalan(X) :-
+    throwDice(X, X),
+    evaluateJalan,
+    switchPlayer,
+    stateGame, !.
+
+jalan(X, Y) :-
+    throwDice(X, Y),
     evaluateJalan,
     switchPlayer,
     stateGame, !.
