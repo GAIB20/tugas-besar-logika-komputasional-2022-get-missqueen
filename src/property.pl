@@ -564,7 +564,7 @@ rentProperty(Player1, Player2, Location) :-
                 assertz(playerCash(Player2, NewCash2))
             )
         )
-    ).
+    ), !.
 
 /*                                              
     (

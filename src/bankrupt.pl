@@ -7,6 +7,7 @@
    Menjalankan penjualan properti pemain P. */
 mortgage(Player, Pay) :-
    playerCash(Player, Cash),
+   otherPlayer(NextPlayer),
    (
       (Cash < Pay) -> (
          playerPropList(Player, PropList),
@@ -41,7 +42,9 @@ mortgage(Player, Pay) :-
                   )
                )
             ) ; (
-               write('Waduh gapunya properti trus gaada duit wkkwkw BROKIEE, BYE!!!'), nl
+               write('Waduh gapunya properti trus gaada duit wkkwkw BROKIEE, BYE!!!'), nl,
+               retract(state(_)),
+               format('Selamat! Player ~w menang!', [NextPlayer]), !
             )
          )
       ) ; (
@@ -50,5 +53,5 @@ mortgage(Player, Pay) :-
          assertz(playerCash(Player, NewCash)),
          format('Selesai membayar hutang. Uang kamu sekarang adalah ~w. ~n', [NewCash])
       )
-   ).
+   ), !.
 
