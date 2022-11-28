@@ -76,7 +76,11 @@ startGame :-
     ), !.
 
 stateGame :-
-    write(' '), nl,
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    jailTimeLeft(PrevPlayer, 0),
+    \+ justGotOutOfJail(PrevPlayer),
+    write('================= INI STATE GAME ================= '), nl,
     playersTurn(CurrentPlayer),
     nl, 
     write('Peta nya gini nih: '), nl,
@@ -84,8 +88,39 @@ stateGame :-
     playerName(CurrentPlayer, Name), nl,
     format('Sekarang gilirannya ~w. ~n', [Name]), !.
 
+stateGame :-
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    jailTimeLeft(PrevPlayer, JailTime),
+    JailTime > 0,
+    playersTurn(CurrentPlayer),
+    playerName(CurrentPlayer, Name), nl,
+    format('~nSekarang gilirannya ~w. ~n', [Name]), !.
+
+stateGame :-
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    justGotOutOfJail(PrevPlayer),
+    retract(justGotOutOfJail(PrevPlayer)),
+    playersTurn(CurrentPlayer),
+    playerName(CurrentPlayer, Name), nl,
+    format('~nSekarang gilirannya ~w. ~n', [Name]), !.
+
 jalan :-
     throwDice,
+    evaluateJalan,
+    switchPlayer,
+    stateGame, !.
+
+
+jalan(X) :-
+    throwDice(X, X),
+    evaluateJalan,
+    switchPlayer,
+    stateGame, !.
+
+jalan(X, Y) :-
+    throwDice(X, Y),
     evaluateJalan,
     switchPlayer,
     stateGame, !.
@@ -98,7 +133,19 @@ evaluateJalan :-
 evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime =:= 3,
     jailMechanism, !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime =:= 3,
+    write('Yah masuk penjara AOKWOWKWOK'), !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime), JailTime < 3, !.
 evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, Loc),
@@ -168,13 +215,12 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
-    write('Yah masuk penjara AOKWOWKWOK'), nl, !.
+    jailTimeLeft(CurrentPlayer, JailTime), JailTime > 0, nl,
+    write('Yah masuk penjara AOKWOWKWOK'), nl.
 
 /* ChanceCard */
 chanceCardMechanism :- 
     playersTurn(CurrentPlayer),
-    nl,
     write('Widih dapet sembako.'), nl,
     landOnChanceCard(CurrentPlayer),
     retract(playerName(CurrentPlayer, Name)),
@@ -184,16 +230,14 @@ chanceCardMechanism :-
 wtMechanism :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, Loc),
-    nl,
     write('Selamat! Kamu sekarang bisa World Tour!!'), nl,
     write('Masukkan tujuan yang kamu mau: '), 
     read(WTLoc),
-    nl,
     allLocationList(AllLoc),
     validateInput(AllLoc, WTLoc),
     (
         Loc == WTLoc -> (
-            write('Woi yang bener dah masa mau diem doang di sini.'), nl,
+            write('Woi yang bener woi masa mau diem doang di sini'), nl,
             write('Coba lagi deh, mau kemana?'),
             read(WTLoc), 
             validateInput(AllLoc, WTLoc)
@@ -201,7 +245,7 @@ wtMechanism :-
     ),
     (
         Loc == wt -> (
-            write('Gaboleh curang ah kok mau World Tour lagi.'), nl,
+            write('Gaboleh curang ah kok mau World Tour lagi'), nl,
             write('Coba lagi deh, mau kemana?'),
             read(WTLoc), 
             validateInput(AllLoc, WTLoc)
@@ -212,9 +256,8 @@ wtMechanism :-
 /* Tax */
 taxMechanism :-
     playersTurn(CurrentPlayer),
-    nl,
-    taxed(CurrentPlayer), 
-    !.
+    write('Waduh! Kamu kena pajak nih.'), nl,
+    taxed(CurrentPlayer), !.
 
 /* FreeParking */
 freeParkMechanism :-

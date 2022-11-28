@@ -9,6 +9,8 @@
 jailTimeLeft(w,0).
 jailTimeLeft(v,0).
 
+:- dynamic(justGotOutOfJail/1).
+
 bailPrice(1000).
 
 /* RULES */
@@ -24,8 +26,8 @@ evaluatePrisonDiceRoll(P, false) :-
                                    NewVal >= 0,
                                    assertz(jailTimeLeft(P, NewVal)).
 evaluatePrisonDiceRoll(P, true) :-
-                                  retract(jailTimeLeft(P, OldVal)),
-                                  assertz(jailTimeLeft(P, OldVal)).
+                                  retract(jailTimeLeft(P, _OldVal)),
+                                  assertz(jailTimeLeft(P, 0)).
 
 /* Mengevaluasi apakah pemain bisa
    membayar untuk keluar penjara */
@@ -44,7 +46,8 @@ payBail(P) :-
              retract(playerCash(P, OldCash)),
              NewCash is OldCash - Price,
              assertz(playerCash(P, NewCash)),
-             retract(jailTimeLeft(P, _OldTime)).
+             retract(jailTimeLeft(P, _OldTime)),
+             assertz(jailTimeLeft(P, 0)).
 
 /* Mengevaluasi apakah pemain memliki,
    kartu Get Out of Jail */
@@ -61,4 +64,5 @@ useGOoJCard(P) :-
                  retract(playerCardList(P, OldList)),
                  deleteVal(OldList, getOutOfJailCard, NewList),
                  assertz(playerCash(P, NewList)),
-                 retract(jailTimeLeft(P, _OldTime)).
+                 retract(jailTimeLeft(P, OldTime)).
+                 assertz(jailTimeLeft(P, 0)).
