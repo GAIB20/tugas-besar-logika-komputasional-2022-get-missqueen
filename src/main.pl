@@ -71,11 +71,33 @@ startGame :-
     !.
 
 stateGame :-
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    jailTimeLeft(PrevPlayer, 0),
+    \+ justGotOutOfJail(PrevPlayer),
     write('================= INI STATE GAME ================= '), nl,
     playersTurn(CurrentPlayer),
     nl, 
     write('Peta nya gini nih: '), nl,
     map,
+    playerName(CurrentPlayer, Name), nl,
+    format('~nSekarang gilirannya ~w. ~n', [Name]), !.
+
+stateGame :-
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    jailTimeLeft(PrevPlayer, JailTime),
+    JailTime > 0,
+    playersTurn(CurrentPlayer),
+    playerName(CurrentPlayer, Name), nl,
+    format('~nSekarang gilirannya ~w. ~n', [Name]), !.
+
+stateGame :-
+    isPlayer(PrevPlayer),
+    \+ playersTurn(PrevPlayer),
+    justGotOutOfJail(PrevPlayer),
+    retract(justGotOutOfJail(PrevPlayer)),
+    playersTurn(CurrentPlayer),
     playerName(CurrentPlayer, Name), nl,
     format('~nSekarang gilirannya ~w. ~n', [Name]), !.
 
@@ -93,7 +115,19 @@ evaluateJalan :-
 evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime =:= 3,
     jailMechanism, !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime),
+    JailTime =:= 3,
+    write('Yah masuk penjara AOKWOWKWOK'), !.
+evaluateJalan :-
+    playersTurn(CurrentPlayer),
+    playerLocation(CurrentPlayer, jl),
+    jailTimeLeft(CurrentPlayer, JailTime), JailTime < 3, !.
 evaluateJalan :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, Loc),
@@ -143,11 +177,8 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    Loc == jl,
-    assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
-    write('Yah masuk penjara AOKWOWKWOK'), nl,
-    retract(playerName(CurrentPlayer, Name)),
-    assertz(playerName(CurrentPlayer, Name)), !.
+    jailTimeLeft(CurrentPlayer, JailTime), JailTime > 0, nl,
+    write('Yah masuk penjara AOKWOWKWOK'), nl.
 
 /* ChanceCard */
 chanceCardMechanism :- 

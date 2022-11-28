@@ -6,7 +6,7 @@ diceNum(dice2, 0).
 
 /* Double Count */
 :- dynamic(doubleCount/2).
-doubleCount(w, 0).
+doubleCount(w, 2).
 doubleCount(v, 0).
 
 /* RULES */
@@ -32,39 +32,54 @@ throwDice :-
     diceNum(dice1, DiceFace1),
     diceNum(dice2, DiceFace2),
     Move is DiceFace1+DiceFace2,
-    (
-        DiceFace1 =:= DiceFace2 -> (
-            retract(doubleCount(CurrentPlayer, OldCount)),
-            NewCount is OldCount+1,
-            assertz(doubleCount(CurrentPlayer, NewCount)),
-            write('Anjay Double!'), nl,
-            (
-                JailTime > 0 -> (
-                    write('yee keluar dr penjara'), nl,
-                    evaluatePrisonDiceRoll(CurrentPlayer, true),
-                    jailTimeLeft(CurrentPlayer, JailTime)
-                )
-            ); nl
-        ); nl
-    ),
     doubleCount(CurrentPlayer, Count), !,
     (
-        Count =:= 3 -> (
-            retract(doubleCount(CurrentPlayer, OldCount)),
-            assertz(doubleCount(CurrentPlayer, 0)),
-            write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl
-        ); nl
-    ),
-    (
         JailTime > 0 -> (
-            write('maaf km msh di penjara...'), nl,
-            evaluatePrisonDiceRoll(CurrentPlayer, false)
-        ) ; nl
+            (
+                (DiceFace1 =:= DiceFace2) -> (
+                    write('yee keluar dr penjara'), nl,
+                    evaluatePrisonDiceRoll(CurrentPlayer, true)
+                );
+                (DiceFace1 =\= DiceFace2) -> (
+                    evaluatePrisonDiceRoll(CurrentPlayer, false),
+                    jailTimeLeft(CurrentPlayer, NewJailTime),
+                    write(JailTime),
+                    (
+                        NewJailTime > 0 -> (
+                            write('maaf km msh di penjara...'), nl
+                        ); (NewJailTime =:= 0) -> (
+                            assertz(justGotOutOfJail(CurrentPlayer)),
+                            write('yee keluar dr penjara'), nl
+                        )
+                    )
+                )
+            )
+        );
+        (JailTime =:= 0, DiceFace1 =:= DiceFace2) -> (
+                retract(doubleCount(CurrentPlayer, OldCount)),
+                NewCount is OldCount+1,
+                assertz(doubleCount(CurrentPlayer, NewCount)),
+                write('Anjay Double!'), nl
+        ); (JailTime =:= 0)
     ),
     (
-        Loc == jl -> (
-            write('yee keluar dr penjara'), nl
-        ); format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
+        JailTime =:= 0 -> (
+            doubleCount(CurrentPlayer, CurrentCount),
+            (
+                CurrentCount < 3 -> (
+                    format('Kamu maju sebanyak ~w langkah.', [Move]), nl,
+                    moveAfterRoll(CurrentPlayer,Move)
+                );
+                CurrentCount =:= 3 -> (
+                    retract(doubleCount(CurrentPlayer, _)),
+                    assertz(doubleCount(CurrentPlayer, 0)),
+                    write('FBI OPEN UP! kamu masuk penjara karena kebanyakan double lah pokoknya'), nl,
+                    moveTo(CurrentPlayer, jl),
+                    retract(jailTimeLeft(CurrentPlayer, _)),
+                    assertz(jailTimeLeft(CurrentPlayer, 3))
+                )
+            )
+        ); (JailTime > 0)
     ),
     map,
     !.
