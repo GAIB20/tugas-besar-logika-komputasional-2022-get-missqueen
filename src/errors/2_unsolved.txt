@@ -1,0 +1,100 @@
++++++++++++++++++++ DESC +++++++++++++++++++
+mech jail masih belom bener, saat ada yg masuk jail program fail terus, program ngestuck
+
++++++++++++++++++++ QUERY +++++++++++++++++++
+Sekarang gilirannya a. 
+
+(1 ms) yes
+| ?- jalan.
+
+Dadu 1: 4 
+Dadu 2: 6 
+
+
+
+Kamu maju sebanyak 10 langkah.
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |  w0        
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+        w0  |  C2  |                                                |  H1  |  w0        
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                             v0                   v0                       
+                W                                  V                       
+
+Posisi pemain:
+W = jl 
+V = a3 
+
+no ----------> PROGRAM FAIL UNTUK EVALUATE JAIL -> JALAN FAIL -> PLAYER TIDAK KESWITCH, STUCK
+| ?- jalan.
+
+Dadu 1: 3 
+Dadu 2: 6 
+
+
+
+yee keluar dr penjara
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |  w0        
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+        w0  |  C2  |                                                |  H1  |  w0        
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                             v0                   v0                       
+                W                                  V                       
+
+Posisi pemain:
+W = jl 
+V = a3 
+
+no ----------> PROGRAM FAIL UNTUK EVALUATE JAIL -> JALAN FAIL -> PLAYER TIDAK KESWITCH, STUCK
+| ?- jalan.
+
+Dadu 1: 2 
+Dadu 2: 3 
+
+
+
+yee keluar dr penjara
+=================  INI MAP  ================= 
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |  w0        
+            |  D1  |                                                |  G3  |            
+            | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+        w0  |  C2  |                                                |  H1  |  w0        
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                             v0                   v0                       
+                W                                  V                       
+
+Posisi pemain:
+W = jl 
+V = a3 
+
+no ----------> PROGRAM FAIL UNTUK EVALUATE JAIL -> JALAN FAIL -> PLAYER TIDAK KESWITCH, STUCK
+
++++++++++++++++++++ STATUS +++++++++++++++++++
+UNSOLVED

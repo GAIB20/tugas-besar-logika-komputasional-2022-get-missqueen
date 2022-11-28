@@ -1,0 +1,144 @@
++++++++++++++++++++ DESC +++++++++++++++++++
+1 player ngestuck saat ada yang masuk lokasi nonproperti
+
++++++++++++++++++++ QUERY +++++++++++++++++++
+| ?- jalan.
+
+Dadu 1: 6 
+Dadu 2: 1 
+
+
+
+Kamu maju sebanyak 7 langkah.
+INI MAP
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+   W        | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                                           
+                                            V                              
+
+Posisi pemain:
+W = tx02 
+V = cc03 
+Waduh! Kamu kena pajak nih.
+INI STATE GAME
+
+Peta nya gini nih: 
+INI MAP
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+   W        | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                                           
+                                            V                              
+
+Posisi pemain:
+W = tx02 
+V = cc03 
+
+
+Sekarang gilirannya b. 
+
+true ? ;  ------------------------> MUNCUL PROMPT INI, DIA NYARI JAWABAN LAIN -> KESWITCH -> 1 TURN KESKIP -> 1 PLAYER NGESTUCK
+INI STATE GAME
+
+Peta nya gini nih: 
+INI MAP
+                                                                           
+                                                                           
+            ----------------------------------------------------------------
+            |  FP  |  E1  |  E2  |  E3  | CC01 |  F1  |  F2  |  F3  |  WT  |
+            |  D3  |------------------------------------------------|  G1  |            
+            |  D2  |                                                |  G2  |            
+            |  D1  |                                                |  G3  |            
+   W        | TX02 |                 M O N O P O L Y                | TX01 |            
+            |  C3  |                                                | CC02 |            
+            |  C2  |                                                |  H1  |            
+            |  C1  |------------------------------------------------|  H2  |            
+            |  JL  |  B3  |  B2  |  B1  | CC03 |  A3  |  A2  |  A1  |  GO  |
+            ----------------------------------------------------------------
+                                                                           
+                                            V                              
+
+Posisi pemain:
+W = tx02 
+V = cc03 
+
+
+Sekarang gilirannya a. 
+
+(1 ms) yes
+
+================= INI STATE GAME ================= 
+     79    3  Exit: write('================= INI STATE GAME ================= ') ? 
+     80    3  Call: nl ? 
+
+     80    3  Exit: nl ? 
+     81    3  Call: playersTurn(_2498) ? 
+     81    3  Exit: playersTurn(v) ? 
+     82    3  Call: nl ? 
+
+     82    3  Exit: nl ? 
+     83    3  Call: write('Peta nya gini nih: ') ? 
+Peta nya gini nih: 
+     83    3  Exit: write('Peta nya gini nih: ') ? 
+     84    3  Call: nl ? 
+
+     84    3  Exit: nl ? 
+     85    3  Call: playerName(v,_2596) ? 
+     85    3  Exit: playerName(v,b) ? 
+     86    3  Call: nl ? 
+
+     86    3  Exit: nl ? 
+     87    3  Call: format('~nSekarang gilirannya ~w. ~n',[b]) ? 
+
+Sekarang gilirannya b. 
+     87    3  Exit: format('~nSekarang gilirannya ~w. ~n',[b]) ? 
+     78    2  Exit: stateGame ? 
+      1    1  Exit: jalan ? 
+
+true ? ;
+      1    1  Redo: jalan ? 
+     74    2  Redo: switchPlayer ? 
+     75    3  Call: playersTurn(v) ? 
+     75    3  Exit: playersTurn(v) ? 
+     76    3  Call: retract(playersTurn(v)) ? 
+     76    3  Exit: retract(playersTurn(v)) ? 
+     77    3  Call: asserta(playersTurn(w)) ? 
+     77    3  Exit: asserta(playersTurn(w)) ? 
+     74    2  Exit: switchPlayer ? 
+     78    2  Call: stateGame ? 
+     79    3  Call: write('================= INI STATE GAME ================= ') ? 
+================= INI STATE GAME ================= 
+     79    3  Exit: write('================= INI STATE GAME ================= ') ? 
+     80    3  Call: nl ? 
+
+     80    3  Exit: nl ? 
+     81    3  Call: playersTurn(_2503) ? 
+     81    3  Exit: playersTurn(w) ? 
+
+
++++++++++++++++++++ STATUS +++++++++++++++++++
+SOLVED, pake ! di "jalan"
+
+Problem 2
+blm ad nonprop mech fp -> evlauate jalan fail -> switchPlayer fail -> stuck
