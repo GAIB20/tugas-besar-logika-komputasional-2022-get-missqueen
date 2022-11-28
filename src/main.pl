@@ -34,7 +34,8 @@ read_player_name :-
     read(X),
     nonvar(X), !,
     assertz(playerName(w, X)), 
-    assertz(playerLocation(w, go)), nl,
+    assertz(playerLocation(w, go)), 
+    assertz(playerCash(w, 5000)), nl,
     format('Horeee, Met datang ~w!', [X]), nl,
     write('ID Player kamu adalah W.'), nl, nl,
     /* Player Kedua */
@@ -42,7 +43,8 @@ read_player_name :-
     read(Y),
     nonvar(Y), !,
     assertz(playerName(v, Y)), 
-    assertz(playerLocation(v, go)), nl,
+    assertz(playerLocation(v, go)), 
+    assertz(playerCash(v, 5000)), nl,
     format('Wessss, Haloo ~w!', [Y]), nl,
     write('ID Player kamu adalah V.').
 
