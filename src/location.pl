@@ -46,7 +46,7 @@ validLoc(b3).
 validLoc(jl).
 validLoc(c1).
 validLoc(c2).
-validLoc(c3).
+validLoc(cf).
 validLoc(tx02).
 validLoc(d1).
 validLoc(d2).
@@ -92,7 +92,7 @@ namaLoc(23,b3).
 namaLoc(24,jl).
 namaLoc(25,c1).
 namaLoc(26,c2).
-namaLoc(27,c3).
+namaLoc(27,cf).
 namaLoc(28,tx02).
 namaLoc(29,d1).
 namaLoc(30,d2).
@@ -134,6 +134,13 @@ checkLocationDetail(go) :-
     write('1. Beli properti.'),
     nl,
     write('2. Upgrade properti yang dimiliki jadi landmark.'),
+    !.
+
+/* Lokasi Nonproperti : Coin Flip */
+checkLocationDetail(cf) :-
+    write('Nama Lokasi            : Coin Flip'),
+    nl,
+    write('Deskripsi Lokasi       : Kuy tebak, head apa tail nih? Kalo bener dapet duit lochhh.'),
     !.
 
 /* Lokasi Nonproperti : Free Parking */
