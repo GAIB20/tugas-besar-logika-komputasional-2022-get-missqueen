@@ -10,6 +10,7 @@ taxOwed(Player, Tax) :-
 /* Mengurangi cash pemain setelah terkena pajak */
 taxed(Player) :-
     taxOwed(Player, Tax),
+    format('Bayar ~w buat biaya admin gan.', [Tax]), nl,
     retract(playerCash(Player, (OldCash))),
     NewCash is (OldCash-Tax),
     assertz(playerCash(Player, NewCash)).

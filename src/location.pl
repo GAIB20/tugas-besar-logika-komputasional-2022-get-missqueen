@@ -135,9 +135,9 @@ checkLocationDetail(go) :-
     write('Nama Lokasi              : Go'),
     nl,
     write('Deskripsi Lokasi         : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
-    nl,
-    write('Aksi yang bisa dilakukan :'),
     nl, nl,
+    write('Aksi yang bisa dilakukan :'),
+    nl,
     write('1. Beli bangunan baru.'),
     nl,
     write('2. Upgrade bangunan yang dimiliki menjadi landmark.'),
@@ -158,10 +158,10 @@ checkLocationDetail(jl) :-
     write('Nama Lokasi              : Penjara'),
     nl,
     /* write('Deskripsi Lokasi       : kamu akan dikurung di sini kalau mendapatkan kartu masuk penjara atau mendapatkan double 3 kali berturut-turut. kamu akan diberikan kesempatan untuk bermain dadu selama tiga kali giliran. Untuk keluar dari sini, kamu harus: '), */
-    write('Deskripsi Lokasi         : Kalo kamu naughty nanti daddy masukin ke sini, makanya gausah macem-macem dapet double 3 kali.'),
-    nl,
-    write('Opsi keluar jail         :'),
+    write('Deskripsi Lokasi         : Kalo kamu naughty, daddy masukin ke sini. Gausah macem-macem dapet double 3 kali.'),
     nl, nl,
+    write('Opsi keluar jail         :'),
+    nl,
     write('1. Mendapat dadu double sebelum tiga kali giliran,'),
     nl,
     write('2. Sudah melempar dadu tiga kali,'),
@@ -185,10 +185,10 @@ checkLocationDetail(Loc) :-
     chanceCard(Loc),
     write('Nama Lokasi              : Chance Card'),
     nl,
-    write('Deskripsi Lokasi         : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah dah.'),
-    nl,
-    write('Kartu yang bisa didapat  :'),
+    write('Deskripsi Lokasi         : Judi itu haram jadi mending gausah ngapa-ngapain di sini. Tapi ya terserah lu dah..'),
     nl, nl,
+    write('Kartu yang bisa didapat  :'),
+    nl,
     write('1. Kartu Tax, kamu langsung dipindahkan ke tempat Tax terdekat dan langsung dikenai pajak.'),
     nl,
     write('2. Kartu Hadiah, kamu langsung mendapatkan uang (haram) berdasarkan nilai yang tertera pada kartu tersebut.'),
@@ -209,7 +209,6 @@ checkLocationDetail(Loc) :-
 
 /* Lokasi Properti (Belum Ada Pemilik) */
 checkLocationDetail(Loc) :-
-    nl,
     validLoc(Loc),
     property(Loc),
     propertyName(Name, Loc),
@@ -218,12 +217,10 @@ checkLocationDetail(Loc) :-
     rent(RentCost, Loc, Level),
     cost(BuyCost, Loc, Level),
     \+ ownProp(_, Loc),
-    
     format('Nama Lokasi             : ~w ~n',[Name]),
     format('Deskripsi Lokasi        : ~w ~n',[Desc]),
     nl,
-    write('Kepemilikan              : -'),
-    nl,
+    format('Kepemilikan             : - ~n', []),
     format('Biaya Sewa Saat Ini     : ~w ~n',[RentCost]),
     format('Biaya Akuisisi          : ~w ~n',[BuyCost]),
     format('Tingkatan Properti      : ~w ~n',[Level]),
@@ -231,7 +228,6 @@ checkLocationDetail(Loc) :-
 
 /* Lokasi Properti (Ada Pemilik) */
 checkLocationDetail(Loc) :-
-    nl,
     validLoc(Loc),
     property(Loc),
     propertyName(Name, Loc),
@@ -240,7 +236,6 @@ checkLocationDetail(Loc) :-
     rent(RentCost, Loc, Level),
     cost(BuyCost, Loc, Level),
     ownProp(Owner, Loc),
-    
     format('Nama Lokasi             : ~w ~n',[Name]),
     format('Deskripsi Lokasi        : ~w ~n',[Desc]),
     nl,
@@ -273,7 +268,7 @@ moveTo(Player,NewLoc)          :-
     steppedStart(PrevLoc,NewLoc),
     playerCash(Player, PrevBal),
     NewBal is PrevBal + 1000, /* dummy dulu kalo lewat start */
-    write('ye congrats dah dapet duit nih 1000 mayan soalnya kamu lewatin Go'),
+    write('Yeey gajian dapet 1000 abis lewatin Go.'),
     nl,
     asserta(playerLocation(Player,NewLoc)),
     asserta(playerCash(Player,NewBal)),

@@ -66,6 +66,7 @@ translatePropLevel(4, 'Landmark').
    Fakta menunjukan translasi
    dari Card menjadi sebuah string, */
 translateCardName(getOutOfJailCard, 'Get Out of Jail Card').
+translateCardName(angelCard, 'Angel Card').
 
 /* RULES */
 /* totalPropVal(ListProp, TOTAL)

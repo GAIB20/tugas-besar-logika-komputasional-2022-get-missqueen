@@ -136,7 +136,7 @@ propertyMechanism :-
     (
         Val =:= 0 -> (
             /* Kalau propertinya dimiliki orang */
-
+            
             /* Kalau propertinya ga dimilikin siapa siapa */
             format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
             write('| ?- '),
@@ -162,6 +162,7 @@ jailMechanism :-
 /* ChanceCard */
 chanceCardMechanism :- 
     playersTurn(CurrentPlayer),
+    nl,
     write('Widih dapet sembako.'), nl,
     landOnChanceCard(CurrentPlayer),
     retract(playerName(CurrentPlayer, Name)),
@@ -171,14 +172,16 @@ chanceCardMechanism :-
 wtMechanism :-
     playersTurn(CurrentPlayer),
     playerLocation(CurrentPlayer, Loc),
+    nl,
     write('Selamat! Kamu sekarang bisa World Tour!!'), nl,
     write('Masukkan tujuan yang kamu mau: '), 
     read(WTLoc),
+    nl,
     allLocationList(AllLoc),
     validateInput(AllLoc, WTLoc),
     (
         Loc == WTLoc -> (
-            write('Woi yang bener woi masa mau diem doang di sini'), nl,
+            write('Woi yang bener dah masa mau diem doang di sini.'), nl,
             write('Coba lagi deh, mau kemana?'),
             read(WTLoc), 
             validateInput(AllLoc, WTLoc)
@@ -186,7 +189,7 @@ wtMechanism :-
     ),
     (
         Loc == wt -> (
-            write('Gaboleh curang ah kok mau World Tour lagi'), nl,
+            write('Gaboleh curang ah kok mau World Tour lagi.'), nl,
             write('Coba lagi deh, mau kemana?'),
             read(WTLoc), 
             validateInput(AllLoc, WTLoc)
@@ -197,8 +200,9 @@ wtMechanism :-
 /* Tax */
 taxMechanism :-
     playersTurn(CurrentPlayer),
-    write('Waduh! Kamu kena pajak nih.'), nl,
-    taxed(CurrentPlayer), !.
+    nl,
+    taxed(CurrentPlayer), 
+    !.
 
 /* FreeParking */
 freeParkMechanism :-
