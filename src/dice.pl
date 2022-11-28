@@ -24,6 +24,7 @@ throwDice :-
     retract(diceNum(dice1, _OldNum1)),
     assertz(diceNum(dice1, Num1)),
     format('Dadu 1: ~w ~n', [Num1]),
+    nl,
     generateDiceNum(Num2),
     retract(diceNum(dice2, _OldNum2)),
     assertz(diceNum(dice2, Num2)),
@@ -43,8 +44,8 @@ throwDice :-
                     evaluatePrisonDiceRoll(CurrentPlayer, true),
                     jailTimeLeft(CurrentPlayer, JailTime)
                 )
-            ); nl
-        ); nl
+            ); (0 == 0)
+        ); (0 == 0)
     ),
     doubleCount(CurrentPlayer, Count), !,
     (

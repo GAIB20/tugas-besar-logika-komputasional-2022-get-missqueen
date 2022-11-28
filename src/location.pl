@@ -201,8 +201,8 @@ checkLocationDetail(Loc) :-
     cost(BuyCost, Loc, Level),
     \+ ownProp(_, Loc),
     
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi           : ~w ~n',[Name]),
+    format('Deskripsi Lokasi      : ~w ~n',[Desc]),
     nl,
     write('Kepemilikan           : -'),
     nl,
@@ -222,8 +222,8 @@ checkLocationDetail(Loc) :-
     cost(BuyCost, Loc, Level),
     ownProp(Owner, Loc),
     
-    format('Nama Lokasi           : ~s ~n',[Name]),
-    format('Deskripsi Lokasi      : ~s ~n',[Desc]),
+    format('Nama Lokasi           : ~w ~n',[Name]),
+    format('Deskripsi Lokasi      : ~w ~n',[Desc]),
     nl,
     format('Kepemilikan           : ~w ~n',[Owner]),
     format('Biaya Sewa Saat Ini   : ~w ~n',[RentCost]),

@@ -37,7 +37,7 @@ read_player_name :-
     assertz(playerName(w, X)), 
     assertz(playerLocation(w, go)), nl,
     format('Horeee, Met datang ~w!', [X]), nl,
-    write('ID Player kamu adalah W!'), nl, nl,
+    write('ID Player kamu adalah W.'), nl, nl,
     /* Player Kedua */
     write('Masukkan nama player kedua: '),
     read(Y),
@@ -45,7 +45,7 @@ read_player_name :-
     assertz(playerName(v, Y)), 
     assertz(playerLocation(v, go)), nl,
     format('Wessss, Haloo ~w!', [Y]), nl,
-    write('ID Player kamu adalah V!').
+    write('ID Player kamu adalah V.').
 
 switchPlayer :-
     playersTurn(w),
@@ -72,13 +72,12 @@ startGame :-
 
 stateGame :-
     write(' '), nl,
-    write('================= INI STATE GAME ================= '), nl,
     playersTurn(CurrentPlayer),
     nl, 
     write('Peta nya gini nih: '), nl,
     map,
     playerName(CurrentPlayer, Name), nl,
-    format('~nSekarang gilirannya ~w. ~n', [Name]), !.
+    format('Sekarang gilirannya ~w. ~n', [Name]), !.
 
 jalan :-
     throwDice,
@@ -114,8 +113,10 @@ propertyMechanism :-
     isPropertyOwned(X, Loc, Val),
     (
         Val =:= 1 -> (
-            format("Apakah kamu ingin mengupgrade ~w? [y/n]~n", [Loc]),
+            format("Apakah kamu ingin upgrade ~w? [y/n]~n", [Loc]),
+            write('| ?- '),
             read(Command),
+            nl,
             (
                 Command == y -> (
                     upgradeProp(CurrentPlayer, Loc), !
@@ -129,7 +130,9 @@ propertyMechanism :-
 
             /* Kalau propertinya ga dimilikin siapa siapa */
             format("Apakah kamu ingin membeli ~w? [y/n]~n", [Loc]),
+            write('| ?- '),
             read(Command),
+            nl,
             (
                 Command == y -> (
                     buyProperty(CurrentPlayer, Loc), !
@@ -184,5 +187,5 @@ help :-
     write('2. checkPropertyDetail(p)'), tab(6), write('dengan p adalah properti'), nl,
     write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,
     write('4. jalan'), nl,
-    write('5. checkState'), nl,
+    write('5. stateGame'), nl,
     write('6. help'), nl.
