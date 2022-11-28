@@ -35,7 +35,7 @@ read_player_name :-
     read(X),
     nonvar(X), !,
     assertz(playerName(w, X)), 
-    assertz(playerLocation(w, jl)), nl,
+    assertz(playerLocation(w, go)), nl,
     format('Horeee, Met datang ~w!', [X]), nl,
     write('ID Player kamu adalah W!'), nl,
     /* Player Kedua */
@@ -43,7 +43,7 @@ read_player_name :-
     read(Y),
     nonvar(Y), !,
     assertz(playerName(v, Y)), 
-    assertz(playerLocation(v, jl)), nl,
+    assertz(playerLocation(v, go)), nl,
     format('Wessss, Haloo ~w!', [Y]), nl,
     write('ID Player kamu adalah V!').
 
@@ -89,7 +89,7 @@ propertyMechanism :-
             read(Command),
             (
                 Command == y -> (
-                    upgradeProp(CurrentPlayer, Location), !
+                    upgradeProp(CurrentPlayer, Loc), !
                 )
             ) ; write('Oke.')
         ) ; nl
@@ -100,7 +100,7 @@ propertyMechanism :-
             read(Command),
             (
                 Command == y -> (
-                    buyProperty(CurrentPlayer, Location), !
+                    buyProperty(CurrentPlayer, Loc), !
                 )
             ) ; write('Okedeh gpp kalo gamau beli.')
         )
