@@ -16,6 +16,7 @@ generateDiceNum(Num) :-
     Num is DiceFace.
 
 throwDice :-
+    playersTurn(CurrentPlayer),
     playerName(CurrentPlayer, Nama),
     playerLocation(CurrentPlayer, Loc),
     jailTimeLeft(CurrentPlayer, JailTime),

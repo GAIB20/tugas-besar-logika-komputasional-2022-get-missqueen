@@ -376,8 +376,8 @@ checkPropertyDetail(Prop) :-
     rent(ClassTwoRent, Prop, 2),
     rent(ClassThreeRent, Prop, 3),
     rent(LandmarkRent, Prop, 4),
-    format('Nama Properti           : ~s ~n', [Name]),
-    format('Deskripsi Properti      : ~s ~n', [Desc]),
+    format('Nama Properti           : ~w ~n', [Name]),
+    format('Deskripsi Properti      : ~w ~n', [Desc]),
     nl,
     format('Harga Tanah             : ~w ~n', [BuyLand]),
     format('Harga Bangunan 1        : ~w ~n', [BuyClassOne]),
@@ -429,7 +429,7 @@ buyProperty(Player, Location) :-
                     retract(playerCash(Player, OldCash)),
                     NewCash is (OldCash-Cost),
                     assertz(playerCash(Player, NewCash)),
-                    format('~s berhasil diakusisi. Sisa uang kamu adalah ~w ~n', [PropName, NewCash]), !
+                    format('~w berhasil diakusisi. Sisa uang kamu adalah ~w ~n', [PropName, NewCash]), !
                 ) ; write('Gausah maruk deh.. kamu dah punya properti ini'), nl, !    
             ) ; format('Kamu miskin! Cari uang sebanyak ~w untuk membeli properti ini ~n', [Cost]), !
         )
@@ -452,7 +452,7 @@ upgradeProp(Player, Location) :-
                         assertz(levelProp(Location, NewLevel)),
                         format('Selesai renov gan. ~n', [])
                     ) ; format('Iya iya.. Saya paham duit kamu banyak. Udah max level propertinya. ~n', [])
-                ) ; format('Miskin.. cari uang sebanyak ~w untuk upgrade properti ini jadi ~s. ~n', [Cost, LevelTranslated])
+                ) ; format('Miskin.. cari uang sebanyak ~w untuk upgrade properti ini jadi w. ~n', [Cost, LevelTranslated])
             )
         ) ; (format('Ini bukan properti yah sayang.. ~n'))
     ).
@@ -486,7 +486,7 @@ sellProperty(Player) :-
                             retract(playerCash(Player, OldCash)),
                             NewCash is OldCash+Cost,
                             assertz(playerCash(Player, NewCash)),
-                            format('~s berhasil dijual. ~n', [DeletedPropName])
+                            format('~w berhasil dijual. ~n', [DeletedPropName])
                         ) ; (
                             (Index >= 0) -> (
                                 format('Gausah ngada-ngada deh, kamu cuman punya ~w properti. ~n', [Length]),
@@ -522,7 +522,7 @@ rentProperty(Player1, Player2, Location) :-
             assertz(playerCash(Player2, NewCash2)),
             format('Uang kamu sekarang adalah ~w. ~n', [NewCash1])
         ) ; (
-            format('You are a brokie! uang kamu tidak cukup untuk menyewa ~s. ~n', [PropName]), 
+            format('You are a brokie! uang kamu tidak cukup untuk menyewa ~w. ~n', [PropName]), 
             nl, 
             /* Mortgage hanya mengurangi uang milik Player 1 namun belum ditransfer ke Player 2  */
             mortgage(Player1, RentCost),
