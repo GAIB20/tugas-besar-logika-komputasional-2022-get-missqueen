@@ -43,6 +43,6 @@ giveGetOutOfJailCard(P) :-
 /* Memindahkan player ke penjara */
 goToJail(P) :-
               write('beuh masuk penjara..'), nl,
-              retract(playerLocation(P, OldLoc)),
+              retract(playerLocation(P, _OldLoc)),
               assertz(playerLocation(P, jl)),
               jailMechanism.

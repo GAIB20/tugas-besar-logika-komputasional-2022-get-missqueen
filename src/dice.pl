@@ -17,7 +17,6 @@ generateDiceNum(Num) :-
 
 throwDice :-
     playersTurn(CurrentPlayer),
-    playerName(CurrentPlayer, Nama),
     playerLocation(CurrentPlayer, Loc),
     jailTimeLeft(CurrentPlayer, JailTime),
     nl,
@@ -57,7 +56,7 @@ throwDice :-
     ),
     (
         JailTime > 0 -> (
-            write('maaf km msh di penjara...'), nl,
+            write('maaf km msh di penjara...'), nl, nl,
             evaluatePrisonDiceRoll(CurrentPlayer, false)
         ) ; nl
     ),

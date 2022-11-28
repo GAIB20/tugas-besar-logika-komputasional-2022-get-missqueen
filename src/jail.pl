@@ -50,8 +50,7 @@ payBail(P) :-
    kartu Get Out of Jail */
 hasGOoJCard(P) :-
                  playerCardList(P, L),
-                 getIndex(L, getOutOfJailCard, Index), !,
-                 RETURN.
+                 getIndex(L, getOutOfJailCard, _Index), !.
 
 /* Pemain menggunakan kartu get out of
    jail untuk keluar dari penjara 
@@ -62,4 +61,4 @@ useGOoJCard(P) :-
                  retract(playerCardList(P, OldList)),
                  deleteVal(OldList, getOutOfJailCard, NewList),
                  assertz(playerCash(P, NewList)),
-                 retract(jailTimeLeft(P, OldTime)).
+                 retract(jailTimeLeft(P, _OldTime)).

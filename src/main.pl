@@ -143,7 +143,6 @@ propertyMechanism :-
 /* Jail */
 jailMechanism :-
     playersTurn(CurrentPlayer),
-    Loc == jl,
     assertz(jailTimeLeft(CurrentPlayer, 3)), nl,
     write('Yah masuk penjara AOKWOWKWOK'), nl,
     retract(playerName(CurrentPlayer, Name)),
@@ -152,8 +151,7 @@ jailMechanism :-
 /* ChanceCard */
 chanceCardMechanism :- 
     playersTurn(CurrentPlayer),
-    write('Widi! Kamu dapet hadiah nih.'), nl,
-    playerLocation(CurrentPlayer, Loc),
+    write('Widih dapet sembako.'), nl,
     landOnChanceCard(CurrentPlayer),
     retract(playerName(CurrentPlayer, Name)),
     assertz(playerName(CurrentPlayer, Name)), !.

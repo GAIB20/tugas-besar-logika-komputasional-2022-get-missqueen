@@ -129,7 +129,11 @@ checkLocationDetail(Loc) :-
 checkLocationDetail(go) :-
     write('Nama Lokasi            : Go'),
     nl,
-    write('Deskripsi Lokasi       : Tempat kamu lahir.'), /* dummy dulu jumlah duitnya */
+    write('Deskripsi Lokasi       : Tempat kamu mulai. Di sini kamu bisa:'), /* dummy dulu jumlah duitnya */
+    nl,
+    write('1. Beli properti.'),
+    nl,
+    write('2. Upgrade properti yang dimiliki jadi landmark.'),
     !.
 
 /* Lokasi Nonproperti : Free Parking */
