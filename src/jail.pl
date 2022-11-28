@@ -25,7 +25,6 @@ evaluatePrisonDiceRoll(P, false) :-
                                    assertz(jailTimeLeft(P, NewVal)).
 evaluatePrisonDiceRoll(P, true) :-
                                   retract(jailTimeLeft(P, OldVal)),
-                                  NewVal is OldVal - OldVal, !,
                                   assertz(jailTimeLeft(P, OldVal)).
 
 /* Mengevaluasi apakah pemain bisa
@@ -45,7 +44,7 @@ payBail(P) :-
              retract(playerCash(P, OldCash)),
              NewCash is OldCash - Price,
              assertz(playerCash(P, NewCash)),
-             retract(jailTimeLeft(P, OldTime)).
+             retract(jailTimeLeft(P, _OldTime)).
 
 /* Mengevaluasi apakah pemain memliki,
    kartu Get Out of Jail */
@@ -63,4 +62,4 @@ useGOoJCard(P) :-
                  retract(playerCardList(P, OldList)),
                  deleteVal(OldList, getOutOfJailCard, NewList),
                  assertz(playerCash(P, NewList)),
-                 retract(jailTimeLeft(P, OldTime)).
+                 retract(jailTimeLeft(P, _OldTime)).
