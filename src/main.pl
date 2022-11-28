@@ -80,7 +80,6 @@ stateGame :-
     \+ playersTurn(PrevPlayer),
     jailTimeLeft(PrevPlayer, 0),
     \+ justGotOutOfJail(PrevPlayer),
-    write('================= INI STATE GAME ================= '), nl,
     playersTurn(CurrentPlayer),
     nl, 
     write('Peta nya gini nih: '), nl,
