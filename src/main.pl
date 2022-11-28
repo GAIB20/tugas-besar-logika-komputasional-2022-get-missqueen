@@ -185,3 +185,5 @@ help :-
     write('2. checkPropertyDetail(p)'), tab(6), write('dengan p adalah properti'), nl,
     write('3. checkPlayerDetail(l)'), tab(8), write('dengan l adalah player'), nl,
     write('4. jalan'), nl.
+    write('5. checkState'), nl.
+    write('6. help'), nl.
