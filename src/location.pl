@@ -261,7 +261,16 @@ nearestTax(cc02,tx02).
 steppedStart(PrevLoc,NewLoc)   :-
     namaLoc(X,PrevLoc),
     namaLoc(Y,NewLoc),
-    Y =< X.
+    X < Y,
+    X < 16,
+    Y >= 16.
+
+steppedStart(PrevLoc,NewLoc)   :-
+    namaLoc(X,PrevLoc),
+    namaLoc(Y,NewLoc),
+    X >= Y,
+    X > 16,
+    Y >= 16.
 
 /* MOVE PLAYER */
 
