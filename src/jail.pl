@@ -5,7 +5,9 @@
    pemain perlu menunggu di penjara.
    Fakta hanya berlaku jika pemain P sedang
    dipenjara. */
-:- dynamic jailTimeLeft/2.
+:- dynamic(jailTimeLeft/2).
+jailTimeLeft(w,1).
+jailTimeLeft(v,1).
 
 bailPrice(1000).
 
@@ -19,10 +21,12 @@ bailPrice(1000).
 evaluatePrisonDiceRoll(P, false) :- 
                                    retract(jailTimeLeft(P, OldVal)),
                                    NewVal is OldVal - 1, !,
-                                   NewVal > 0,
+                                   NewVal >= 0,
                                    assertz(jailTimeLeft(P, NewVal)).
 evaluatePrisonDiceRoll(P, true) :-
-                                  retract(jailTimeLeft(P, OldVal)).
+                                  retract(jailTimeLeft(P, OldVal)),
+                                  NewVal is OldVal - OldVal, !,
+                                  assertz(jailTimeLeft(P, OldVal)).
 
 /* Mengevaluasi apakah pemain bisa
    membayar untuk keluar penjara */

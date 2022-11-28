@@ -11,7 +11,6 @@ doubleCount(v, 0).
 
 /* Player's Turn*/
 :- dynamic(playersTurn/1).
-playersTurn(w).
 
 /* RULES */
 /* Menghasilkan angka 1-6 */
@@ -20,7 +19,9 @@ generateDiceNum(Num) :-
     Num is DiceFace.
 
 throwDice :-
-    playersTurn(CurrentPlayer),
+    playerName(CurrentPlayer, Nama),
+    playerLocation(CurrentPlayer, Loc),
+    jailTimeLeft(CurrentPlayer, JailTime),
     nl,
     generateDiceNum(Num1),
     retract(diceNum(dice1, _OldNum1)),
@@ -40,14 +41,15 @@ throwDice :-
             assertz(doubleCount(CurrentPlayer, NewCount)),
             write('Anjay Double!'), nl,
             (
-                Loc == jl -> (
+                JailTime > 0 -> (
                     write('yee keluar dr penjara'), nl,
-                    evaluatePrisonDiceRoll(CurrentPlayer, true) 
+                    evaluatePrisonDiceRoll(CurrentPlayer, true),
+                    jailTimeLeft(CurrentPlayer, JailTime)
                 )
             ); nl
         ); nl
     ),
-    doubleCount(CurrentPlayer, Count),
+    doubleCount(CurrentPlayer, Count), !,
     (
         Count =:= 3 -> (
             retract(doubleCount(CurrentPlayer, OldCount)),
@@ -56,13 +58,17 @@ throwDice :-
         ); nl
     ),
     (
-        Loc == jl -> (
+        JailTime > 0 -> (
             write('maaf km msh di penjara...'), nl,
             evaluatePrisonDiceRoll(CurrentPlayer, false)
+        ) ; nl
+    ),
+    (
+        Loc == jl -> (
+            write('yee keluar dr penjara'), nl
         ); format('Kamu maju sebanyak ~w langkah.', [Move]), nl, moveAfterRoll(CurrentPlayer,Move)
     ),
+    map,
     retract(playerName(CurrentPlayer, Name)),
-    retract(playersTurn(_)),
-    assertz(playersTurn(_NextPlayer)),
     assertz(playerName(CurrentPlayer, Name)),
     !.
